@@ -77,6 +77,6 @@ cd src && python run_all.py        # about 30 s; writes everything in results/
 - A timetable robustness objective, such as light robustness or recoverable robustness.
 
 ## Presentation deck (`deck/`)
-- `river_line_deck.html`: self-contained 28-slide deck (open in a browser; arrow keys to navigate). Includes four interactive slides from the dashboard: the live line map (the dashboard's day engine in `deck/engine.js`, with breakdowns and rescues), timetable explorer, day replay, and bottleneck map.
+- `river_line_deck.html`: self-contained 30-slide deck: a standalone HTML file that opens in any browser, no Claude needed (arrow keys to navigate; interactive slides work offline, fonts load from Google Fonts when online). Includes four interactive slides from the dashboard: the live line map (the dashboard's day engine in `deck/engine.js`, with breakdowns and rescues), timetable explorer, day replay, and bottleneck map.
 - Rebuild: `python analysis/deck_interactive.py` (bottleneck data), then `python deck/make_deck_data.py` (inlines data, JS and images into `deck_src.html`).
-- Images in `deck/img/` are reproduced from NJDOT SSO Appendix F (map © NJ TRANSIT; photo © 2004 Jon Bell). Check permissions before public use.
+- Photos in `deck/img/` are from Wikimedia Commons under CC/GFDL/public-domain licenses; see `deck/img/CREDITS.md`. The route map is © NJ TRANSIT (via NJDOT SSO Appendix F); get permission before public use.

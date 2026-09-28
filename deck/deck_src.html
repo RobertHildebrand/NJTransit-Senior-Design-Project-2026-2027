@@ -96,6 +96,14 @@ svg .strong{fill:var(--ink);font-weight:600}
 .chartcol{display:flex;flex-direction:column;gap:.35em;min-width:0}
 .chartcol svg{width:100%;height:auto;display:block}
 .dot{display:inline-block;width:.75em;height:.75em;border-radius:50%;margin-right:.35em;vertical-align:-.05em}
+.photos{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(8px,1.2cqw,16px);min-height:0}
+.photos figure{margin:0;display:flex;flex-direction:column;gap:.25em;min-width:0}
+.photos img{width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:4px;display:block;background:var(--rule)}
+.photos figcaption{font-size:clamp(11px,.95cqw,14px);line-height:1.3;color:var(--ink-2)}
+.photos figcaption .cr{display:block;font-size:.82em;color:var(--muted)}
+body.stacked .photos{grid-template-columns:1fr 1fr}
+.photos.six img{aspect-ratio:2/1}
+body.stacked .photos.six img{aspect-ratio:3/2}
 /* nav */
 .nav{display:flex;align-items:center;gap:10px;padding-block:6px 10px;position:sticky;bottom:0;background:var(--paper);padding-bottom:calc(10px + env(safe-area-inset-bottom,0px))}
 .nav button{font:600 14px var(--body);color:var(--ink);background:var(--panel);border:1px solid var(--rule);border-radius:4px;padding:6px 12px;cursor:pointer}
@@ -129,8 +137,8 @@ body.stacked .nav{display:none}
       <p class="small" style="font-size:.85em">Virginia Tech · Grado Department of Industrial and Systems Engineering<br>Faculty advisor: Dr. Robert Hildebrand</p>
     </div>
     <figure style="margin:0;display:flex;flex-direction:column;gap:.3em;min-width:0">
-      <img src="__IMG_PHOTO__" alt="A white, blue and yellow two-car River LINE diesel light rail train at a Camden platform, with the Ben Franklin Bridge behind" style="width:100%;border-radius:4px;display:block">
-      <figcaption class="src" style="margin:0">River LINE train at Camden, opening week 2004. Photo © 2004 Jon Bell, as reproduced in NJDOT SSO Appendix F.</figcaption>
+      <img src="__IMG:car_pavonia_2006.jpg__" alt="Front of a white, blue and yellow two-car River LINE diesel light rail train at the Pavonia maintenance facility in Camden" style="width:100%;border-radius:4px;display:block">
+      <figcaption class="src" style="margin:0">Stadler GTW train at the Pavonia shop, Camden, 2006. Photo: David (Fewi18), public domain, Wikimedia Commons.</figcaption>
     </figure>
   </div>
   <svg id="heroTrack" viewBox="0 0 1000 120" role="img" aria-label="The River LINE from Camden to Trenton, 34 miles, with single-track sections"></svg>
@@ -184,7 +192,7 @@ body.stacked .nav{display:none}
   <div class="kicker"><span class="tag">Background</span><span>What we are dealing with</span></div>
   <div class="grid" style="grid-template-columns:auto 1fr;align-items:start">
     <figure style="margin:0;height:100%;display:flex;flex-direction:column;gap:.3em;min-width:0">
-      <img src="__IMG_MAP__" alt="NJ TRANSIT River LINE route map along the Delaware River from Camden to Trenton, with all 21 stations" style="height:min(100%,36cqw);width:auto;max-width:100%;border:1px solid var(--rule);border-radius:4px;display:block;object-fit:contain">
+      <img src="__IMG:riverline_system_map.jpg__" alt="NJ TRANSIT River LINE route map along the Delaware River from Camden to Trenton, with all 21 stations" style="height:min(100%,36cqw);width:auto;max-width:100%;border:1px solid var(--rule);border-radius:4px;display:block;object-fit:contain">
       <figcaption class="src" style="margin:0;max-width:22em">River LINE map: NJ TRANSIT, as reproduced in NJDOT SSO Appendix F.</figcaption>
     </figure>
     <div style="display:flex;flex-direction:column;gap:.8em;min-width:0">
@@ -197,6 +205,37 @@ body.stacked .nav{display:none}
       </ul>
       <svg id="mapTrack" viewBox="0 0 1000 120" role="img" aria-label="Straight-line diagram of the line with the seven single-track sections"></svg>
     </div>
+  </div>
+</div></section>
+
+<!-- 2c: photos: cars, riders, shop -->
+<section class="slide" id="photos" aria-label="Cars, riders and maintenance"><div class="in">
+  <div class="kicker"><span class="tag">Background</span><span>What it looks like</span></div>
+  <h2>The cars, the riders and the shop</h2>
+  <div class="photos six">
+    <figure><img src="__IMG:train_trenton_2022.jpg__" alt="Two-car River LINE train at the Trenton Transit Center platform"><figcaption><b>The cars.</b> Stadler GTW diesel cars, built 2002–03, at Trenton.<span class="cr">Pi.1415926535, 2022, CC BY-SA 4.0</span></figcaption></figure>
+    <figure><img src="__IMG:interior_2008.jpg__" alt="Interior of a River LINE car with rows of seats and a rider"><figcaption><b>Inside.</b> A two-section car with a low-floor middle for level boarding.<span class="cr">Lensovet, 2008, GFDL</span></figcaption></figure>
+    <figure><img src="__IMG:riders_onboard_2008.jpg__" alt="Riders seated on board with a bicycle hanging on a rack"><figcaption><b>Riders.</b> 63% ride to work (DVRPC survey); bikes ride on board.<span class="cr">David Wilson, 2008, CC BY 2.0</span></figcaption></figure>
+    <figure><img src="__IMG:boarding_walter_rand.jpg__" alt="Riders walking along the platform next to a River LINE train at Walter Rand Transportation Center in Camden"><figcaption><b>Boarding at Walter Rand, Camden.</b> Transfers to PATCO and NJ TRANSIT buses.<span class="cr">Jeff122989, CC BY-SA 3.0</span></figcaption></figure>
+    <figure><img src="__IMG:pavonia_shop.jpg__" alt="River LINE trains parked at the Pavonia yard and shop in Camden next to freight tracks"><figcaption><b>The shop.</b> Pavonia Operations and Maintenance Facility, Camden, where cars are inspected and repaired.<span class="cr">JohnGIV, CC BY 4.0</span></figcaption></figure>
+    <figure><img src="__IMG:vehicle_change.jpg__" alt="River LINE train on the yard lead near Pavonia, beside freight tank cars"><figcaption><b>Yard moves.</b> A 'vehicle change' by the Pavonia yard, where spare cars are kept (photographer's caption).<span class="cr">JohnGIV, CC BY 4.0</span></figcaption></figure>
+  </div>
+  <p class="src">Photos from Wikimedia Commons under the licenses shown; see deck/img/CREDITS.md.</p>
+</div></section>
+
+<!-- 2d: photos: operating conditions -->
+<section class="slide" id="photos2" aria-label="Operating conditions"><div class="in">
+  <div class="kicker"><span class="tag">Background</span><span>What makes it hard to run</span></div>
+  <h2>Street running, freight neighbors and meets on one track</h2>
+  <div class="photos">
+    <figure><img src="__IMG:street_burlington_2026.jpg__" alt="River LINE train running down the middle of West Broad Street in Burlington among cars"><figcaption><b>Street running.</b> Through downtown Burlington, trains share the road with traffic and wait at lights.<span class="cr">Mr. Matté, April 2026, CC BY-SA 4.0</span></figcaption></figure>
+    <figure><img src="__IMG:freight_csx.jpg__" alt="River LINE train beside a CSX freight locomotive on adjacent track"><figcaption><b>Freight neighbors.</b> Freight runs on the same corridor; passenger trains must be off the line overnight.<span class="cr">JohnGIV, CC BY 4.0</span></figcaption></figure>
+    <figure><img src="__IMG:meet_pennsauken.jpg__" alt="River LINE train at Pennsauken Transit Center with an Atlantic City Line train on the bridge above"><figcaption><b>Meets and transfers.</b> At Pennsauken, River LINE trains meet each other and connect to the Atlantic City Line.<span class="cr">JohnGIV, CC BY 4.0</span></figcaption></figure>
+  </div>
+  <div class="grid g3" style="flex:0 1 auto">
+    <p class="small"><b>72 grade crossings</b> and street segments add variability to running times, which is what makes trains late in our simulation.</p>
+    <p class="small"><b>Temporal separation:</b> passenger service ends before freight takes over at night, so late trips can't simply be pushed later.</p>
+    <p class="small"><b>Seven single-track sections:</b> a late train at one meet holds the opposing train, which is then late for its next meet.</p>
   </div>
 </div></section>
 
@@ -666,8 +705,8 @@ body.stacked .nav{display:none}
 </main>
 <nav class="nav" aria-label="Slide navigation">
   <button id="prev" type="button" aria-label="Previous slide">←</button>
-  <div class="track" id="navTrack" role="slider" tabindex="0" aria-label="Slide position along the line" aria-valuemin="1" aria-valuemax="28" aria-valuenow="1"><svg id="navSvg" viewBox="0 0 1000 34" preserveAspectRatio="none"></svg></div>
-  <span class="count" id="count">1 / 28</span>
+  <div class="track" id="navTrack" role="slider" tabindex="0" aria-label="Slide position along the line" aria-valuemin="1" aria-valuemax="30" aria-valuenow="1"><svg id="navSvg" viewBox="0 0 1000 34" preserveAspectRatio="none"></svg></div>
+  <span class="count" id="count">1 / 30</span>
   <button id="next" type="button" aria-label="Next slide">→</button>
 </nav>
 </div>

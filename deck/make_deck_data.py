@@ -26,7 +26,13 @@ src = (R / "deck" / "deck_src.html").read_text()
 assert src.count("__DATA__") == 1
 src = src.replace("/*__INTERACTIVE__*/", (R / "deck" / "engine.js").read_text() + "\n" + (R / "deck" / "interactive.js").read_text() + "\n" + (R / "deck" / "livemap.js").read_text())
 import base64
-for key, fn in [("__IMG_PHOTO__", "riverline_train_camden_2004.jpg"), ("__IMG_MAP__", "riverline_system_map.jpg")]:
-    src = src.replace(key, "data:image/jpeg;base64," + base64.b64encode((R / "deck" / "img" / fn).read_bytes()).decode())
-(R / "deck" / "river_line_deck.html").write_text(src.replace("__DATA__", js))
+import re
+src = re.sub(r"__IMG:([A-Za-z0-9_.\-]+)__", lambda mm: "data:image/jpeg;base64," + base64.b64encode((R / "deck" / "img" / mm.group(1)).read_bytes()).decode(), src)
+assert "__IMG" not in src
+src = src.replace("__DATA__", js)
+# standalone document: opens in any browser, no Claude needed
+i = src.index('<div class="app">')
+page = ('<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n'
+        + src[:i] + '</head>\n<body>\n' + src[i:] + '\n</body>\n</html>\n')
+(R / "deck" / "river_line_deck.html").write_text(page)
 print("data kB", len(js) // 1000)
