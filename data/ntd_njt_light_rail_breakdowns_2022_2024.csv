@@ -1,0 +1,7 @@
+report_year,ntd_id,agency,mode,type_of_service,mode_voms,major_mechanical_failures,other_mechanical_failures,total_mechanical_failures,vehicle_passenger_car_miles,vehicle_passenger_car_revenue_miles,train_miles,train_revenue_miles,car_miles_per_major_failure,note
+2024,20080,New Jersey Transit Corporation,LR,DO,15,53,127,180,538405,524591,538405,524591,10159,DO = Newark Light Rail (directly operated)
+2024,20080,New Jersey Transit Corporation,LR,PT,42,126,64,190,2199052,2139525,1265741,1231955,17453,PT = Hudson-Bergen LR + River LINE combined (purchased transportation)
+2023,20080,New Jersey Transit Corporation,LR,DO,15,98,42,140,528469,514930,528469,514930,5393,
+2023,20080,New Jersey Transit Corporation,LR,PT,42,130,47,177,2193607,2138781,1227822,1227822,16874,
+2022,20080,New Jersey Transit Corporation,LR,DO,15,103,38,141,534194,520531,534194,520531,5186,
+2022,20080,New Jersey Transit Corporation,LR,PT,42,249,59,308,2150540,2087932,1225728,1225728,8637,

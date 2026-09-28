@@ -1,0 +1,137 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs,tabularx}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[hidelinks]{hyperref}
+\usepackage{xurl}
+
+\title{Service Planning Under Uncertain Vehicle Availability:\\
+A Literature Review for the NJ TRANSIT River LINE Project}
+\author{ISE Senior Design, Team 22}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+The River LINE is a 34-mile diesel light rail line between Camden and Trenton, New Jersey. Its aging fleet cannot reliably supply the eight vehicles its weekday schedule assumes. This review surveys the operations research literature relevant to choosing a service plan as a function of the number of vehicles available. It covers the railway planning hierarchy, train timetabling on single-track lines, periodic timetabling, frequency setting, rolling stock circulation, disruption management, robust and stochastic timetabling, and fleet reliability and spare sizing. It closes by identifying the gap this project fills: most of the literature takes the fleet as given and plans around delays, while here the binding uncertainty is how many vehicles show up each morning.
+\end{abstract}
+
+\section{Problem context}
+
+The River LINE has 21 stations over about 34 miles, of which 12.7 miles are single track with passing sidings at Pennsauken, South Burlington, Florence, and Roebling \citep{njdot2021riverline}. The vehicles are not crashworthy under federal railroad standards, so passenger service is separated in time from freight. Light rail runs from 5:45\,am to 10:00\,pm, and Conrail freight uses the line overnight \citep{njdot2021riverline}. The fleet consists of 20 Stadler GTW articulated diesel cars delivered in 2002--2003.
+
+Reliability has deteriorated sharply. Reported miles between breakdowns fell from about 22{,}300 in 2022 to about 4{,}200 in 2024 \citep{roinj2025riverline}. NJ TRANSIT took over operations from its contractor in 2025--2026 \citep{njt2025alstom}.
+
+The client's question is operational. Given the cars available on the morning hold sheet, what schedule should run so that on-time performance, frequency, and customer impact are balanced? Two features make this more than a textbook timetabling problem:
+\begin{enumerate}
+\item The resource that constrains the plan, the number of serviceable vehicles, is random and seasonal.
+\item A failed vehicle removes a second vehicle from service while it is being rescued.
+\end{enumerate}
+
+\section{The railway planning hierarchy}
+
+Passenger railway planning is conventionally decomposed into sequential stages: network and line planning, timetabling, rolling stock circulation, crew scheduling, and real-time control \citep{huisman2005operations,caprara2007passenger}. \citet{huisman2005operations} survey this hierarchy from the perspective of Netherlands Railways. \citet{caprara2007passenger} give integer programming formulations for each stage. \citet{lusby2011railway} review track allocation models organized by network topology and planning horizon, and \citet{cacchiani2012nominal} survey nominal and robust timetabling.
+
+For the River LINE the hierarchy collapses considerably. There is one line, so line planning reduces to choosing frequencies. Every vehicle shuttles end to end, so rolling stock circulation is nearly trivial. The coupling between timetabling and fleet size, however, is tight. On a line with a fixed round-trip time $C$ and headway $h$, a periodic schedule needs $\lceil C/h \rceil$ trainsets. The single-track sections determine which values of $C$ are achievable for each $h$.
+
+\section{Timetabling on single-track lines}
+
+Scheduling trains on a single line with sidings is one of the oldest problems in the field. \citet{szpigel1973optimal} modeled meet and pass decisions as disjunctive constraints, in the manner of job-shop scheduling, and solved them by branch and bound. \citet{higgins1996optimal} gave an exact model for a single line with sidings that minimizes weighted delay and travel time, with lookahead bounds to prune the search. Their setting is close to the River LINE's alternating single and double track. \citet{carey1995model} proposed a decomposition that inserts trains one at a time. \citet{zhou2007single} treated double-direction single-track timetabling with Lagrangian-based bounds and obtained provably optimal timetables on realistic instances.
+
+On corridors with many trains, \citet{caprara2002modeling} introduced a time-space graph formulation solved by Lagrangian heuristics. \citet{cacchiani2008column} strengthened it through a path-based column generation formulation. \citet{barber2009metaheuristic} applied constraint programming and metaheuristics to Spanish single-line timetabling. \citet{harrod2012tutorial} compares the basic model structures (time-space networks, event-activity formulations with disjunctions, and hypergraphs), which helps in choosing a formulation. \citet{dure1999maximizing} addressed the design question for long single-track light rail. They found that siding placement and length strongly affect how delays propagate at 15-minute headways, which bears on how robust a River LINE timetable can be.
+
+\paragraph{Periodic timetabling.}
+Most transit timetables repeat with a fixed period. The Periodic Event Scheduling Problem (PESP) of \citet{serafini1989mathematical} models each event time modulo the period $T$ and imposes interval constraints of the form
+\[
+  (\pi_j - \pi_i - \ell_{ij}) \bmod T \in [0,\, u_{ij} - \ell_{ij}].
+\]
+A single-track section is naturally a PESP constraint: the occupation intervals of opposing trains must not overlap modulo $T$. \citet{odijk1996constraint} solved PESP by constraint generation. \citet{kroon2003variable} allowed trip times to vary within bounds. \citet{nachtigall1997minimizing} minimized passenger transfer waiting.
+
+PESP models have been put into practice. \citet{liebchen2008first} reports the first PESP-optimized timetable implemented in practice, on the Berlin U-Bahn, which also reduced the number of vehicles needed. \citet{kroon2009new} describe the 2007 Dutch national timetable, built by combining PESP timetabling with rolling stock and crew optimization.
+
+The prototype developed for this project uses a PESP-style formulation. Opposing trains may meet only on double track, siding dwell is optional, and the objective minimizes the number of trainsets for each candidate headway.
+
+\section{Frequency setting and passenger-oriented objectives}
+
+Setting frequencies from demand data is classical. \citet{ceder1984bus} gives max-load and load-profile rules in which frequency is the larger of a demand-based value and a policy minimum. \citet{guihaire2008transit} and \citet{ibarrarojas2015planning} review network design, frequency setting, timetabling, and vehicle scheduling for transit. \citet{schobel2012line} surveys line planning, contrasting cost-oriented and passenger-oriented models.
+
+When passengers arrive at random, the mean wait at a stop depends on both the mean headway and its variability:
+\[
+  \mathbb{E}[W] = \frac{\mathbb{E}[H]}{2}\left(1 + \mathrm{CV}^2(H)\right),
+\]
+see \citet{welding1957instability} and \citet{osuna1972control}. For this project, a cancelled trip doubles one headway and so hurts riders more than a planned lower frequency with the same number of trips. This is the analytical case for replacing ad hoc cancellations with a deliberately thinner schedule.
+
+\citet{niu2015train} optimize corridor timetables for passenger waiting under time-dependent demand. \citet{parbo2016passenger} review passenger-oriented timetabling and conclude that passengers value travel-time certainty over shorter scheduled times. On measurement, the \emph{Transit Capacity and Quality of Service Manual} \citep{tcrp2013tcqsm} defines frequency and reliability measures such as on-time performance and headway adherence. \citet{vanoort2014incorporating} find that agencies rarely incorporate reliability into service design and recommend passenger-oriented reliability indicators. \citet{vanoort2010reliability} quantify how holding strategies improve regularity on short-headway services, including a tram line. Empirical work on punctuality \citep{olsson2004influencing} identifies crossing management on single-track lines as a leading cause of delay.
+
+\section{Rolling stock circulation, vehicle scheduling, and maintenance}
+
+Rolling stock circulation assigns train units to timetabled trips. \citet{schrijver1993minimum} modeled the minimum number of units required on a line as an integer multicommodity flow. \citet{alfieri2006efficient} added the order of units in coupled trains. \citet{fioole2006rolling} extended the model to trains that combine and split. \citet{borndorfer2016integrated} used a hypergraph model for rotation planning with maintenance at DB Fernverkehr. For buses, the analogous vehicle scheduling problem is reviewed by \citet{bunte2009overview}.
+
+Maintenance enters through routing and scheduling. \citet{maroti2005maintenance,maroti2007maintenance} route units that need urgent maintenance to workshops by modifying planned circulations. \citet{lai2015optimizing} integrate rolling stock assignment with the maintenance plan.
+
+On the River LINE the circulation itself is simple, since every vehicle shuttles between the terminals. The relevant questions are whether to run one- or two-car consists and how many protect vehicles to hold back. Whether a two-car consist can move a disabled partner without a separate rescue vehicle is worth confirming with the client.
+
+\section{Disruption management and vehicle rescheduling}
+
+\citet{jespersengroth2009disruption} describe the disruption management process and its three rescheduling subproblems: timetable, rolling stock, and crew. \citet{cacchiani2014overview} survey real-time recovery models. For rolling stock, \citet{nielsen2012rolling} propose a rolling-horizon approach. \citet{kroon2015rescheduling} add passengers who reroute in response to cancellations. \citet{veelenturf2016railway} reschedule timetables through all phases of a large disruption.
+
+The closest model to the River LINE's rescue problem is the \emph{vehicle rescheduling problem} of \citet{li2007vehicle}. When a vehicle breaks down, its remaining trips are reassigned to other vehicles, including standby vehicles. The River LINE adds a twist: the rescue itself consumes a working vehicle for a significant time, and a failure on single track blocks traffic in both directions.
+
+\section{Robust and stochastic timetabling}
+
+A large body of work plans timetables that tolerate small delays. \citet{kroon2008stochastic} redistribute running-time supplements in a cyclic timetable using stochastic optimization. \citet{fischetti2009light} introduced \emph{light robustness}, which maximizes slack subject to a bounded loss in nominal cost. \citet{fischetti2009fast} compare such methods on Italian corridors. \citet{liebchen2009concept} formalized \emph{recoverable robustness}: a plan is robust if a limited recovery algorithm can repair it after any disruption in a given scenario set.
+
+Recoverable robustness fits this project well. The published tiers of service plans are the first-stage decision. The choice of tier at the 6\,am hold sheet, and any change at the 6\,pm hold sheet, is the recovery.
+
+\section{Fleet reliability, spares, and seasonality}
+
+Sizing spares for repairable items has a long history in inventory theory. The METRIC model of \citet{sherbrooke1968metric} sets stock levels for repairable items with compound-Poisson failures. \citet{hou2018optimization} size a transit reserve fleet with a queueing model that trades operator cost against the cost of breakdowns to users.
+
+In U.S. practice, the Federal Transit Administration recommends a 20\% spare ratio for buses. It sets no fixed number for rail, requiring operators to justify their ratio from maintenance and reliability needs \citep{fta2015op37}. Agency practice for buses is surveyed in \citet{tcrp2014spare}. \citet{conradie2015quantifying} quantify system reliability for an aging commuter rail fleet from failure statistics, which is the kind of analysis the River LINE's failure logs would support.
+
+Seasonal effects are well documented. \citet{ferranti2016heat} find that heat-related rail failures peak early in summer and then decline even at similar temperatures (``failure harvesting''). \citet{brazil2017weather} relate rail delays in Dublin to rainfall and wind, with delays peaking in November. \citet{white2023yearround} analyze eleven years of low-adhesion station overruns and confirm an autumn leaf-fall peak. These findings match the client's account: heat affects hydraulics in summer, cold affects equipment in winter, and fall brings slippery rails. They support modeling failure and delay rates by season.
+
+\section{Gap and implications for this project}
+
+Table~\ref{tab:map} maps the literature to the components of the River LINE model. Two gaps stand out.
+\begin{enumerate}
+\item \textbf{Fleet availability is treated as given.} Timetabling and rolling stock models assume the fleet is fixed and plan around delays. Spare-sizing models ignore the timetable. We found no work that designs a menu of periodic single-track timetables indexed by the number of available vehicles and evaluates the policy for switching among them under stochastic, seasonal availability.
+\item \textbf{The rescue coupling is unmodeled.} In the models we reviewed, a failure costs only the failed vehicle; the second vehicle tied up by the rescue does not appear.
+\end{enumerate}
+
+A practical formulation therefore has three layers:
+\begin{enumerate}
+\item a PESP-style single-track timetable for each candidate headway, giving the trainsets it requires;
+\item a policy that maps the morning availability (and season) to a service tier and a number of protect vehicles;
+\item a simulation that evaluates each policy against historical or fitted availability, reporting cancellations, on-time performance, and passenger wait.
+\end{enumerate}
+
+\begin{table}[ht]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}lX@{}}
+\toprule
+Model component & Key references \\
+\midrule
+Single-track timetable & \citet{szpigel1973optimal,higgins1996optimal,zhou2007single,caprara2002modeling,cacchiani2008column,harrod2012tutorial} \\
+Periodic (PESP) formulation & \citet{serafini1989mathematical,odijk1996constraint,kroon2003variable,liebchen2008first,kroon2009new} \\
+Frequency and passenger wait & \citet{ceder1984bus,schobel2012line,welding1957instability,osuna1972control,niu2015train,parbo2016passenger} \\
+Fleet assignment and consists & \citet{schrijver1993minimum,alfieri2006efficient,fioole2006rolling,bunte2009overview} \\
+Failures and rescue & \citet{li2007vehicle,jespersengroth2009disruption,nielsen2012rolling,cacchiani2014overview} \\
+Robust tiers and recovery & \citet{liebchen2009concept,fischetti2009light,kroon2008stochastic,dure1999maximizing} \\
+Spares and reliability & \citet{sherbrooke1968metric,hou2018optimization,fta2015op37,tcrp2014spare,conradie2015quantifying} \\
+Seasonality & \citet{ferranti2016heat,brazil2017weather,white2023yearround} \\
+Performance measures & \citet{tcrp2013tcqsm,vanoort2014incorporating,olsson2004influencing} \\
+\bottomrule
+\end{tabularx}
+\caption{Literature mapped to components of the River LINE model.}
+\label{tab:map}
+\end{table}
+
+\bibliographystyle{plainnat}
+\bibliography{refs}
+
+\end{document}

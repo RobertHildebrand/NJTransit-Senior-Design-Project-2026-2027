@@ -1,0 +1,49 @@
+\documentclass[10pt,landscape]{article}
+\usepackage[margin=0.6in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{booktabs}
+\usepackage[hidelinks]{hyperref}
+\title{River LINE Timetable Book\\\large Current (NJ TRANSIT, Sept 2026) and proposed weekday timetables}
+\author{ISE Senior Design Team 22}
+\date{September 28, 2026}
+\begin{document}
+\maketitle
+\noindent Times are departures, rounded to the minute. ``--'' means the trip does not serve that station.
+\begin{itemize}
+\item \textbf{NJT current} is transcribed from NJ TRANSIT's GTFS feed (release of Sept.~15, 2026; Mobility Database mirror mdb-509).
+\item \textbf{Proposed T8--T3} come from the pattern optimizer described in the project report. Each keeps NJ TRANSIT's 150-minute round trip and spaces trains as evenly as the single track allows. Every scheduled meet falls on double track in the calibrated track model, all day.
+\item \textbf{Proposals B8, B7, E5, E6, G8, S8, R8, W7} (revision 3) change one design choice each: meet buffers and layover length (B8, B7, G8, R8), the midday service (E5, E6), holds before single track (S8), and summer running times (W7). All are conflict-free. B8 is the recommended weekday timetable; see Section~7 of the project report for their simulated punctuality.
+\item \textbf{Uniform U8--U4} use a single headway in each period. Each period is conflict-free, but the changeovers between peak and off-peak produce the conflicts listed below and need retiming before use.
+\item All proposed timetables are planning drafts: running times are NJ TRANSIT's scheduled times, and siding locations are calibrated from NJ TRANSIT's own meets rather than taken from an official track chart.
+\end{itemize}
+\begin{center}\small
+\begin{tabular}{@{}lrrrrrrrr@{}}\toprule
+Timetable & Trains peak/mid & Trips & Train-h & AM gap $\to$Trenton & AM gap $\to$Camden & Midday gap & Avg wait & Meet conflicts\\
+ & & & & mean/max (min) & mean/max (min) & mean (min) & (min) & \\\midrule
+NJT current (Sept 2026) & 8/6 & 87 & 109 & 17.5/30 & 18.2/30 & 30.0 & 12.9 & 1 \\
+Proposed T8 (8 trains peak, 6 midday) & 8/6 & 88 & 109 & 18.4/21 & 18.8/24 & 26.2 & 12.9 & 0 \\
+Proposed T7 (7 peak, 6 midday) & 7/6 & 80 & 99 & 21.8/26 & 21.3/30 & 25.6 & 14.0 & 0 \\
+Proposed T6 (6 peak, 5 midday) & 6/5 & 69 & 86 & 25.0/26 & 24.7/31 & 28.3 & 15.5 & 0 \\
+Proposed T5 (5 all day) & 5/5 & 62 & 77 & 30.2/31 & 30.2/31 & 30.0 & 16.0 & 0 \\
+Proposed T4 (4 all day) & 4/4 & 48 & 60 & 37.7/38 & 37.5/38 & 37.5 & 21.1 & 0 \\
+Proposed T3 (3 all day) & 3/3 & 37 & 46 & 51.5/52 & 46.3/52 & 49.7 & 27.2 & 0 \\
+Proposal B8: 8 trains, 160-min cycle, 2.5-min meet buffers, 9-min layovers & 8/6 & 83 & 109 & 19.3/25 & 21.2/31 & 26.7 & 13.5 & 0 \\
+Proposal B7: 7 trains, 160-min cycle, 2.5-min meet buffers, 9-min layovers & 7/6 & 76 & 100 & 22.5/27 & 22.6/32 & 27.2 & 14.6 & 0 \\
+Proposal E5: 8 peak, 5 midday (frees a car) & 8/5 & 80 & 99 & 17.9/25 & 20.3/28 & 29.2 & 13.3 & 0 \\
+Proposal E6: 8 peak, 6 midday, even midday & 8/6 & 87 & 108 & 18.1/23 & 19.8/26 & 23.2 & 12.7 & 0 \\
+Proposal G8: 8 trains, 2-min meet buffers & 8/6 & 88 & 109 & 19.4/27 & 16.9/29 & 24.4 & 12.3 & 0 \\
+Proposal S8: 8 trains, slack held before single track & 8/6 & 87 & 108 & 18.3/23 & 19.6/26 & 23.3 & 12.8 & 0 \\
+Proposal R8: 8 trains, 160-min cycle, 8-min layovers & 8/6 & 83 & 109 & 19.6/25 & 19.5/26 & 26.8 & 13.3 & 0 \\
+Proposal W7: summer (+6\% run time), 7 trains & 7/5 & 71 & 93 & 22.6/29 & 22.1/32 & 31.9 & 15.4 & 0 \\
+Uniform U8: every 21 min peak, 30 off-peak & 8/5 & 74 & 98 & 21.0/21 & 20.0/21 & 30.0 & 14.2 & 7 \\
+Uniform U7: every 23 min peak, 30 off-peak & 8/6 & 71 & 100 & 23.0/23 & 22.6/23 & 30.0 & 14.7 & 6 \\
+Uniform U6: every 26 min peak, 30 off-peak & 7/6 & 66 & 96 & 26.0/26 & 24.7/26 & 30.0 & 15.7 & 4 \\
+Uniform U5: every 29 min peak, 30 off-peak & 6/5 & 63 & 77 & 29.0/29 & 23.8/29 & 30.0 & 16.8 & 6 \\
+Uniform U4: every 38 min peak, 38 off-peak & 4/4 & 50 & 63 & 38.0/38 & 38.0/38 & 38.0 & 19.8 & 0 \\
+\bottomrule\end{tabular}\end{center}
+\noindent Avg wait: random passenger arrivals at Walter Rand, weighted by an assumed hourly demand profile. Meet conflicts: pairs of opposing trains scheduled on the same single-track section (calibrated track model, 0.5-min buffer).
+\clearpage
+\tableofcontents
+\clearpage
+\input{timetable_book_body.tex}
+\end{document}

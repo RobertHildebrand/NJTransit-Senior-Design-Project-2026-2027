@@ -1,0 +1,14 @@
+measure,category,riders_weighted,share,source_note
+trip_purpose,work,3244,0.63,DVRPC pub. 11057 text
+trip_purpose,college_or_technical_school,517,0.10,DVRPC pub. 11057 text
+access_mode,walk,1761,,Table 4
+access_mode,drive_and_park,1851,,Table 4
+access_mode,njt_bus,385,,Table 4
+access_mode,patco,260,,Table 4
+access_mode,carpool,391,,Table 4
+egress_mode,walk,2414,,Table 5
+egress_mode,patco,734,,Table 5
+egress_mode,njt_bus,541,,Table 5
+egress_mode,njt_train,489,,Table 5
+fare_type,one_way_ticket,2129,0.41,DVRPC pub. 11057 text
+fare_type,monthly_pass,2262,0.44,DVRPC pub. 11057 text

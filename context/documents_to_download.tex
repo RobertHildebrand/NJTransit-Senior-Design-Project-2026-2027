@@ -1,0 +1,115 @@
+\documentclass[10.5pt]{article}
+\usepackage[margin=0.8in,landscape]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{booktabs,longtable,array}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+\usepackage{xurl}
+\usepackage{enumitem}
+\setlist{itemsep=1pt,topsep=3pt}
+\definecolor{got}{HTML}{1F8A4C}\definecolor{hi}{HTML}{D03B3B}\definecolor{md}{HTML}{B7791F}\definecolor{lo}{HTML}{6B736E}
+\newcommand{\Got}{\textcolor{got}{\textbf{Have.}}}\newcommand{\Part}{\textcolor{md}{\textbf{Partial.}}}\newcommand{\Need}{\textcolor{hi}{\textbf{Still needed:}}}
+\newcommand{\Hi}{\textcolor{hi}{\textbf{High}}}\newcommand{\Md}{\textcolor{md}{\textbf{Med}}}\newcommand{\Lo}{\textcolor{lo}{\textbf{Low}}}
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
+\title{River LINE: Documents to Download\\\large Documents we found but could not read in full, and how to get them}
+\author{ISE Senior Design Team 22}
+\date{September 28, 2026 (updated after the team's downloads)}
+\begin{document}
+\maketitle
+
+
+\section*{Update: what the team downloaded (September 28, 2026)}
+A team member downloaded 22 files. They are now in \texttt{RiverLine-Team22/docs\_downloaded/}, sorted into subfolders by section of the table below and renamed by ID. Three duplicate copies were discarded. The main results, now in the background report and in \texttt{data\_public/}:
+
+\begin{itemize}
+\item \textbf{D02 (failures).} NJ TRANSIT's monthly River LINE miles between failures, January 2017 to August 2026. The series fell to 2{,}377 miles (September 2025) and recovered to about 3{,}700 by mid-2026. Saved in \texttt{data\_public/njt\_performance/}.
+\item \textbf{D06 (satisfaction surveys).} River LINE overall satisfaction by wave: 6.6 (Spring 2022), falling to 5.9 (Spring 2025), then 6.8 (Fall 2025). It was the lowest light rail line in every wave until Fall 2025. Top-ten attribute scores were also extracted. Saved in \texttt{data\_public/njt\_survey/}.
+\item \textbf{D05 and D04 (NTD cost history).} River LINE operating cost, fares, and service for 2015--2024, and the 2019 agency profile.
+\item \textbf{D09 and D10 (board agendas).}
+  \begin{itemize}
+  \item Confirmed ``River LINE insourcing: 94 FTE, \$3.9m.''
+  \item Found board item 2511-51 (November 12, 2025). It records a termination for convenience ``due to performance concerns,'' the February 14, 2026 transfer date, and the new subsidiary NJ TRANSIT Southern Light Rail, Inc.
+  \end{itemize}
+\item \textbf{D19 (NJDOT safety oversight appendix).} Burlington City Yard holds 2 cars and the Trenton layover holds 8. The line has 72 grade crossings and 23 bridges, and trains are limited to 2 cars. It gives no siding mileposts.
+\item \textbf{D17 (FRA docket).} The file is a 2007 e-mail setting a 25\,mph limit at the Farnsworth Avenue crossing, not the Temporal Separation Plan, which is still needed.
+\end{itemize}
+
+\paragraph{Still most useful to get:}
+\begin{itemize}
+\item River LINE-only on-time data; the public file is all light rail.
+\item The 2003 Temporal Separation Plan.
+\item Board agendas from September 2025 to February 2026, to find the Kinkisharyo contract.
+\item The official track chart with siding limits (Data Request).
+\item Post-takeover boardings by station.
+\end{itemize}
+
+\paragraph{Why these were missing.} Our research tools could not open these files. Most are PDFs on \texttt{content.njtransit.com}, which blocks automated access in its robots file. Others are JavaScript dashboards, paywalled articles, or PDFs whose text did not extract. A team member can download almost all of them in an ordinary web browser.
+\begin{itemize}
+\item Save each file to \texttt{RiverLine-Team22/docs\_downloaded/}, using the ID in the first column as the file-name prefix (e.g.\ \texttt{D01\_Fall2024\_survey.pdf}).
+\item Items marked \emph{OPRA} are not public. Request them from NJ TRANSIT under New Jersey's Open Public Records Act, through NJ TRANSIT's records-request page on njtransit.com (search ``OPRA'') or the client contact. Several overlap with our Data Request.
+\end{itemize}
+
+\paragraph{Priority.}
+\begin{itemize}
+\item \Hi: feeds our models or the client report directly.
+\item \Md: useful context.
+\item \Lo: nice to have.
+\end{itemize}
+
+{\small
+\begin{longtable}{@{}p{0.7cm}P{5.2cm}P{6.6cm}P{5.9cm}p{1.0cm}P{3.4cm}@{}}
+\toprule
+ID & Document & Where & What it should contain and why we need it & Pri. & Status (Sept.~28) \\
+\midrule\endhead
+\multicolumn{6}{@{}l}{\textbf{A. Performance and ridership data}}\\
+D01 & NJ TRANSIT light rail on-time performance data file & \url{https://content.njtransit.com/sites/default/files/OTP/datafiles/LIGHTRAIL_OTP_DATA.csv} (listed at \url{https://www.njtransit.com/performance-data-download}) & Monthly on-time performance by light rail line. Lets us calibrate the delay simulation to the River LINE before and after the takeover. & \Hi & \Part{} Obtained. File covers all light rail combined; River LINE-only on-time data still needed. \\
+D02 & NJ TRANSIT light rail mean-distance-between-failures data file & \url{https://content.njtransit.com/sites/default/files/OTP/datafiles/LIGHTRAIL_MDBF_DATA.csv} & Monthly miles between failures by line. The key failure-rate input to the fleet simulation. & \Hi & \Got{} Obtained. River LINE monthly 2017--Aug 2026 extracted. \\
+D03 & Light rail on-time dashboard & \url{https://www.njtransit.com/improve/on-time-performance/light-rail} & Interactive version of D01--D02. Screenshot it if the CSV files fail. & \Md & \Got{} Printout obtained (shows River LINE 86.2\%, period not stated). \\
+D04 & NTD agency profiles, NJ TRANSIT 2019--2021 & e.g.\ \url{https://www.transit.dot.gov/sites/fta.dot.gov/files/transit_agency_profile_doc/2019/20080.pdf} & Pre-pandemic River LINE (Hybrid Rail) costs and service, to extend our 2022--24 table back in time. & \Md & \Part{} 2019 obtained; 2020--2021 still needed. \\
+D05 & NTD TS2.1 time series (service data and operating expenses by mode) & \url{https://www.transit.dot.gov/ntd/data-product/ts21-service-data-and-operating-expenses-time-series-mode-2} & Excel file with annual costs and service for Hybrid Rail from 2004 on. Gives a long cost history. & \Md & \Got{} Obtained; River LINE rows 2015--2024 extracted. \\
+\midrule
+\multicolumn{6}{@{}l}{\textbf{B. Rider satisfaction}}\\
+D06 & NJ TRANSIT Customer Satisfaction Survey wave reports, Spring 2022 -- Fall 2025 (8 PDFs) & Index: \url{https://www.njtransit.com/surveyresults}; example: \url{https://content.njtransit.com/sites/default/files/marketing/website/pdf/2023\%20Spring\%20Customer\%20Satisfaction\%20Survey\%20Presentation\%20Chair\%20Review\%209-26-23.pdf} & River LINE scores for every wave and for about 40 attributes (on-time, cleanliness, communication). Gives the satisfaction trend. We have only Fall 2024 (6.1). & \Hi & \Got{} All 8 waves obtained; scores extracted. \\
+D07 & Customer satisfaction dashboard (Power BI) & embedded at \url{https://www.njtransit.com/surveyresults} & Line-by-attribute scores; export or screenshot the River LINE view. & \Hi & \Part{} Page printout only; dashboard data not exported. \\
+D08 & DVRPC product pages: \emph{Safe Routes to Transit: Bordentown Station}; DVRPC TOD pages & \url{https://www.dvrpc.org/products/20023}; \url{https://www.dvrpc.org/tod} & Station access and development studies on the line. & \Lo & \Got{} Bordentown study obtained; TOD pages not. \\
+\midrule
+\multicolumn{6}{@{}l}{\textbf{C. Budget, contracts, and board actions}}\\
+D09 & NJ TRANSIT board agenda, April 15, 2026 & \url{https://content.njtransit.com/sites/default/files/board/agenda/NJT-04-15-2026-FINAL-BOARD-MEETING-AGENDA-V2.pdf} & FY2027 budget exhibits; ``River LINE insourcing: 94 FTE, \$3.9m'' (to verify); light rail staffing. & \Hi & \Got{} Obtained; 94 FTE / \$3.9m confirmed. \\
+D10 & NJ TRANSIT board agenda, November 12, 2025, and agendas from September 2025 to February 2026 & \url{https://content.njtransit.com/sites/default/files/board/agenda/NJT-11-12-2025-FINAL-BOARD-MEETING-AGENDA2.pdf}; index \url{https://www.njtransit.com/board-committee-meetings} & Likely the Kinkisharyo maintenance contract (value, term) and takeover authorizations. & \Hi & \Part{} Nov 12, 2025 obtained (subsidiary created; no Kinkisharyo item). Sept 2025--Feb 2026 agendas still needed. \\
+D11 & Kinkisharyo River LINE maintenance contract; fleet-replacement RFP & \emph{OPRA} / future NJ TRANSIT procurement notice & Contract value and scope; replacement fleet specification and schedule. & \Hi & \Need{} not public \\
+D12 & NJDOT Transportation Capital Program FY2026 and FY2027, NJ TRANSIT section & \url{https://dot.nj.gov/transportation/capital/tcp26/sec8.shtm} (FY2027 edition not located) & River LINE capital line items (overhaul, replacement, infrastructure). & \Md & \Need{} 403 \\
+D13 & NJ STIP, NJ TRANSIT section; NJTPA TIP detail (read in part) & \url{https://njtpa.org/wp-content/uploads/2026/04/NJ-TRANSITdetail.pdf} & Confirm project T550 overhaul amounts and any River LINE-only lines. & \Md & \Need{} large PDF, read in part \\
+D14 & River LINE fare chart & \url{https://content.njtransit.com/sites/default/files/marketing/website/pdf/RiverLine.pdf} & Current fares and passes, to explain fare revenue per trip (\$0.46) being far below the \$1.90 fare. & \Lo & \Need{} robots block \\
+D15 & River LINE operator job postings & \url{https://www.transittalent.com/job-light-rail-train-operator-river-line-179013}; LinkedIn posting & Wage and headcount, to estimate the marginal cost of a train-hour. & \Md & \Need{} expired / login \\
+\midrule
+\multicolumn{6}{@{}l}{\textbf{D. Safety and regulation}}\\
+D16 & NTSB docket RRD25FR001 (Florence tree strike) & \url{https://data.ntsb.gov/Docket/Forms/searchdocket} (search RRD25FR001) & Operations and track factual reports: vegetation program, speeds, earlier strikes. & \Md & \Need{} not fetched \\
+D17 & FRA docket FRA-1999-6135: Temporal Separation Plan (Oct 29, 2003) & \url{https://www.regulations.gov/docket/FRA-1999-6135} & The exact passenger and freight hours, which bound the service day in our timetables. & \Hi & \Need{} File downloaded (FRA-1999-6135-0070) is a 2007 crossing e-mail, not the plan; plan still needed. \\
+D18 & FRA docket FRA-2007-0030: 2026 waiver extension petition & \url{https://www.regulations.gov/docket/FRA-2007-0030} & Current shared-use conditions and requested relief (Parts 229, 238). & \Md & \Need{} not fetched \\
+D19 & NJDOT State Safety Oversight report (2017) and Appendix F (2021) & \url{https://nj.gov/transportation/capital/guideway/pdf/F_RiverLINE.pdf} (mirror worked; dot.nj.gov copy 403) & Track chart, sidings, yards, speeds. May settle our siding calibration. & \Hi & \Part{} Appendix F obtained (yards, crossings, signals; no siding mileposts); 2017 report still needed. \\
+\midrule
+\multicolumn{6}{@{}l}{\textbf{E. History and legislative record}}\\
+D20 & NJ Senate Transportation Committee hearing transcripts, 2024--25 & \url{https://pub.njleg.state.nj.us/} (search ``River LINE'') & NJ TRANSIT testimony on failures, fixes, and plans. & \Md & \Need{} site blocked \\
+D21 & Sen.\ Singleton press releases (njsendems.org) and 2025 meeting materials & \url{https://www.njsendems.org/}; \url{https://www.troysingleton.com/} & Dates and quotes from public meetings. & \Lo & \Need{} rate-limited \\
+D22 & NJDOT press release, Nov 22, 2000 (vehicle model); LRTA article ``Light rail takes off in New Jersey'' & \url{https://dot.nj.gov/transportation/about/press/2000/112200a.shtm}; \url{https://www.lrta.info/archive/mag/articles/art0007.html} & Original vehicle order: number, cost, specification. & \Lo & \Need{} 403 \\
+D23 & Newspaper originals: \emph{NYT} (Mansnerus, 2004), \emph{The Record} (2007), \emph{Courier-Post} opening coverage (March 2004), NJ.com ``largely fixed'' (2025) & library databases (ProQuest, NewsBank) & Opening cost and ridership critiques; recent ridership and on-time claims. & \Lo & \Need{} paywall \\
+\midrule
+\multicolumn{6}{@{}l}{\textbf{F. Plans}}\\
+D24 & Glassboro--Camden Line Final EIS and Record of Decision; Walter Rand renovation plans & \url{https://glassborocamdenline.com/} (documents page) & Connection design and operating plan at Walter Rand; timed-transfer requirements. & \Md & \Need{} not attempted in full \\
+D25 & DVRPC long-range plan \emph{Connections 2050}, transit project list & \url{https://www.dvrpc.org/} (Connections 2050) & Confirms no River LINE extension; lists any regional priorities. & \Lo & \Need{} 404 on subpage \\
+\midrule
+\multicolumn{6}{@{}l}{\textbf{G. Peers and literature}}\\
+D26 & CapMetro internal audit of the GTW fleet (December 2025) & CapMetro board materials, \url{https://www.capmetro.org/} & Obsolescence findings for the same vehicle type. & \Md & \Need{} not found online \\
+D27 & Rutgers VTC tech brief (read); Chatman et al.\ 2012, \emph{Urban Studies} full text & \url{https://journals.sagepub.com/doi/abs/10.1177/0042098011404933} & Full hedonic results by station. & \Lo & \Got{} Chatman et al.\ 2012 obtained. \\
+D28 & Paywalled articles cited in the background report: Chakrabarti \& Giuliano 2015; Carrel et al.\ 2013; van Oort 2016; Bates et al.\ 2001; Wardman 2004; Carrion \& Levinson 2012; Stutzer \& Frey 2008; St-Louis et al.\ 2014; Ettema et al.\ 2010; De Vos et al.\ 2013; Tyndall 2017; Boisjoly et al.\ 2018; Brakewood et al.\ 2015; Debrezion et al.\ 2007; Mohammad et al.\ 2013; Hess \& Almeida 2007 & via DOI links in the report bibliography, through the VT library & Check page ranges and findings. & \Lo & \Need{} paywall \\
+D29 & TCRP Report 95 Ch.~9; TCRP Report 165 (TCQSM); TransitCenter \emph{Who's On Board 2016} & \url{https://www.trb.org/Publications/Blurbs/154751.aspx}; \url{https://doi.org/10.17226/24766}; \url{https://transitcenter.org/wp-content/uploads/2016/07/TransitCenter-WOB-2016.pdf} & Frequency elasticities and quality-of-service measures for a ridership response in our cost account. & \Md & \Need{} large PDFs, not opened \\
+\bottomrule
+\end{longtable}}
+
+\paragraph{Also worth requesting (not yet published anywhere we found).}
+\begin{itemize}
+\item A post-takeover River LINE on-board survey or station boarding counts; the last public survey is from 2010.
+\item River LINE boardings by station, weekday, 2024--2026. The Wikipedia station table has no source.
+\item NJ TRANSIT's vegetation-management plan for the corridor after the 2024 collision.
+\end{itemize}
+\end{document}

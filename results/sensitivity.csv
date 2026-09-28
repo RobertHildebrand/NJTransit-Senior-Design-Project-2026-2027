@@ -1,0 +1,37 @@
+case,policy,cars,cancel_pct,wait_total,total_cost
+base,Fixed 8-car (20/30),8,3.68,15.47,82464.52
+base,Fixed 8-car (20/30),9,1.33,14.04,79748.13
+base,"Tiered flexible, 1 protect",8,1.59,16.02,81769.5
+base,"Tiered flexible, 1 protect",9,1.33,14.04,79748.13
+base,"Tiered clock-face, 1 protect",8,1.16,17.87,83847.44
+base,"Tiered clock-face, 1 protect",9,1.33,14.04,79748.13
+"MDBF 8,000 mi",Fixed 8-car (20/30),8,1.75,14.24,80121.65
+"MDBF 8,000 mi",Fixed 8-car (20/30),9,0.57,13.55,78809.64
+"MDBF 8,000 mi","Tiered flexible, 1 protect",8,0.57,15.28,80366.17
+"MDBF 8,000 mi","Tiered flexible, 1 protect",9,0.57,13.55,78809.64
+"MDBF 8,000 mi","Tiered clock-face, 1 protect",8,0.42,17.33,82803.59
+"MDBF 8,000 mi","Tiered clock-face, 1 protect",9,0.57,13.55,78809.64
+"MDBF 2,500 mi",Fixed 8-car (20/30),8,6.74,18.03,87337.72
+"MDBF 2,500 mi",Fixed 8-car (20/30),9,2.98,14.97,81527.19
+"MDBF 2,500 mi","Tiered flexible, 1 protect",8,3.08,17.23,84070.52
+"MDBF 2,500 mi","Tiered flexible, 1 protect",9,2.98,14.97,81527.19
+"MDBF 2,500 mi","Tiered clock-face, 1 protect",8,2.04,18.49,85018.36
+"MDBF 2,500 mi","Tiered clock-face, 1 protect",9,2.98,14.97,81527.19
+rescue 30 min,Fixed 8-car (20/30),8,3.45,15.28,82112.19
+rescue 30 min,Fixed 8-car (20/30),9,1.45,14.14,79938.29
+rescue 30 min,"Tiered flexible, 1 protect",8,1.43,15.86,81475.82
+rescue 30 min,"Tiered flexible, 1 protect",9,1.45,14.14,79938.29
+rescue 30 min,"Tiered clock-face, 1 protect",8,0.65,17.45,83043.59
+rescue 30 min,"Tiered clock-face, 1 protect",9,1.45,14.14,79938.29
+rescue 90 min,Fixed 8-car (20/30),8,3.68,15.45,82432.99
+rescue 90 min,Fixed 8-car (20/30),9,1.84,14.31,80270.81
+rescue 90 min,"Tiered flexible, 1 protect",8,1.79,16.07,81862.3
+rescue 90 min,"Tiered flexible, 1 protect",9,1.84,14.31,80270.81
+rescue 90 min,"Tiered clock-face, 1 protect",8,1.48,18.1,84282.54
+rescue 90 min,"Tiered clock-face, 1 protect",9,1.84,14.31,80270.81
+block 60 min,Fixed 8-car (20/30),8,3.89,15.7,82905.99
+block 60 min,Fixed 8-car (20/30),9,1.52,14.1,79857.47
+block 60 min,"Tiered flexible, 1 protect",8,1.31,15.76,81282.59
+block 60 min,"Tiered flexible, 1 protect",9,1.52,14.1,79857.47
+block 60 min,"Tiered clock-face, 1 protect",8,0.95,17.65,83423.98
+block 60 min,"Tiered clock-face, 1 protect",9,1.52,14.1,79857.47

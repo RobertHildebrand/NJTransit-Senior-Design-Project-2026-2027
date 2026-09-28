@@ -1,0 +1,258 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{booktabs,tabularx,longtable,array}
+\usepackage[hidelinks]{hyperref}
+\usepackage{xurl}
+\usepackage{enumitem}
+\setlist{itemsep=2pt,topsep=3pt}
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}
+
+\title{Data Sources and Provenance\\\large NJ TRANSIT River LINE Schedule Optimization (Team 22)}
+\author{ISE Senior Design, Team 22}
+\date{Living document --- last updated September 28, 2026 (public data pull added)}
+
+\begin{document}
+\maketitle
+
+\noindent This document records where every number, file, and parameter used in the project comes from, how it was processed, and how much to trust it. Update it whenever a source is added or replaced. Links were accessed on September 28, 2026 unless noted.
+
+\medskip
+\noindent\textbf{Trust levels used below.}
+\begin{itemize}
+\item \textbf{A} --- official agency data or documents.
+\item \textbf{B} --- reputable secondary sources, such as news reports quoting the agency, or Wikipedia citing the agency.
+\item \textbf{C} --- third-party mirrors, or data that was machine-extracted.
+\item \textbf{P} --- placeholder assumptions made by the team, to be replaced with client data.
+\end{itemize}
+
+\tableofcontents
+
+%======================================================================
+\section{Schedule, stations, and running times}
+
+\begin{longtable}{@{}p{3.3cm}p{7.8cm}p{1.0cm}p{2.6cm}@{}}
+\toprule
+Item & Source and link & Trust & Project file \\
+\midrule
+\endhead
+Stations, coordinates, track geometry, scheduled trips (2014) &
+NJ TRANSIT rail GTFS feed, service dates 2014-03-13 to 2014-09-08, route 16 ``Riverline Light Rail.'' This is a third-party GitHub copy: \url{https://github.com/heychrisek/njtransit/tree/master/rail_data}. We used \texttt{stops.txt}, \texttt{trips.txt}, \nolinkurl{stop_times.txt}, and shape 1404 in \texttt{shapes.txt} (33.59 mi). &
+C & \nolinkurl{data/raw_gtfs_njt_rail_2014/}, \nolinkurl{river_line_stops.csv}, \nolinkurl{river_line_trips_2014.csv}, \nolinkurl{river_line_stop_times_2014.csv} \\
+Running time between each pair of stations &
+Derived from the 2014 GTFS stop times: the median scheduled minutes for each segment, by direction and day type. End-to-end time is 67 min. &
+C & \nolinkurl{river_line_interstation_runtimes_2014.csv} \\
+Vehicle blocks (train duties) &
+Derived from the GTFS \nolinkurl{block_id} field. We saw 12 active blocks at the peak and 6 at the base. &
+C & \nolinkurl{river_line_blocks_2014.csv} \\
+Cross-check of the current timetable &
+The partial December 2024 weekday northbound timetable, read from \url{https://njtranshit.com/schedule/17/riverline-light-rail?date=2024-12-02&direction=1}. It shows 65--67 min end to end and the same 15/30-min pattern. This is an unofficial site. &
+C & \nolinkurl{river_line_weekday_northbound_2024-12-02_partial.csv} \\
+\textbf{Current official schedule (to obtain)} &
+NJ TRANSIT developer portal (free registration and license agreement): \url{https://www.njtransit.com/developer-tools}, and \url{https://developer.njtransit.com/registration/docs}. Also available through the Transitland feed page \url{https://www.transit.land/feeds/f-dr5-nj~transit~rail}. The timetable PDF is at \url{https://content.njtransit.com/sites/default/files/pdfs/rail/2025/07/10003/343.pdf} (linked from \url{https://www.njtransit.com/rline}). &
+A & not yet downloaded \\
+\bottomrule
+\end{longtable}
+
+\noindent\textbf{Update (Sept.~28, 2026).} The current feed has been retrieved (Section~\ref{sec:pull}). Its scheduled end-to-end running time is still 67 minutes, the same as in 2014, so the model's running times remain valid. Slow orders are still not modeled.
+
+%======================================================================
+\section{Infrastructure and operating rules}\label{sec:infra}
+
+\begin{longtable}{@{}p{3.3cm}p{7.8cm}p{1.0cm}p{2.6cm}@{}}
+\toprule
+Item & Source and link & Trust & Project file \\
+\midrule
+\endhead
+Single and double track by milepost; siding names; facilities; 72 grade crossings; car capacity &
+NJDOT, \emph{NJ Freight Guideway: RiverLINE fact sheet}, version 10/1/2021: \url{https://nj.gov/transportation/capital/guideway/pdf/F_RiverLINE.pdf}. It shows 12.7 mi of single track and 21.2 mi of double track, with sidings at Pennsauken, South Burlington, Florence, and Roebling. The facilities listed are the Camden Light Rail Complex, Burlington City Yard (MP~17), and the Trenton layover (MP~32.9). &
+A & \nolinkurl{river_line_track_segments.csv} \\
+Freight time separation &
+The same NJDOT sheet gives light rail 5:45\,am--10:00\,pm and freight 10:00\,pm--5:45\,am. The FRA waiver docket FRA-1999-6135 is at \url{https://www.govinfo.gov/content/pkg/FR-2007-01-12/pdf/E7-316.pdf}, and the horn-rule waiver FRA-2007-0030 at \url{https://www.govinfo.gov/link/fr/73/6260}. &
+A & model constant (day window) \\
+Maximum speed; post-2024 speed restrictions &
+NTSB, operations factual report for investigation RRD25FR001 (Florence, NJ, Oct.~14, 2024): \url{https://data.ntsb.gov/Docket/Document/docBLOB?ID=19394735&FileExtension=pdf&FileName=Operations+Factual-RRD25FR001-Florence+NJ-Rel.pdf}. The investigation page is \url{https://www.ntsb.gov/investigations/Pages/RRD25FR001.aspx}. It gives a 65 mph maximum, and a 30 mph restriction extended to MP 23.9--27.4. &
+A & not yet in model \\
+\bottomrule
+\end{longtable}
+
+\noindent\textbf{Processing.} Railroad mileposts (0--33.9) were rescaled linearly onto GTFS shape distance (0--33.59 mi). This is an approximation. The team should obtain the actual track chart, with siding limits and switch locations, from NJ TRANSIT.
+
+%======================================================================
+\section{Fleet, operator, and reliability}
+
+\begin{longtable}{@{}p{3.3cm}p{7.8cm}p{1.0cm}p{2.6cm}@{}}
+\toprule
+Item & Source and link & Trust & Used as \\
+\midrule
+\endhead
+Fleet: 20 Stadler GTW 2/6 cars, delivered 2002--2003 &
+\url{https://en.wikipedia.org/wiki/River_Line_(NJ_Transit)}; \url{https://blog.pesky.moe/posts/2025-02-02-stadler-njt/} &
+B & fleet size 20 \\
+Car capacity: 90 seated, 184 total &
+NJDOT fact sheet (above) &
+A & comfort and crowding analysis \\
+Operator change from Alstom to NJ TRANSIT, completed by Feb.~14, 2026 &
+NJ TRANSIT press release, Sept.~3, 2025: \url{https://www.njtransit.com/press-releases/nj-transit-and-alstom-joint-statement-river-line}. NJT board minutes, Nov.~12, 2025: \url{https://content.njtransit.com/sites/default/files/board/meeting_minutes/2025_11_12_OpenSess.pdf}. Railway Gazette: \url{https://www.railwaygazette.com/light-rail-and-tram/nj-transit-to-take-over-river-line-operations-from-alstom/69575.article} &
+A & context \\
+Maintenance contractor (Kinkisharyo); 14-car rehabilitation; fleet replacement RFP &
+\url{https://www.njtransit.com/press-releases/nj-transit-announces-continued-river-line-customer-experience-and-communication}; \url{https://railway-news.com/nj-transit-outlines-ongoing-river-line-upgrades/} (Jan.~13, 2026); \url{https://www.masstransitmag.com/rail/infrastructure/news/55342693/new-jersey-transit-nj-transit-nj-transit-advances-river-line-transition-with-system-and-equipment-upgrades} &
+A/B & context; the long-term-out parameter \\
+Miles between breakdowns: 22{,}337 (2022), 4{,}192 (2024) &
+ROI-NJ, Sept.~8, 2025: \url{https://www.roi-nj.com/2025/09/08/transportation/nj-transit-will-take-over-river-line-light-rail-in-south-jersey/} &
+B & \textbf{failure rate in the simulation} (4{,}192 mi) \\
+Service cuts and heat-related failures, 2023--2024 &
+Philadelphia Inquirer, Sept.~2023: \url{https://www.inquirer.com/transportation/nj-transit-riverline-cancelations-delays-light-rail-20230920.html}. News 12, 2024: \url{https://newjersey.news12.com/nj-transit-to-provide-supplemental-bus-service-to-address-river-line-delays-and-cancellations}. \url{https://www.troysingleton.com/nj_transit_takes_control_of_troubled_river_line_light_rail_from_contractor} &
+B & summer seasonal factor (qualitative) \\
+NTD breakdowns, NJ TRANSIT light rail (NTD ID 20080) &
+\url{https://data.transportation.gov/Public-Transit/2022-2024-NTD-Annual-Data-Breakdowns/amkt-4ehs}. Correction (Sept.~28, 2026): ``LR-PT'' is Hudson--Bergen. The River LINE is reported separately as Hybrid Rail (mode YR, purchased transportation until Feb.~2026, directly operated after); see \texttt{data\_public/ntd\_hybrid\_rail/}. &
+A & not used in the model \\
+NTD agency profile, 2024 &
+\url{https://www.transit.dot.gov/sites/fta.dot.gov/files/transit_agency_profile_doc/2024/20080.pdf} &
+A & context \\
+NTD Revenue Vehicle Inventory, 2024 (to obtain) &
+\url{https://www.transit.dot.gov/sites/fta.dot.gov/files/2025-10/2024\%20Revenue\%20Vehicle\%20Inventory_250820.xlsx}. Filter on the Stadler manufacturer to isolate the River LINE fleet. &
+A & not yet downloaded \\
+\bottomrule
+\end{longtable}
+
+%======================================================================
+\section{Performance}
+
+\begin{longtable}{@{}p{3.3cm}p{7.8cm}p{1.0cm}p{2.6cm}@{}}
+\toprule
+Item & Source and link & Trust & Used as \\
+\midrule
+\endhead
+On-time performance: 80.4\% (Aug.~2023), 82\% (July 2024), 84\% (2025) &
+Inquirer (above); Troy Singleton (above); NJTOD newsletter: \url{https://www.njtod.org/the-river-lines-untapped-potential/} &
+B & \textbf{calibration target} for the simulation \\
+On-time definition: within 6 minutes &
+NJ TRANSIT press release on its performance dashboard: \url{https://www.njtransit.com/press-releases/nj-transit-launches-new-online-performance-dashboard} &
+A & lateness threshold in the model \\
+Monthly OTP dashboard (to extract) &
+\url{https://www.njtransit.com/improve/on-time-performance/light-rail}. The data loads by JavaScript and needs a browser. &
+A & not yet extracted \\
+CEO monthly reports (to extract) &
+For example, \url{https://content.njtransit.com/sites/default/files/board/edreport/edreport-September-2025.pdf} &
+A & not yet extracted \\
+Customer satisfaction surveys &
+\url{https://www.njtransit.com/surveyresults} &
+A & not yet extracted \\
+\bottomrule
+\end{longtable}
+
+%======================================================================
+\section{Ridership and rider behavior}
+
+\begin{longtable}{@{}p{3.3cm}p{7.8cm}p{1.0cm}p{2.6cm}@{}}
+\toprule
+Item & Source and link & Trust & Used as \\
+\midrule
+\endhead
+Weekday boardings by station, 2024 (total $\approx$5{,}573; Pennsauken TC missing) &
+\url{https://en.wikipedia.org/wiki/River_Line_(NJ_Transit)}, which cites NJ TRANSIT &
+B & \nolinkurl{river_line_station_boardings_2024.csv}; total demand (rounded to 5{,}600) \\
+Ridership trend: 9{,}014 per weekday (2014), 6{,}330 (2019), about 5{,}350 (2022); 1.6M a year (2025) &
+Wikipedia (above); Inquirer (above); NJTOD (above) &
+B & context \\
+2010 onboard survey: boardings and alightings by station, origins and destinations, trip purpose, access mode &
+DVRPC, \emph{NJ Transit River LINE Survey}, publication 11057 (March 2013), survey of Nov.~17, 2010, 1{,}265 responses, first train to 2:30\,pm: \url{https://www.dvrpc.org/reports/11057.pdf} &
+A & not yet used; basis for an origin--destination matrix \\
+DVRPC transit ridership datasets &
+\url{https://catalog.dvrpc.org/dataset/transit-ridership-ntd} &
+A & not yet used \\
+\textbf{Hourly demand profile} &
+\textbf{No source.} This is an assumed commuter-shaped profile, with 10\% of daily boardings at 7--8\,am and 9\% each at 4--5 and 5--6\,pm. &
+P & passenger wait and crowding \\
+\bottomrule
+\end{longtable}
+
+%======================================================================
+\section{Weather}
+\begin{itemize}
+\item NOAA GHCN-Daily station USW00014792, Trenton-Mercer Airport: \url{https://www.ncdc.noaa.gov/cdo-web/datasets/GHCND/stations/GHCND:USW00014792/detail}. Alternate station: USW00013739, Philadelphia International.
+\item Bulk download (daily TMAX, TMIN, PRCP, SNOW, AWND): \url{https://www.ncei.noaa.gov/access/services/data/v1?dataset=daily-summaries&stations=USW00014792,USW00013739&startDate=2015-01-01&endDate=2026-09-27&dataTypes=TMAX,TMIN,PRCP,SNOW,AWND&units=standard&format=csv}
+\item Trust A. Not yet downloaded. To be joined with the hold sheets to estimate how temperature affects failure rates.
+\end{itemize}
+
+%======================================================================
+\section{Map layers (simulator only)}
+\begin{itemize}
+\item Track line: GTFS shape 1404 (above).
+\item County and NJ/PA state lines: U.S.\ Census-derived \texttt{us-atlas} v3.0.1, 1:10M scale: \url{https://github.com/topojson/us-atlas}.
+\item Delaware River centerline: Natural Earth 10m rivers: \url{https://github.com/nvkelso/natural-earth-vector/blob/master/geojson/ne_10m_rivers_lake_centerlines.geojson}.
+\item Both map layers are coarse (trust C for placement). Use them for orientation only.
+\end{itemize}
+
+
+%======================================================================
+\section{Public data retrieved September 28, 2026}\label{sec:pull}
+The files below are in \nolinkurl{data_public/}. Most hosts were not reachable from the cloud workspace. The data were fetched through a browser on the advisor's computer, reduced there to the River LINE subset, and checked with a 32-bit rolling hash on both ends. Every extracted file matched its source.
+
+\begin{longtable}{@{}p{3.6cm}p{7.2cm}p{1.0cm}p{2.3cm}@{}}
+\toprule
+File & Source and link & Trust & Contents \\
+\midrule\endhead
+\nolinkurl{gtfs_2026-09_weekday_timetable_raw.txt} &
+NJ TRANSIT rail GTFS, release of Sept.~15, 2026, via the Mobility Database mirror (feed mdb-509): \url{https://mobilitydatabase.org/feeds/gtfs/mdb-509}. Producer URL: \url{https://www.njtransit.com/rail_data.zip}. River LINE is route 17 (RVLN). &
+A & 87 weekday trips (Tue.~Sept.~29, 2026); departure time at all 21 stations; block id \\
+\nolinkurl{noaa_trenton_monthly_2015_2026.csv}, \nolinkurl{noaa_trenton_daily_2026.csv} &
+NOAA NCEI GHCN-Daily, station USW00014792, via \url{https://www.ncei.noaa.gov/access/services/data/v1?dataset=daily-summaries} &
+A & Monthly heat, freeze, rain and snow day counts; 2026 daily values \\
+\nolinkurl{ntd_njt_lightrail_monthly_2015_2026.csv} &
+FTA NTD Complete Monthly Ridership, \url{https://data.transportation.gov/d/8bui-9xvu}, NTD ID 20080, mode LR &
+A & Monthly trips, vehicle revenue miles and hours, vehicles in maximum service (DO and PT) \\
+\nolinkurl{ntd_njt_lightrail_breakdowns_2022_2024.csv}, \nolinkurl{..._metrics_...}, \nolinkurl{..._service_by_period_...}, \nolinkurl{ntd_njt_all_modes_metrics_2024.csv} &
+NTD annual datasets: breakdowns \url{https://data.transportation.gov/d/amkt-4ehs}; metrics \url{https://data.transportation.gov/d/ekg5-frzt}; service by time period \url{https://data.transportation.gov/d/wwdp-t4re} &
+A & Failures, cost per revenue hour, trains in operation by period; River LINE is reported as Hybrid Rail (YR), separate from HBLR \\
+\nolinkurl{osm_river_line_route_ways.csv}, \nolinkurl{osm_derived_single_track_intervals.csv} &
+OpenStreetMap route relations 206683 (to Trenton) and 10213648 (to Camden) and their member ways, via the Overpass API (\url{https://overpass-api.de}) &
+C & Posted speed per way; ways used by both directions (single track) \\
+\nolinkurl{dvrpc_2010_survey_summary.csv} &
+DVRPC publication 11057 (2013): \url{https://www.dvrpc.org/reports/11057.pdf} &
+A & Trip purpose, access/egress mode, fare type \\
+\nolinkurl{gtfs_2014_river_line_shape_camden_to_trenton.csv} &
+2014 GTFS shape 1404, reversed to run Camden to Trenton &
+C & Track polyline with mileage \\
+\bottomrule
+\end{longtable}
+
+%======================================================================
+\section{Model parameters and where each comes from}
+
+\begin{longtable}{@{}p{4.2cm}p{2.2cm}p{1.0cm}p{6.4cm}@{}}
+\toprule
+Parameter & Value & Trust & Basis \\
+\midrule
+\endhead
+Fleet size & 20 cars & B & Wikipedia; blog \\
+Cars in long-term overhaul & 3 & P & Guess, informed by the 14-car rehabilitation program \\
+Miles between breakdowns & 4{,}192 & B & ROI-NJ (2024 figure) \\
+Seasonal breakdown multipliers & W 0.85, Sp 1.25, Su 0.65, F 1.0 & P & Client notes (heat worst, spring best) and the heat-failure literature in the review \\
+Background late probability & 3--9\% by season & P & Tuned so on-time $\approx$ 84--86\% under the fixed schedule \\
+Mean repair time & 12 days & P & Tuned so mean availability is about 9 cars, consistent with ``fewer than 8 often'' \\
+Rescue and blockage & 10 min dispatch, 25/15 mph, 35 min block & P & Guesses; ask the client \\
+Minimum layover & 5 min & C & 2014 GTFS blocks show 5--9 min \\
+Meet clearance buffer & 1 min & P & Chosen so the model reproduces the 8-train/20-min and 6-train/30-min schedules \\
+Weekday boardings & 5{,}600 & B & 2024 station boardings \\
+Car capacity & 90 seated / 184 total & A & NJDOT \\
+Operating cost per train-hour & \$400 (range \$150--800) & P & Assumption, bracketed by NTD 2024 light rail cost per revenue hour: \$560 (DO), \$809 (PT) \\
+Value of rider time & \$13.60/h; waiting $\times 2$ & A & USDOT 2016 VTTS guidance, local personal travel, 2015 dollars \\
+Bus-bridge cost & \$170/bus-hour & P & Between NTD 2024 NJT bus \$126 (PT) and \$214 (DO) \\
+\bottomrule
+\end{longtable}
+
+%======================================================================
+\section{Data to request from NJ TRANSIT}
+\begin{enumerate}
+\item Hold sheets since Feb.~14, 2026: cars available and down, recorded at 6\,am and 6\,pm. This is the key input.
+\item Work orders and failure logs by car: date, failure type, mileage, and days out of service.
+\item Delay, cancellation, and incident logs by train, with causes.
+\item The current slow-order list and the track chart: siding limits, switches, and speed limits.
+\item Ridership: automatic passenger counts (if equipped), ticket machine and mobile-app sales or activations by station and hour, and any recent onboard survey. Ask DVRPC for the raw 2010 survey.
+\item Minimum layover times, consist rules, crew constraints, and where protect cars can be staged.
+\item The names of NJT's scheduling system, maintenance system, and dashboard platform, and access to the River LINE real-time feed.
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,7 @@
+report_year,type_of_service,mode_voms,major_mechanical_failures,other_mechanical_failures,total_mechanical_failures,vehicle_passenger_car_miles,train_miles
+2022,DO,15,103,38,141,534194,534194
+2022,PT,42,249,59,308,2150540,1225728
+2023,DO,15,98,42,140,528469,528469
+2023,PT,42,130,47,177,2193607,1227822
+2024,DO,15,53,127,180,538405,538405
+2024,PT,42,126,64,190,2199052,1265741

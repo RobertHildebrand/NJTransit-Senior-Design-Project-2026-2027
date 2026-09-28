@@ -1,0 +1,350 @@
+MONTH          ,LINE                            ,      MDBF
+---------------,--------------------------------,----------
+2017 January   ,Hudson-Bergen Light Rail        ,29599
+2017 January   ,River Line                      ,9362
+2017 January   ,Newark Light Rail               ,8219
+2017 February  ,Newark Light Rail               ,7164
+2017 February  ,Hudson-Bergen Light Rail        ,28081
+2017 February  ,River Line                      ,9829
+2017 March     ,Hudson-Bergen Light Rail        ,27048
+2017 March     ,Newark Light Rail               ,8026
+2017 March     ,River Line                      ,9630
+2017 April     ,Hudson-Bergen Light Rail        ,25543
+2017 April     ,Newark Light Rail               ,7849
+2017 April     ,River Line                      ,9377
+2017 May       ,Hudson-Bergen Light Rail        ,25302
+2017 May       ,Newark Light Rail               ,7641
+2017 May       ,River Line                      ,9195
+2017 June      ,Newark Light Rail               ,7389
+2017 June      ,Hudson-Bergen Light Rail        ,21724
+2017 June      ,River Line                      ,8911
+2017 July      ,Hudson-Bergen Light Rail        ,25827
+2017 July      ,River Line                      ,8806
+2017 July      ,Newark Light Rail               ,7322
+2017 August    ,Newark Light Rail               ,7106
+2017 August    ,Hudson-Bergen Light Rail        ,24835
+2017 August    ,River Line                      ,8664
+2017 September ,Hudson-Bergen Light Rail        ,24961
+2017 September ,Newark Light Rail               ,7842
+2017 September ,River Line                      ,8878
+2017 October   ,Hudson-Bergen Light Rail        ,23172
+2017 October   ,River Line                      ,8371
+2017 October   ,Newark Light Rail               ,8618
+2017 November  ,Hudson-Bergen Light Rail        ,22141
+2017 November  ,River Line                      ,8058
+2017 November  ,Newark Light Rail               ,8976
+2017 December  ,Newark Light Rail               ,9349
+2017 December  ,River Line                      ,8064
+2017 December  ,Hudson-Bergen Light Rail        ,21869
+2018 January   ,Hudson-Bergen Light Rail        ,21203
+2018 January   ,River Line                      ,7653
+2018 January   ,Newark Light Rail               ,9285
+2018 February  ,Newark Light Rail               ,9542
+2018 February  ,Hudson-Bergen Light Rail        ,21082
+2018 February  ,River Line                      ,8093
+2018 March     ,Hudson-Bergen Light Rail        ,20081
+2018 March     ,Newark Light Rail               ,10069
+2018 March     ,River Line                      ,7929
+2018 April     ,Hudson-Bergen Light Rail        ,19573
+2018 April     ,Newark Light Rail               ,9461
+2018 April     ,River Line                      ,7888
+2018 May       ,Hudson-Bergen Light Rail        ,19153
+2018 May       ,Newark Light Rail               ,9150
+2018 May       ,River Line                      ,7693
+2018 June      ,Newark Light Rail               ,9188
+2018 June      ,Hudson-Bergen Light Rail        ,19470
+2018 June      ,River Line                      ,7618
+2018 July      ,Hudson-Bergen Light Rail        ,18555
+2018 July      ,River Line                      ,7504
+2018 July      ,Newark Light Rail               ,9111
+2018 August    ,Newark Light Rail               ,9104
+2018 August    ,Hudson-Bergen Light Rail        ,17807
+2018 August    ,River Line                      ,7317
+2018 September ,Hudson-Bergen Light Rail        ,17786
+2018 September ,Newark Light Rail               ,8771
+2018 September ,River Line                      ,7093
+2018 October   ,Hudson-Bergen Light Rail        ,17940
+2018 October   ,River Line                      ,6926
+2018 October   ,Newark Light Rail               ,8712
+2018 November  ,Hudson-Bergen Light Rail        ,18305
+2018 November  ,River Line                      ,6922
+2018 November  ,Newark Light Rail               ,8498
+2018 December  ,Newark Light Rail               ,8342
+2018 December  ,River Line                      ,6739
+2018 December  ,Hudson-Bergen Light Rail        ,18225
+2019 January   ,Newark Light Rail               ,8124
+2019 January   ,River Line                      ,6643
+2019 January   ,Hudson-Bergen Light Rail        ,17717
+2019 February  ,Newark Light Rail               ,7940
+2019 February  ,River Line                      ,6509
+2019 February  ,Hudson-Bergen Light Rail        ,17872
+2019 March     ,Newark Light Rail               ,7767
+2019 March     ,Hudson-Bergen Light Rail        ,18062
+2019 March     ,River Line                      ,6616
+2019 April     ,Newark Light Rail               ,7518
+2019 April     ,Hudson-Bergen Light Rail        ,18032
+2019 April     ,River Line                      ,6685
+2019 May       ,River Line                      ,6423
+2019 May       ,Newark Light Rail               ,7525
+2019 May       ,Hudson-Bergen Light Rail        ,18047
+2019 June      ,Newark Light Rail               ,7390
+2019 June      ,River Line                      ,6286
+2019 June      ,Hudson-Bergen Light Rail        ,18260
+2019 July      ,River Line                      ,5984
+2019 July      ,Hudson-Bergen Light Rail        ,18841
+2019 July      ,Newark Light Rail               ,6493
+2019 August    ,Hudson-Bergen Light Rail        ,19329
+2019 August    ,Newark Light Rail               ,5959
+2019 August    ,River Line                      ,5834
+2019 September ,Newark Light Rail               ,6323
+2019 September ,Hudson-Bergen Light Rail        ,19397
+2019 September ,River Line                      ,5613
+2019 October   ,Hudson-Bergen Light Rail        ,23575
+2019 October   ,River Line                      ,5606
+2019 October   ,Newark Light Rail               ,6150
+2019 November  ,Newark Light Rail               ,5872
+2019 November  ,Hudson-Bergen Light Rail        ,25670
+2019 November  ,River Line                      ,5909
+2019 December  ,Newark Light Rail               ,5408
+2019 December  ,Hudson-Bergen Light Rail        ,26461
+2019 December  ,River Line                      ,6284
+2020 January   ,Hudson-Bergen Light Rail        ,28322
+2020 January   ,Newark Light Rail               ,5368
+2020 January   ,River Line                      ,8254
+2020 February  ,River Line                      ,8925
+2020 February  ,Hudson-Bergen Light Rail        ,29475
+2020 February  ,Newark Light Rail               ,4980
+2020 March     ,Newark Light Rail               ,4809
+2020 March     ,Hudson-Bergen Light Rail        ,32341
+2020 March     ,River Line                      ,11050
+2020 April     ,River Line                      ,11819
+2020 April     ,Hudson-Bergen Light Rail        ,34322
+2020 April     ,Newark Light Rail               ,4886
+2020 May       ,River Line                      ,12135
+2020 May       ,Hudson-Bergen Light Rail        ,37524
+2020 May       ,Newark Light Rail               ,4973
+2020 June      ,Hudson-Bergen Light Rail        ,26951
+2020 June      ,Newark Light Rail               ,5088
+2020 June      ,River Line                      ,12873
+2020 July      ,Hudson-Bergen Light Rail        ,22763
+2020 July      ,River Line                      ,13441
+2020 July      ,Newark Light Rail               ,5048
+2020 August    ,Newark Light Rail               ,5064
+2020 August    ,Hudson-Bergen Light Rail        ,16247
+2020 August    ,River Line                      ,13903
+2020 September ,Hudson-Bergen Light Rail        ,11829
+2020 September ,Newark Light Rail               ,5211
+2020 September ,River Line                      ,14531
+2020 October   ,River Line                      ,15110
+2020 October   ,Hudson-Bergen Light Rail        ,15642
+2020 October   ,Newark Light Rail               ,5163
+2020 November  ,Newark Light Rail               ,5174
+2020 November  ,River Line                      ,15492
+2020 November  ,Hudson-Bergen Light Rail        ,9284
+2020 December  ,Hudson-Bergen Light Rail        ,13926
+2020 December  ,Newark Light Rail               ,5256
+2020 December  ,River Line                      ,15865
+2021 January   ,Hudson-Bergen Light Rail        ,10071
+2021 January   ,River Line                      ,16258
+2021 January   ,Newark Light Rail               ,5347
+2021 February  ,Newark Light Rail               ,5433
+2021 February  ,River Line                      ,16669
+2021 February  ,Hudson-Bergen Light Rail        ,13433
+2021 March     ,River Line                      ,18161
+2021 March     ,Hudson-Bergen Light Rail        ,8888
+2021 March     ,Newark Light Rail               ,5445
+2021 April     ,Newark Light Rail               ,5252
+2021 April     ,Hudson-Bergen Light Rail        ,10392
+2021 April     ,River Line                      ,18941
+2021 May       ,Newark Light Rail               ,5006
+2021 May       ,Hudson-Bergen Light Rail        ,12705
+2021 May       ,River Line                      ,20325
+2021 June      ,Hudson-Bergen Light Rail        ,4764
+2021 June      ,Newark Light Rail               ,4918
+2021 June      ,River Line                      ,20830
+2021 July      ,Hudson-Bergen Light Rail        ,5993
+2021 July      ,Newark Light Rail               ,4850
+2021 July      ,River Line                      ,20986
+2021 August    ,Newark Light Rail               ,4912
+2021 August    ,Hudson-Bergen Light Rail        ,6944
+2021 August    ,River Line                      ,21617
+2021 September ,Hudson-Bergen Light Rail        ,5082
+2021 September ,Newark Light Rail               ,4816
+2021 September ,River Line                      ,22452
+2021 October   ,Newark Light Rail               ,4828
+2021 October   ,Hudson-Bergen Light Rail        ,5684
+2021 October   ,River Line                      ,21165
+2021 November  ,Newark Light Rail               ,4812
+2021 November  ,Hudson-Bergen Light Rail        ,5511
+2021 November  ,River Line                      ,21129
+2021 December  ,Newark Light Rail               ,4789
+2021 December  ,Hudson-Bergen Light Rail        ,7010
+2021 December  ,River Line                      ,19896
+2022 January   ,Hudson-Bergen Light Rail        ,7583
+2022 January   ,Newark Light Rail               ,4612
+2022 January   ,River Line                      ,19407
+2022 February  ,Hudson-Bergen Light Rail        ,8042
+2022 February  ,Newark Light Rail               ,4453
+2022 February  ,River Line                      ,20921
+2022 March     ,Newark Light Rail               ,4390
+2022 March     ,Hudson-Bergen Light Rail        ,10465
+2022 March     ,River Line                      ,21588
+2022 April     ,Newark Light Rail               ,4619
+2022 April     ,Hudson-Bergen Light Rail        ,8241
+2022 April     ,River Line                      ,32260
+2022 May       ,Newark Light Rail               ,4566
+2022 May       ,Hudson-Bergen Light Rail        ,8012
+2022 May       ,River Line                      ,22402
+2022 June      ,Hudson-Bergen Light Rail        ,8568
+2022 June      ,Newark Light Rail               ,4381
+2022 June      ,River Line                      ,22253
+2022 July      ,Hudson-Bergen Light Rail        ,5499
+2022 July      ,Newark Light Rail               ,4460
+2022 July      ,River Line                      ,21846
+2022 August    ,Newark Light Rail               ,4442
+2022 August    ,Hudson-Bergen Light Rail        ,23754
+2022 August    ,River Line                      ,22187
+2022 September ,Newark Light Rail               ,4279
+2022 September ,Hudson-Bergen Light Rail        ,20318
+2022 September ,River Line                      ,22021
+2022 October   ,Newark Light Rail               ,4413
+2022 October   ,Hudson-Bergen Light Rail        ,15336
+2022 October   ,River Line                      ,21863
+2022 November  ,Newark Light Rail               ,4218
+2022 November  ,Hudson-Bergen Light Rail        ,10460
+2022 November  ,River Line                      ,21328
+2022 December  ,Newark Light Rail               ,4260
+2022 December  ,Hudson-Bergen Light Rail        ,8968
+2022 December  ,River Line                      ,19971
+2023 January   ,Hudson-Bergen Light Rail        ,9904
+2023 January   ,Newark Light Rail               ,5972
+2023 January   ,River Line                      ,17388
+2023 February  ,Newark Light Rail               ,6156
+2023 February  ,Hudson-Bergen Light Rail        ,10467
+2023 February  ,River Line                      ,15094
+2023 March     ,Newark Light Rail               ,5974
+2023 March     ,Hudson-Bergen Light Rail        ,10989
+2023 March     ,River Line                      ,12877
+2023 April     ,Newark Light Rail               ,5772
+2023 April     ,Hudson-Bergen Light Rail        ,11814
+2023 April     ,River Line                      ,11154
+2023 May       ,Newark Light Rail               ,5635
+2023 May       ,Hudson-Bergen Light Rail        ,13065
+2023 May       ,River Line                      ,10327
+2023 June      ,Hudson-Bergen Light Rail        ,14051
+2023 June      ,Newark Light Rail               ,5630
+2023 June      ,River Line                      ,9692
+2023 July      ,Hudson-Bergen Light Rail        ,16321
+2023 July      ,Newark Light Rail               ,5583
+2023 July      ,River Line                      ,9214
+2023 August    ,Newark Light Rail               ,5428
+2023 August    ,Hudson-Bergen Light Rail        ,15567
+2023 August    ,River Line                      ,7856
+2023 September ,Hudson-Bergen Light Rail        ,12892
+2023 September ,Newark Light Rail               ,5441
+2023 September ,River Line                      ,7101
+2023 October   ,Newark Light Rail               ,5170
+2023 October   ,Hudson-Bergen Light Rail        ,14778
+2023 October   ,River Line                      ,6817
+2023 November  ,Newark Light Rail               ,5147
+2023 November  ,Hudson-Bergen Light Rail        ,14854
+2023 November  ,River Line                      ,6485
+2023 December  ,Newark Light Rail               ,5102
+2023 December  ,Hudson-Bergen Light Rail        ,15508
+2023 December  ,River Line                      ,6381
+2024 January   ,Hudson-Bergen Light Rail        ,15990
+2024 January   ,Newark Light Rail               ,3417
+2024 January   ,River Line                      ,5822
+2024 February  ,Newark Light Rail               ,3230
+2024 February  ,Hudson-Bergen Light Rail        ,13004
+2024 February  ,River Line                      ,4670
+2024 March     ,River Line                      ,4679
+2024 March     ,Newark Light Rail               ,3274
+2024 March     ,Hudson-Bergen Light Rail        ,13188
+2024 April     ,Hudson-Bergen Light Rail        ,13405
+2024 April     ,Newark Light Rail               ,3608
+2024 April     ,River Line                      ,4164
+2024 May       ,River Line                      ,3934
+2024 May       ,Newark Light Rail               ,3591
+2024 May       ,Hudson-Bergen Light Rail        ,13590
+2024 June      ,Newark Light Rail               ,3633
+2024 June      ,Hudson-Bergen Light Rail        ,13737
+2024 June      ,River Line                      ,3720
+2024 July      ,River Line                      ,3921
+2024 July      ,Newark Light Rail               ,3792
+2024 July      ,Hudson-Bergen Light Rail        ,14005
+2024 August    ,Hudson-Bergen Light Rail        ,13494
+2024 August    ,Newark Light Rail               ,3773
+2024 August    ,River Line                      ,4063
+2024 September ,River Line                      ,4244
+2024 September ,Hudson-Bergen Light Rail        ,13141
+2024 September ,Newark Light Rail               ,4049
+2024 October   ,River Line                      ,2616
+2024 October   ,Newark Light Rail               ,4174
+2024 October   ,Hudson-Bergen Light Rail        ,11838
+2024 November  ,River Line                      ,4281
+2024 November  ,Newark Light Rail               ,4602
+2024 November  ,Hudson-Bergen Light Rail        ,13297
+2024 December  ,Newark Light Rail               ,4833
+2024 December  ,Hudson-Bergen Light Rail        ,13043
+2024 December  ,River Line                      ,4196
+2025 January   ,Newark Light Rail               ,4901
+2025 January   ,Hudson-Bergen Light Rail        ,12717
+2025 January   ,River Line                      ,4036
+2025 February  ,Hudson-Bergen Light Rail        ,12041
+2025 February  ,Newark Light Rail               ,5232
+2025 February  ,River Line                      ,4138
+2025 March     ,Hudson-Bergen Light Rail        ,12784
+2025 March     ,Newark Light Rail               ,5153
+2025 March     ,River Line                      ,3801
+2025 April     ,Newark Light Rail               ,4694
+2025 April     ,Hudson-Bergen Light Rail        ,13504
+2025 April     ,River Line                      ,3442
+2025 May       ,River Line                      ,3244
+2025 May       ,Hudson-Bergen Light Rail        ,14023
+2025 May       ,Newark Light Rail               ,4933
+2025 June      ,River Line                      ,3244
+2025 June      ,Hudson-Bergen Light Rail        ,13284
+2025 June      ,Newark Light Rail               ,4933
+2025 July      ,Newark Light Rail               ,4876
+2025 July      ,Hudson-Bergen Light Rail        ,12890
+2025 July      ,River Line                      ,2678
+2025 August    ,Hudson-Bergen Light Rail        ,13682
+2025 August    ,River Line                      ,2586
+2025 August    ,Newark Light Rail               ,4955
+2025 September ,Newark Light Rail               ,5245
+2025 September ,River Line                      ,2377
+2025 September ,Hudson-Bergen Light Rail        ,13401
+2025 October   ,River Line                      ,2496
+2025 October   ,Hudson-Bergen Light Rail        ,13190
+2025 October   ,Newark Light Rail               ,4660
+2025 November  ,Newark Light Rail               ,4586
+2025 November  ,Hudson-Bergen Light Rail        ,12818
+2025 November  ,River Line                      ,2818
+2025 December  ,Hudson-Bergen Light Rail        ,12118
+2025 December  ,Newark Light Rail               ,4511
+2025 December  ,River Line                      ,2686
+2026 January   ,Hudson-Bergen Light Rail        ,11426
+2026 January   ,River Line                      ,2724
+2026 January   ,Newark Light Rail               ,4446
+2026 February  ,Newark Light Rail               ,4728
+2026 February  ,Hudson-Bergen Light Rail        ,11222
+2026 February  ,River Line                      ,2819
+2026 March     ,Hudson-Bergen Light Rail        ,12650
+2026 March     ,River Line                      ,3201
+2026 March     ,Newark Light Rail               ,4904
+2026 April     ,Newark Light Rail               ,4874
+2026 April     ,River Line                      ,3421
+2026 April     ,Hudson-Bergen Light Rail        ,11442
+2026 May       ,Newark Light Rail               ,4721
+2026 May       ,Hudson-Bergen Light Rail        ,10127
+2026 May       ,River Line                      ,3593
+2026 June      ,Hudson-Bergen Light Rail        ,10053
+2026 June      ,Newark Light Rail               ,5021
+2026 June      ,River Line                      ,3690
+2026 July      ,Newark Light Rail               ,4654
+2026 July      ,Hudson-Bergen Light Rail        ,9623
+2026 July      ,River Line                      ,3822
+2026 August    ,Newark Light Rail               ,4566
+2026 August    ,Hudson-Bergen Light Rail        ,8041
+2026 August,River Line,3680

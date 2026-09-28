@@ -1,0 +1,77 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{booktabs,longtable,array,enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{xurl}
+\setlist{itemsep=2pt,topsep=3pt}
+\title{Data Request to NJ TRANSIT\\\large River LINE Schedule Optimization, ISE Senior Design Team 22}
+\author{Virginia Tech, Grado Department of Industrial and Systems Engineering}
+\date{Prepared September 28, 2026}
+\begin{document}
+\maketitle
+
+\noindent The team has already collected what is publicly available: the September 2026 GTFS schedule, NOAA weather, National Transit Database aggregates, OpenStreetMap track data, and the 2010 DVRPC onboard survey (see the companion document \emph{Data Sources and Provenance}). The items below cannot be obtained publicly.
+
+They are grouped by priority. For each item, the list states what the team would use it for and the smallest useful form. Any format is fine: CSV, Excel, scanned paper, or read-only access to a report.
+
+\section*{Priority 1 --- needed to calibrate the model}
+\begin{longtable}{@{}p{0.5cm}p{5.3cm}p{5.2cm}p{3.6cm}@{}}
+\toprule
+\# & Data & Used for & Minimum useful form \\
+\midrule\endhead
+1 & \textbf{Hold sheets} since Feb.~14, 2026 (6\,am and 6\,pm): cars available, cars down, and the reason, by car number & The distribution of cars available by day and season, which is the main random input to every policy & Scans or photos of the sheets; the team will transcribe them \\
+2 & \textbf{Failure and work-order log} by car: date and time, location, failure type, mileage, date returned to service & Failure rates per car-mile and by season and temperature; repair-time distributions; which cars fail most & Export from the maintenance system (Kinkisharyo), or a spreadsheet \\
+3 & \textbf{Train-level on-time and cancellation records} with causes, 2025--2026 & Validating the simulation's on-time and cancellation predictions; separating equipment causes from other causes & Daily CSV by train \\
+4 & \textbf{Rescue and recovery practice}: who performs rescues, from where, typical time to clear a disabled car, and whether a 2-car consist can move its partner & The rescue model, where each failure also takes a second car out of service & A short interview with operations is enough \\
+\bottomrule
+\end{longtable}
+
+\section*{Priority 2 --- needed to make the timetables realistic}
+\begin{longtable}{@{}p{0.5cm}p{5.3cm}p{5.2cm}p{3.6cm}@{}}
+\toprule
+\# & Data & Used for & Minimum useful form \\
+\midrule\endhead
+5 & \textbf{Track chart}: siding limits, switch locations, signal blocks, and the current speed restrictions and slow orders & The single-track timetable model. Public sources disagree about how much of the line is single track: 12.7 miles per NJDOT, 15.2 miles per OpenStreetMap & PDF track chart and the slow-order bulletin \\
+6 & \textbf{Minimum turnback and layover times} at Entertainment Center and Trenton; meet and dwell rules at sidings & Model constraints; the team currently assumes 5 minutes & Operating rule or bulletin \\
+7 & \textbf{Crew rules and availability}: operator shifts, extra-board size, relief points & Checking whether operators, rather than cars, limit service on some days & Summary numbers \\
+8 & \textbf{Consist rules}: when 2-car trains run and why & Capacity on event days; rescue options & Operating rule \\
+9 & \textbf{Name of the scheduling system} (for example HASTUS) and its import format & Delivering tiered schedules in a form NJT can load & System name and a sample export \\
+\bottomrule
+\end{longtable}
+
+\section*{Priority 3 --- needed for rider impact}
+\begin{longtable}{@{}p{0.5cm}p{5.3cm}p{5.2cm}p{3.6cm}@{}}
+\toprule
+\# & Data & Used for & Minimum useful form \\
+\midrule\endhead
+10 & \textbf{Ridership by trip or by hour}: automatic passenger counts if the cars have them; otherwise ticket vending machine and mobile-app sales and activations by station and hour & Time-of-day demand for the waiting-time and crowding estimates; the model now assumes an hourly profile & Hourly counts by station for a few typical weeks \\
+11 & \textbf{Any recent onboard or customer survey} of River LINE riders (or the raw 2010 DVRPC file) & Origin--destination patterns and transfers & Survey report or file \\
+12 & \textbf{Special-event service history}: extra trips for waterfront concerts or ballgames, with ridership & Event planning within the 10\,pm freight window & List of events and the service run \\
+13 & \textbf{Rider complaints} tagged River LINE, by month & Relating complaints to cancellations & Monthly counts \\
+\bottomrule
+\end{longtable}
+
+\section*{Priority 4 --- costs}
+\begin{longtable}{@{}p{0.5cm}p{5.3cm}p{5.2cm}p{3.6cm}@{}}
+\toprule
+\# & Data & Used for & Minimum useful form \\
+\midrule\endhead
+14 & \textbf{Marginal cost per train-hour} (operator wages, fuel, maintenance per car-mile) & The operating-cost side of the trade-off; the model now brackets it with National Transit Database averages & One or two numbers \\
+15 & \textbf{Cost and lead time of supplemental buses} & Bus-bridge alternatives on low-car days & Rate per bus-hour \\
+16 & \textbf{Rehabilitation and overhaul schedule} (14-car program) and the fleet replacement timeline & The expected number of cars available over the next two years & Planned dates \\
+\bottomrule
+\end{longtable}
+
+\section*{Questions for the next client meeting}
+\begin{enumerate}
+\item Does ``8-car schedule'' mean 8 cars (single-car trains) in service? The September 2026 GTFS shows 8 vehicle blocks active in the peaks and 6 midday.
+\item What does ``10 cars a day is the goal'' mean: 10 available, or 8 in service plus 2 protect cars?
+\item Where are protect cars kept today, and could one be staged at Burlington or Trenton?
+\item How is on-time performance counted: are cancelled trips included?
+\item Could a reduced schedule be published by 6\,am (app, GTFS-realtime, station signs) when the hold sheet is short?
+\end{enumerate}
+
+\section*{Data handling}
+The team will use the data only for this course project, keep it in a private repository, and share results with NJ TRANSIT before any presentation. Contact: Prof.~Robert Hildebrand (faculty advisor).
+\end{document}

@@ -1,0 +1,66 @@
+{
+ "props": [
+  {
+   "key": "njt_current",
+   "what": "Today's timetable: 150-min cycle, 15/15/30-min peak gaps, 12 vehicle blocks.",
+   "rec": false
+  },
+  {
+   "key": "proposed_T8",
+   "what": "Same 8 trains, peak gaps evened out (17\u201321 min); meets packed with 0.5-min buffers.",
+   "rec": false
+  },
+  {
+   "key": "proposal_B8",
+   "what": "8 trains on a 160-min cycle; every single-track meet has \u22652.5 min buffer; \u22659-min layovers.",
+   "rec": true
+  },
+  {
+   "key": "proposal_B7",
+   "what": "7-train version of B8 for 7-car days (replaces T7).",
+   "rec": false
+  },
+  {
+   "key": "proposal_E5",
+   "what": "8 trains at the peaks but only 5 midday (every 30 min): frees a car for maintenance or protect.",
+   "rec": false
+  },
+  {
+   "key": "proposal_E6",
+   "what": "T8 with the midday service chosen jointly with the peak (midday gaps \u226430 min).",
+   "rec": false
+  },
+  {
+   "key": "proposal_G8",
+   "what": "E6 with a 2-min buffer at every meet.",
+   "rec": false
+  },
+  {
+   "key": "proposal_S8",
+   "what": "E6 with 6% of running time moved into holds just before each single-track section.",
+   "rec": false
+  },
+  {
+   "key": "proposal_R8",
+   "what": "8 trains on a 160-min cycle with \u22658-min layovers (0.5-min meet buffers).",
+   "rec": false
+  },
+  {
+   "key": "proposal_W7",
+   "what": "Summer timetable: running times +6% for heat restrictions, 7 trains on 160 min, 5 midday.",
+   "rec": false
+  },
+  {
+   "key": "uniform_U8",
+   "what": "Clock-face every 21 min peak / 30 off-peak (needs retiming at 7 changeover meets).",
+   "rec": false
+  }
+ ],
+ "rules": [
+  "<b>Evening out the gaps alone makes trains later.</b> T8 cuts the longest AM gap from 30 to 21 min, but its meets are packed tight and its layovers are short, so one late train holds the next: on time falls from 84% to 72%. Today's 30-minute gap is, in effect, NJ TRANSIT's recovery time.",
+  "<b>Buffers at meets plus longer layovers fix it.</b> B8 uses the same 8 trains and 109 train-hours (today: 109) and is on time 87% of trips (79% on a hot day, vs 60% today). Its on-time rate beats today's in every sensitivity case we ran. The price: it gives back the even spacing (longest AM gap 31 min, average wait 13.5 vs 12.9 min), so wait plus lateness per rider is about the same (15.7 vs 15.7 min). With 8 trains, reliability and even spacing trade off; B8 buys reliability.",
+  "<b>Moving slack to the sidings did not help on its own</b> (S8: 74%), and longer layovers alone (R8: 80%) or meet buffers alone (G8: 80%) each recover only part of the loss. Both are needed.",
+  "<b>A published summer timetable pays off.</b> W7 plans for heat speed restrictions with 7 trains: 86% on time on a hot day vs 60% for today's timetable, at the cost of a longer average wait (15.4 vs 12.9 min).",
+  "<b>E5 frees a car midday</b> (99 train-hours instead of 109) with midday trains still every ~30 min; useful on days a car is due for maintenance."
+ ]
+}

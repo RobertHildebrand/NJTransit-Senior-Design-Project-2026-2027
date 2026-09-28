@@ -1,0 +1,49 @@
+report_year,type_of_service,time_period,time_service_begins,time_service_ends,trains_in_operation,car_revenue_miles,car_revenue_hours,unlinked_passenger_trips,days_of_service_operated,average_speed_mph
+2022,DO,Annual Total,,,0,520531,53578,3489489,,9.72
+2022,DO,Average Typical Saturday,55:00.0,45:00.0,4,722,87,5086,58,8.3
+2022,DO,Average Typical Sunday,50:00.0,39:00.0,3,579,66,4089,53,8.77
+2022,DO,Average Typical Weekday,10:00.0,35:00.0,15,1777,175,11817,252,10.15
+2022,DO,Average Weekday - AM Peak,30:00.0,00:00.0,15,0,0,0,,
+2022,DO,Average Weekday - Midday,00:00.0,30:00.0,8,0,0,0,,
+2022,DO,Average Weekday - Other,,,5,0,0,0,,
+2022,DO,Average Weekday - PM Peak,30:00.0,00:00.0,15,0,0,0,,
+2022,PT,Annual Total,,,0,2087932,127235,10793219,,16.41
+2022,PT,Average Typical Saturday,00:00.0,45:00.0,6,3297,212,21403,59,15.55
+2022,PT,Average Typical Sunday,00:00.0,45:00.0,6,3234,203,17431,54,15.93
+2022,PT,Average Typical Weekday,30:00.0,45:00.0,20,6806,410,34084,252,16.6
+2022,PT,Average Weekday - AM Peak,30:00.0,30:00.0,20,0,0,0,,
+2022,PT,Average Weekday - Midday,30:00.0,30:00.0,10,0,0,0,,
+2022,PT,Average Weekday - Other,,,10,0,0,0,,
+2022,PT,Average Weekday - PM Peak,30:00.0,30:00.0,19,0,0,0,,
+2023,DO,Annual Total,,,0,514930,52363,4173204,,9.83
+2023,DO,Average Typical Saturday,55:00.0,45:00.0,0,720,87,5073,55,8.28
+2023,DO,Average Typical Sunday,50:00.0,39:00.0,0,577,66,3676,50,8.74
+2023,DO,Average Typical Weekday,10:00.0,35:00.0,0,1772,176,14724,252,10.07
+2023,DO,Average Weekday - AM Peak,30:00.0,00:00.0,0,0,0,0,,
+2023,DO,Average Weekday - Midday,00:00.0,30:00.0,0,0,0,0,,
+2023,DO,Average Weekday - Other,,,0,0,0,0,,
+2023,DO,Average Weekday - PM Peak,30:00.0,00:00.0,0,0,0,0,,
+2023,PT,Annual Total,,,0,2138781,130615,13390492,,16.37
+2023,PT,Average Typical Saturday,00:00.0,45:00.0,0,3461,225,20917,59,15.38
+2023,PT,Average Typical Sunday,00:00.0,45:00.0,0,3448,222,18208,54,15.53
+2023,PT,Average Typical Weekday,30:00.0,45:00.0,0,6924,417,44338,252,16.6
+2023,PT,Average Weekday - AM Peak,30:00.0,30:00.0,0,0,0,0,,
+2023,PT,Average Weekday - Midday,30:00.0,30:00.0,0,0,0,0,,
+2023,PT,Average Weekday - Other,,,0,0,0,0,,
+2023,PT,Average Weekday - PM Peak,30:00.0,30:00.0,0,0,0,0,,
+2024,DO,Annual Total,,,,524591,51582,4914883,,10.17
+2024,DO,Average Typical Saturday,55:00.0,45:00.0,4,726,85,6941,60,8.5412
+2024,DO,Average Typical Sunday,50:00.0,39:00.0,3,583,65,4445,55,8.9692
+2024,DO,Average Typical Weekday,10:00.0,35:00.0,15,1789,171,16948,251,10.462
+2024,DO,Average Weekday - AM Peak,30:00.0,00:00.0,15,,,,,
+2024,DO,Average Weekday - Midday,00:00.0,30:00.0,8,,,,,
+2024,DO,Average Weekday - Other,,,5,,,,,
+2024,DO,Average Weekday - PM Peak,30:00.0,00:00.0,15,,,,,
+2024,PT,Annual Total,,,,2139525,129722,14823161,,16.4932
+2024,PT,Average Typical Saturday,00:00.0,45:00.0,42,3741,230,27355,59,16.2652
+2024,PT,Average Typical Sunday,00:00.0,45:00.0,42,3429,211,23912,54,16.2512
+2024,PT,Average Typical Weekday,30:00.0,45:00.0,42,6871,414,47482,253,16.5966
+2024,PT,Average Weekday - AM Peak,30:00.0,30:00.0,42,,,,,
+2024,PT,Average Weekday - Midday,30:00.0,30:00.0,42,,,,,
+2024,PT,Average Weekday - Other,,,42,,,,,
+2024,PT,Average Weekday - PM Peak,30:00.0,30:00.0,42,,,,,

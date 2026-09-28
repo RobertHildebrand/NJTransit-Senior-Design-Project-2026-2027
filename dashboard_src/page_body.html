@@ -1,0 +1,248 @@
+<div class="wrap">
+  <header class="bar">
+    <div class="brand"><h1>River LINE Service Simulator</h1><span>Camden ⇄ Trenton · 34 mi · decision support for the 6 am hold sheet</span></div>
+    <nav class="tabs" role="tablist" aria-label="Dashboard pages">
+      <button role="tab" id="tab-live" aria-controls="pg-live" aria-selected="true">Live day</button>
+      <button role="tab" id="tab-tt" aria-controls="pg-tt" aria-selected="false">Timetables</button>
+      <button role="tab" id="tab-prop" aria-controls="pg-prop" aria-selected="false">Proposals</button>
+      <button role="tab" id="tab-play" aria-controls="pg-play" aria-selected="false">Playbook</button>
+      <button role="tab" id="tab-lab" aria-controls="pg-lab" aria-selected="false">Policy lab</button>
+      <button role="tab" id="tab-cost" aria-controls="pg-cost" aria-selected="false">Costs &amp; impacts</button>
+      <button role="tab" id="tab-data" aria-controls="pg-data" aria-selected="false">Public data</button>
+      <button role="tab" id="tab-about" aria-controls="pg-about" aria-selected="false">About</button>
+    </nav>
+  </header>
+
+  <!-- ================= LIVE ================= -->
+  <section id="pg-live" role="tabpanel" aria-labelledby="tab-live" class="page">
+    <div class="bar">
+      <div class="clock"><small id="periodLabel">AM peak</small><span id="clock">06:50</span></div>
+      <div class="play">
+        <button class="btn primary" id="playBtn">Pause</button>
+        <div class="seg" role="group" aria-label="Playback speed">
+          <button data-speed="1" aria-pressed="false">1×</button><button data-speed="3" aria-pressed="true">3×</button><button data-speed="10" aria-pressed="false">10×</button><button data-speed="30" aria-pressed="false">30×</button>
+        </div>
+      </div>
+      <div class="timeline">
+        <label for="tslider" class="lab">Time</label>
+        <input type="range" id="tslider" min="345" max="1320" step="1" value="410">
+        <button class="btn jump" data-jump="400">AM peak</button><button class="btn jump" data-jump="690">Midday</button><button class="btn jump" data-jump="960">PM peak</button>
+      </div>
+    </div>
+    <div class="main">
+      <section class="panel" aria-label="Map">
+        <div class="maphead">
+          <h2>Live line map</h2>
+          <div class="legend">
+            <span><i class="dot" style="background:var(--nb)"></i>To Trenton</span><span><i class="dot" style="background:var(--sb)"></i>To Camden</span>
+            <span><i class="dot" style="background:var(--fail)"></i>Failed car</span><span><i class="dot" style="background:var(--rescue)"></i>Rescue move</span>
+            <span><i class="bar-sw" style="background:var(--single)"></i>Single track</span><span><i class="bar-sw" style="background:var(--track)"></i>Double track</span>
+          </div>
+        </div>
+        <div id="map">
+          <svg id="mapsvg" role="img" aria-label="Map of the River LINE between Camden and Trenton with trains moving along it"></svg>
+          <div class="zoomctl"><button class="btn" id="zin" aria-label="Zoom in">+</button><button class="btn" id="zout" aria-label="Zoom out">−</button><button class="btn" id="zreset" aria-label="Reset view" style="font-size:12px">⟲</button></div>
+          <div class="hint">Click a moving train to break it down · drag to pan · scroll to zoom</div>
+          <div class="tip" id="tip" hidden></div>
+        </div>
+      </section>
+      <aside class="side">
+        <section class="panel sec" aria-label="Scenario">
+          <h2>6 am hold sheet</h2>
+          <div class="field"><label for="cars">Cars available</label>
+            <div class="carsrow"><input type="range" id="cars" min="3" max="14" step="1" value="8"><output id="carsOut" for="cars">8</output></div></div>
+          <div class="field"><span class="lab" id="polLab">Schedule policy</span>
+            <div class="seg" role="group" aria-labelledby="polLab" id="policySeg">
+              <button data-pol="gtfs" aria-pressed="true" title="NJ TRANSIT's published Sept 2026 weekday timetable; blocks without a car are cancelled">NJT published</button>
+              <button data-pol="clock" aria-pressed="false">Tiered, clock-face</button>
+              <button data-pol="flex" aria-pressed="false">Tiered, flexible</button>
+              <button data-pol="prop" aria-pressed="false" title="Proposed pattern timetables T3–T8 (one per car count), from the timetable optimizer">Proposed tiers</button>
+            </div></div>
+          <div class="row2">
+            <div class="field"><span class="lab" id="resLab">Protect cars</span>
+              <div class="seg" role="group" aria-labelledby="resLab" id="resSeg"><button data-res="0" aria-pressed="false">0</button><button data-res="1" aria-pressed="true">1</button><button data-res="2" aria-pressed="false">2</button></div></div>
+            <div class="field"><label for="stage">Protect car waits at</label>
+              <select id="stage" class="btn"><option value="camden">Camden shop</option><option value="burl" selected>Burlington yard</option><option value="trenton">Trenton</option><option value="split">Split ends</option></select></div>
+            <div class="field"><label for="season">Season</label>
+              <select id="season" class="btn"><option value="winter">Winter</option><option value="spring">Spring</option><option value="summer" selected>Summer</option><option value="fall">Fall</option></select></div>
+          </div>
+          <div class="row2">
+            <label class="toggle"><input type="checkbox" id="randFail" checked> Random breakdowns</label>
+            <button class="btn" id="newDay">New day</button><button class="btn" id="clearManual">Clear my breakdowns</button>
+          </div>
+          <div class="planbox" id="planbox"></div>
+          <div class="advice" id="advice"></div>
+        </section>
+        <section class="panel sec" aria-label="Performance">
+          <div class="row2" style="justify-content:space-between"><h2>So far today</h2><span class="pill good" id="status">Normal service</span></div>
+          <div class="kpis" id="kpisNow"></div>
+          <div class="lab">Whole-day outlook</div>
+          <div class="kpis" id="kpisDay"></div>
+        </section>
+        <section class="panel sec" aria-label="Event log"><h2>Dispatch log</h2><div class="log" id="log" aria-live="polite"></div></section>
+      </aside>
+    </div>
+    <section class="panel sec" aria-label="Time-distance chart">
+      <div class="row2" style="justify-content:space-between"><h2>Whole day, time–distance</h2>
+        <div class="legend"><span><i class="bar-sw" style="background:var(--nb)"></i>Trip run</span><span><i class="bar-sw" style="background:var(--muted);opacity:.5"></i>Cancelled (planned path)</span><span><i class="bar-sw" style="background:var(--fail)"></i>Single track blocked</span><span><i class="bar-sw" style="background:var(--rescue)"></i>Rescue</span></div></div>
+      <div class="chartwrap"><svg id="marey" aria-label="Time-distance chart of every trip in the simulated day"></svg></div>
+      <p class="note">Each line is one trip. Blue and orange lines cross where trains meet; the timetable must put those meets on double track (unshaded). Click the chart to jump the clock.</p>
+    </section>
+  </section>
+
+
+  <!-- ================= TIMETABLES ================= -->
+  <section id="pg-tt" role="tabpanel" aria-labelledby="tab-tt" class="page" hidden>
+    <section class="panel sec">
+      <div class="row2" style="justify-content:space-between;align-items:flex-end">
+        <div><h2>Current and proposed timetables</h2><p class="note">NJ TRANSIT's published weekday timetable (GTFS, Sept 2026), six proposed pattern timetables (T8–T3) and five uniform-headway timetables (U8–U4). Pattern timetables keep NJT's 150-minute round trip, space trains as evenly as the single track allows, and have every meet on double track all day. Uniform timetables are conflict-free within each period but need retiming where peak and off-peak meet (see the conflicts column).</p></div>
+        <div class="field"><label for="ttSel">Timetable</label><select id="ttSel" class="btn"></select></div>
+      </div>
+      <div class="kpis kpis4" id="ttKpis"></div>
+      <div class="chartwrap"><table id="ttCompare"></table></div>
+      <p class="note">Click a row to view it. “Cars incl. 1 protect” is how many cars the hold sheet must show to run the timetable and still keep one protect car.</p>
+    </section>
+    <section class="panel sec">
+      <div class="row2" style="justify-content:space-between">
+        <h2>Time–distance and printed timetable</h2>
+        <div class="row2">
+          <div class="seg" role="group" aria-label="Direction" id="ttDir"><button data-dir="NB" aria-pressed="true">To Trenton</button><button data-dir="SB" aria-pressed="false">To Camden</button></div>
+          <div class="seg" role="group" aria-label="Period" id="ttPer"><button data-per="am" aria-pressed="true">AM peak</button><button data-per="mid" aria-pressed="false">Midday</button><button data-per="pm" aria-pressed="false">PM peak</button><button data-per="eve" aria-pressed="false">Evening</button><button data-per="all" aria-pressed="false">All day</button></div>
+        </div>
+      </div>
+      <svg id="ttMarey" class="chart" style="height:280px"></svg>
+      <div class="chartwrap"><table id="ttGrid"></table></div>
+    </section>
+  </section>
+
+
+  <!-- ================= PROPOSALS ================= -->
+  <section id="pg-prop" role="tabpanel" aria-labelledby="tab-prop" class="page" hidden>
+    <section class="panel sec">
+      <h2>Proposed schedules: what each one buys, and what it costs</h2>
+      <p class="note">Each proposal changes one thing about the timetable. Scheduled quality (trains, train-hours, gaps, average wait) comes from the timetable itself. Punctuality comes from a delay simulation: 400 simulated weekdays with random running times and incidents, calibrated so NJ TRANSIT's current timetable is 83% on time (it reported 80–84% in 2023–25). A late train that is due to meet an opposing train on single track delays that train too. “Hot day” adds 6% to running times, like a heat speed restriction. Click a row to replay it below.</p>
+      <div class="kpis kpis4" id="prKpis"></div>
+      <div class="chartwrap"><table id="prTable"></table></div>
+    </section>
+    <section class="panel sec">
+      <h2>The trade-off: even spacing versus recovery time</h2>
+      <div class="grid2">
+        <div><div class="lab">On time (%) against scheduled average wait (min). Up and left is better.</div><svg id="prScatter" class="chart" style="height:300px"></svg></div>
+        <div><div class="lab">On time (%) on a normal and a hot day</div><svg id="prHot" class="chart" style="height:300px"></svg></div>
+      </div>
+      <div class="rules" id="prRules"></div>
+    </section>
+    <section class="panel sec">
+      <div class="row2" style="justify-content:space-between;align-items:flex-end">
+        <div><h2>Replay a simulated day</h2><p class="note">Faint lines: the timetable. Solid lines: what the simulated trains did. Red dots: a train held at the entrance to single track because the opposing train it was due to meet was late (dot size = minutes held). Both timetables see the same kind of day.</p></div>
+        <div class="row2">
+          <div class="field"><label for="rpA">Timetable A</label><select id="rpA" class="btn"></select></div>
+          <div class="field"><label for="rpB">Timetable B</label><select id="rpB" class="btn"></select></div>
+        </div>
+      </div>
+      <div class="row2" style="margin:8px 0">
+        <div class="seg" role="group" aria-label="Day" id="rpDay"><button data-day="typical" aria-pressed="true">Typical day</button><button data-day="bad" aria-pressed="false">Bad day</button><button data-day="hot" aria-pressed="false">Hot day</button></div>
+        <div class="seg" role="group" aria-label="Period" id="rpPer"><button data-per="am" aria-pressed="true">AM peak</button><button data-per="mid" aria-pressed="false">Midday</button><button data-per="pm" aria-pressed="false">PM peak</button><button data-per="all" aria-pressed="false">All day</button></div>
+      </div>
+      <div class="lab" id="rpLabA"></div><div class="kpis kpis4" id="rpKA"></div>
+      <svg id="rpMA" class="chart" style="height:260px"></svg>
+      <div class="lab" id="rpLabB" style="margin-top:10px"></div><div class="kpis kpis4" id="rpKB"></div>
+      <svg id="rpMB" class="chart" style="height:260px"></svg>
+    </section>
+    <section class="panel sec">
+      <div class="grid2">
+        <div><h2>Why: slack at single-track meets</h2><div class="lab">Share of scheduled meets by how many minutes the first train can run late before it holds the opposing train (A and B)</div><svg id="prSlack" class="chart" style="height:240px"></svg></div>
+        <div><h2>Over a year: the headline measure</h2><div class="lab">Reliable trip-miles delivered and cancellations, scenario S2 (NJ TRANSIT 2026), 10 simulated years each</div><div class="chartwrap"><table id="prYear"></table></div></div>
+      </div>
+    </section>
+  </section>
+
+  <!-- ================= PLAYBOOK ================= -->
+  <section id="pg-play" role="tabpanel" aria-labelledby="tab-play" class="page" hidden>
+    <section class="panel sec">
+      <div class="row2" style="justify-content:space-between">
+        <div><h2>What to run for each hold-sheet count</h2><p class="note">For each number of serviceable cars at 6 am, the plan with the most <b>reliable trip-miles delivered</b> (trip-miles run and on time, as a % of today's timetable); near-ties go to the cheaper plan, and plans that cancel more than 5% of their own trips without warning are not recommended. 300 simulated days per cell, calibrated scenario S2 (NJ TRANSIT 2026) unless the Policy lab is changed. "Today's timetable" means running NJ TRANSIT's published timetable with whatever cars are available.</p></div>
+        <div class="field"><label for="pbSeason">Season</label><select id="pbSeason" class="btn"><option value="summer">Summer (failures high)</option><option value="spring">Spring (failures low)</option></select></div>
+      </div>
+      <div class="chartwrap"><table id="pbTable"></table></div>
+      <div class="rules" id="pbRules"></div>
+    </section>
+    <section class="panel sec">
+      <h2>Cancellations and waiting by fleet size</h2>
+      <div class="grid2">
+        <div><div class="lab">Cancelled trips, % of published</div><svg id="pbChart1" class="chart"></svg></div>
+        <div><div class="lab">Reliable trip-miles delivered, % of today's timetable</div><svg id="pbChart2" class="chart"></svg></div>
+      </div>
+      <div class="legend" id="pbLegend"></div>
+    </section>
+  </section>
+
+  <!-- ================= LAB ================= -->
+  <section id="pg-lab" role="tabpanel" aria-labelledby="tab-lab" class="page" hidden>
+    <section class="panel sec">
+      <h2>Policy lab: simulate a year with your assumptions</h2>
+      <p class="note">Each run simulates 365 weekdays with fleet availability carried from day to day (breakdowns send cars to the shop). The headline measure, <b>reliable trip-miles delivered</b>, is the trip-miles that run and arrive less than 6 minutes late, as a percentage of today's timetable; lateness comes from the delay simulation for each timetable. Pick a calibrated scenario, change the assumptions the team is unsure of, and see whether the ranking changes.</p>
+      <div class="row2" style="margin-bottom:8px"><div class="field"><label for="lScen">Calibrated scenario</label><select id="lScen" class="btn"><option value="S1">S1: Alstom era 2024–25</option><option value="S2" selected>S2: NJ TRANSIT 2026</option><option value="S3">S3: renewed fleet</option></select></div><span class="note">Sets breakdowns, repairs and the delay regime to the values fitted to data (report Section 9). Sliders can then be changed.</span></div>
+      <div class="labgrid">
+        <div class="field"><label for="lMdbf">Miles between breakdowns <output id="oMdbf"></output></label><input type="range" id="lMdbf" min="2000" max="15000" step="500" value="3568"></div>
+        <div class="field"><label for="lRepair">Mean repair time, days <output id="oRepair"></output></label><input type="range" id="lRepair" min="1" max="30" step="1" value="5"></div>
+        <div class="field"><label for="lOut">Cars in long-term overhaul <output id="oOut"></output></label><input type="range" id="lOut" min="0" max="8" step="1" value="3"></div>
+        <div class="field"><label for="lBlock">Single-track blockage, min <output id="oBlock"></output></label><input type="range" id="lBlock" min="10" max="90" step="5" value="35"></div>
+        <div class="field"><label for="lCost">Operating cost per train-hour, $ <output id="oCost"></output></label><input type="range" id="lCost" min="200" max="1000" step="1" value="547"></div>
+        <div class="field"><label for="lVtts">Value of rider time, $/h <output id="oVtts"></output></label><input type="range" id="lVtts" min="8" max="40" step="0.5" value="13.6"></div>
+        <div class="field"><label for="lStage">Protect car waits at</label><select id="lStage" class="btn"><option value="camden">Camden shop</option><option value="burl" selected>Burlington yard</option><option value="trenton">Trenton</option><option value="split">Split ends</option></select></div>
+        <div class="field"><label for="lRuns">Years to average <output id="oRuns"></output></label><input type="range" id="lRuns" min="1" max="6" step="1" value="3"></div>
+      </div>
+      <div class="row2"><button class="btn primary" id="runLab">Run year</button><span class="note" id="labStatus"></span></div>
+      <div class="chartwrap"><table id="labTable"></table></div>
+      <div class="grid2">
+        <div><div class="lab">Cost trade-off per weekday</div><svg id="labChart" class="chart"></svg></div>
+        <div><div class="lab">Cancelled trips by season</div><svg id="labChart2" class="chart"></svg></div>
+      </div>
+    </section>
+  </section>
+
+  <!-- ================= COSTS ================= -->
+  <section id="pg-cost" role="tabpanel" aria-labelledby="tab-cost" class="page" hidden>
+    <section class="panel sec">
+      <h2>What today's plan costs</h2>
+      <p class="note">From the Live day tab's scenario. Operating cost uses the train-hour rate from the Policy lab; rider cost values waiting at twice the USDOT local personal rate, following the 2016 USDOT guidance.</p>
+      <div class="kpis kpis4" id="costKpis"></div>
+      <svg id="costChart" class="chart" style="height:120px"></svg>
+    </section>
+    <section class="panel sec">
+      <h2>Costs and effects: what the model covers</h2>
+      <div class="chartwrap"><table id="effectsTable"></table></div>
+    </section>
+  </section>
+
+  <!-- ================= DATA ================= -->
+  <section id="pg-data" role="tabpanel" aria-labelledby="tab-data" class="page" hidden>
+    <section class="panel sec">
+      <h2>What the public data says</h2>
+      <div class="kpis kpis4" id="dataKpis"></div>
+    </section>
+    <div class="grid2">
+      <section class="panel sec"><h2>Trains in service, today's published timetable</h2><svg id="dChart1" class="chart"></svg><p class="note">NJ TRANSIT GTFS feed, Sept 15, 2026 release (Mobility Database mirror). Peak uses 8 trains on a repeating 15/15/30-minute pattern; midday 6 trains every 30 minutes.</p></section>
+      <section class="panel sec"><h2>Weather seasonality, Trenton</h2><svg id="dChart2" class="chart"></svg><p class="note">NOAA GHCN-Daily, station USW00014792, monthly mean days 2015–2025. Heat days line up with the 2023–2024 summer service cuts.</p></section>
+      <section class="panel sec"><h2>Light rail ridership (NTD)</h2><svg id="dChart3" class="chart"></svg><p class="note">National Transit Database monthly ridership. River LINE is reported together with Hudson–Bergen (purchased transportation) through 2025.</p></section>
+      <section class="panel sec"><h2>Single track: two sources disagree</h2><svg id="dChart4" class="chart" style="height:150px"></svg><p class="note">Top: NJDOT fact sheet (12.7 mi). Bottom: derived from OpenStreetMap route relations (15.2 mi), where both directions share a track. The biggest difference is the Roebling siding. Get the official track chart.</p></section>
+    </div>
+  </section>
+
+  <!-- ================= ABOUT ================= -->
+  <section id="pg-about" role="tabpanel" aria-labelledby="tab-about" class="page" hidden>
+    <section class="panel sec">
+      <h2>About this model and its data</h2>
+      <ul class="about">
+        <li><b>Track and stations:</b> real track geometry from NJ TRANSIT's GTFS shape; single and double track from the NJDOT Freight Guideway fact sheet (2021), rescaled from railroad mileposts.</li>
+        <li><b>Tiered timetables:</b> for each headway, a periodic single-track timetable MIP (HiGHS) places every opposing meet on double track and returns the trains needed: 15 min → 11, 20 min → 8, 30 min → 6.</li>
+        <li><b>NJT published:</b> the actual Sept 2026 weekday timetable (87 trips, 12 vehicle blocks). A block with no car available is cancelled.</li>
+        <li><b>Breakdowns:</b> Poisson in car-miles, scaled by season. Calibrated scenarios (report Section 9) use NJ TRANSIT's monthly River LINE series: 3,661 miles between failures in 2024–25 (S1) and 3,568 in Mar–Aug 2026 (S2, the default). A failure needs a rescue car: a protect car from where it is staged if one is free, otherwise the nearest train in service is pulled. A failure on single track blocks both directions.</li>
+        <li><b>Rider waiting:</b> random arrivals over each gap between departures, weighted by an assumed hourly profile on about 5,600 weekday boardings.</li>
+        <li><b>Costs:</b> $547 per train-hour = NTD FY2024 vehicle operations plus vehicle maintenance divided by vehicle revenue hours for the River LINE (Hybrid Rail); the full average including administration is $952. Value of time: USDOT 2016 guidance, $13.60/h local personal travel in 2015 dollars, doubled for waiting.</li><li><b>Headline measure:</b> reliable trip-miles delivered = trip-miles run and on time (from the delay simulation for the day's timetable; summer mixes 23% hot days) ÷ trip-miles in today's timetable.</li>
+        <li><b>Still uncertain:</b> repair times are inferred (10 days in 2024–25, 5 in 2026) because no repair records are public; rescue and blockage times are placeholders. Replace them with NJ TRANSIT hold sheets and failure logs.</li>
+      </ul>
+    </section>
+  </section>
+</div>

@@ -1,0 +1,796 @@
+<title>River LINE Findings Deck</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 slide at a time on wide screens, slides stacked on phones; a to-scale track strip of the Camden–Trenton line is the progress bar. */
+:root{
+  --paper:#f3f6f6; --panel:#ffffff; --ink:#122428; --ink-2:#3d5157; --muted:#667a80; --rule:#d2dcde;
+  --river:#0d5f73; --river-soft:#dcebee; --signal:#c47a00; --signal-soft:#f7ecd6;
+  --good:#1f7a45; --bad:#b83a26; --single:#e9dcc2;
+  --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a;
+  --display:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --body:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --paper:#0e1a1d; --panel:#152429; --ink:#e7f0f1; --ink-2:#bccbce; --muted:#8fa3a8; --rule:#2a3d42;
+  --river:#62b6cb; --river-soft:#1b3a42; --signal:#f0a92b; --signal-soft:#3a2e17;
+  --good:#46b87a; --bad:#ec6b55; --single:#4a3f2c;
+  --s1:#3987e5; --s2:#d95926; --s3:#199e70; color-scheme:dark; } }
+:root[data-theme="dark"]{
+  --paper:#0e1a1d; --panel:#152429; --ink:#e7f0f1; --ink-2:#bccbce; --muted:#8fa3a8; --rule:#2a3d42;
+  --river:#62b6cb; --river-soft:#1b3a42; --signal:#f0a92b; --signal-soft:#3a2e17;
+  --good:#46b87a; --bad:#ec6b55; --single:#4a3f2c;
+  --s1:#3987e5; --s2:#d95926; --s3:#199e70; color-scheme:dark; }
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);padding-inline:16px;padding-block:12px 0;-webkit-font-smoothing:antialiased}
+.app{max-width:1440px;margin:0 auto;display:flex;flex-direction:column;gap:10px;min-height:100%}
+.deck{position:relative;margin:0 auto;width:100%}
+.slide{container-type:inline-size;background:var(--panel);border:1px solid var(--rule);border-radius:6px;overflow:hidden;position:relative}
+.slide .in{padding:clamp(18px,3.4cqw,48px) clamp(18px,4cqw,60px);display:flex;flex-direction:column;gap:clamp(10px,1.6cqw,22px);height:100%;font-size:clamp(14px,1.45cqw,20px);line-height:1.45}
+.kicker{font-family:var(--mono);font-size:clamp(11px,.95cqw,13.5px);letter-spacing:.08em;text-transform:uppercase;color:var(--river);display:flex;gap:.8em;align-items:center}
+.kicker .tag{background:var(--river-soft);padding:.15em .55em;border-radius:3px}
+h1,h2,h3{font-family:var(--display);margin:0;text-wrap:balance;letter-spacing:.005em}
+h1{font-size:clamp(34px,6.2cqw,88px);line-height:.95;font-weight:700}
+h2{font-size:clamp(24px,3.5cqw,50px);line-height:1.02;font-weight:700}
+h3{font-size:clamp(17px,1.9cqw,26px);font-weight:600;line-height:1.1}
+p{margin:0;max-width:65ch}
+.lead{font-size:clamp(15px,1.75cqw,24px);color:var(--ink-2);max-width:52ch}
+.muted{color:var(--muted)}
+.small{font-size:.82em;color:var(--muted)}
+.grid{display:grid;gap:clamp(12px,2cqw,28px);min-height:0;flex:1}
+.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}.g21{grid-template-columns:1.5fr 1fr}.g12{grid-template-columns:1fr 1.5fr}
+.grid>*{min-width:0}
+ul.pts{margin:0;padding-left:1.1em;display:flex;flex-direction:column;gap:.45em}
+ul.pts li::marker{color:var(--river)}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.stat{display:flex;flex-direction:column;gap:.15em;border-top:2px solid var(--rule);padding-top:.5em}
+.stat .v{font-family:var(--display);font-weight:700;font-size:clamp(26px,3.3cqw,46px);line-height:1;color:var(--ink)}
+.stat .k{font-size:.86em;color:var(--muted);line-height:1.3}
+.stat.hot{border-top-color:var(--signal)} .stat.hot .v{color:var(--signal)}
+.stat.cool{border-top-color:var(--river)} .stat.cool .v{color:var(--river)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(9.5em,1fr));gap:clamp(10px,1.6cqw,22px)}
+.callout{background:var(--signal-soft);border-left:3px solid var(--signal);padding:.7em .9em;border-radius:0 4px 4px 0}
+.callout.cool{background:var(--river-soft);border-left-color:var(--river)}
+table{border-collapse:collapse;width:100%;font-size:.88em}
+th{font-family:var(--mono);font-weight:500;font-size:.78em;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);text-align:left;padding:.35em .5em;border-bottom:1.5px solid var(--ink-2)}
+td{padding:.42em .5em;border-bottom:1px solid var(--rule);vertical-align:top}
+td.r,th.r{text-align:right}
+tr.hl td{background:var(--river-soft)}
+.pill{display:inline-block;font-family:var(--mono);font-size:.75em;padding:.1em .5em;border-radius:999px;border:1px solid currentColor;white-space:nowrap}
+.pill.good{color:var(--good)}.pill.bad{color:var(--bad)}.pill.warn{color:var(--signal)}.pill.cool{color:var(--river)}
+.tablewrap{overflow-x:auto}
+svg text{fill:var(--muted);font-family:var(--body)}
+svg .lab{fill:var(--ink-2)}
+svg .strong{fill:var(--ink);font-weight:600}
+.legend{display:flex;flex-wrap:wrap;gap:.4em 1.2em;font-size:.8em;color:var(--ink-2)}
+.legend i{display:inline-block;width:.9em;height:.9em;border-radius:2px;margin-right:.35em;vertical-align:-.1em}
+.flow{display:flex;flex-wrap:wrap;gap:.5em;align-items:stretch}
+.flow .step{flex:1 1 9em;border:1px solid var(--rule);border-radius:4px;padding:.6em .7em;background:var(--paper);display:flex;flex-direction:column;gap:.25em}
+.flow .step b{font-family:var(--display);font-size:1.15em;font-weight:600}
+.flow .arr{align-self:center;color:var(--muted);font-family:var(--mono)}
+.flow .step.bad{border-color:var(--bad)} .flow .step.bad b{color:var(--bad)}
+.title-slide .in{justify-content:space-between}
+.foot{display:flex;justify-content:space-between;gap:1em;flex-wrap:wrap;font-family:var(--mono);font-size:clamp(11px,.9cqw,13px);color:var(--muted)}
+.src{font-size:clamp(10px,.8cqw,12px);color:var(--muted);margin-top:auto}
+.lever{display:grid;grid-template-columns:auto 1fr;gap:.2em .8em;align-items:baseline}
+.ctl{display:flex;flex-wrap:wrap;gap:.45em 1.1em;align-items:center;font-size:.8em;color:var(--muted)}
+.ctl .lbl{font-family:var(--mono);font-size:.85em;letter-spacing:.06em;text-transform:uppercase}
+.seg{display:inline-flex;border:1px solid var(--rule);border-radius:4px;overflow:hidden;background:var(--panel)}
+.seg button{font:500 1em/1.2 var(--body);padding:.28em .65em;background:transparent;color:var(--ink-2);border:0;border-left:1px solid var(--rule);cursor:pointer;white-space:nowrap}
+.seg button:first-child{border-left:0}
+.seg button[aria-pressed="true"]{background:var(--river);color:var(--panel)}
+.seg button:focus-visible,.ctl select:focus-visible,.play:focus-visible{outline:2px solid var(--river);outline-offset:1px}
+.ctl select{font:500 1em var(--body);color:var(--ink);background:var(--panel);border:1px solid var(--rule);border-radius:4px;padding:.22em .4em}
+.play{font:600 1em var(--body);color:var(--panel);background:var(--river);border:0;border-radius:4px;padding:.3em .9em;cursor:pointer;min-width:5.5em}
+.ctl input[type=range]{accent-color:var(--river);width:min(9em,40vw)}
+.mtab{width:100%;font-size:.8em}.mtab td,.mtab th{padding:.28em .4em}
+.mtab td.r{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.clock{font-family:var(--display);font-weight:700;font-size:clamp(28px,3.4cqw,48px);line-height:1;font-variant-numeric:tabular-nums}
+.note{font-size:.84em;line-height:1.4}
+.note p{max-width:none}
+.chartcol{display:flex;flex-direction:column;gap:.35em;min-width:0}
+.chartcol svg{width:100%;height:auto;display:block}
+.dot{display:inline-block;width:.75em;height:.75em;border-radius:50%;margin-right:.35em;vertical-align:-.05em}
+/* nav */
+.nav{display:flex;align-items:center;gap:10px;padding-block:6px 10px;position:sticky;bottom:0;background:var(--paper);padding-bottom:calc(10px + env(safe-area-inset-bottom,0px))}
+.nav button{font:600 14px var(--body);color:var(--ink);background:var(--panel);border:1px solid var(--rule);border-radius:4px;padding:6px 12px;cursor:pointer}
+.nav button:hover{border-color:var(--river)} .nav button:focus-visible,.track:focus-visible{outline:2px solid var(--river);outline-offset:2px}
+.nav button:disabled{opacity:.4;cursor:default}
+.count{font:500 13px var(--mono);color:var(--muted);min-width:4.5em;text-align:center;font-variant-numeric:tabular-nums}
+.track{flex:1;min-width:0;height:34px;cursor:pointer}
+.track svg{width:100%;height:100%;display:block}
+#tip{position:fixed;pointer-events:none;background:var(--ink);color:var(--paper);font:500 12px/1.35 var(--body);padding:5px 8px;border-radius:4px;z-index:10;max-width:260px}
+/* deck vs stacked */
+body.deckmode .slide{display:none;aspect-ratio:16/9;width:min(100%,calc((100vh - 96px)*16/9));margin:0 auto}
+body.deckmode .slide.on{display:block}
+body.stacked .deck{display:flex;flex-direction:column;gap:14px}
+body.stacked .grid{grid-template-columns:1fr}
+body.stacked .nav{display:none}
+@media (prefers-reduced-motion:no-preference){ body.deckmode .slide.on .in>*{animation:rise .35s ease both} body.deckmode .slide.on .in>*:nth-child(2){animation-delay:.04s} body.deckmode .slide.on .in>*:nth-child(3){animation-delay:.08s}
+ @keyframes rise{from{opacity:.001;transform:translateY(6px)}to{opacity:1;transform:none}} }
+</style>
+
+<div class="app">
+<main class="deck" id="deck">
+
+<!-- 1 -->
+<section class="slide title-slide" id="s1" aria-label="Title"><div class="in">
+  <div class="kicker"><span class="tag">ISE Senior Design · Team 22</span><span>Client: NJ TRANSIT</span></div>
+  <div class="grid g21" style="flex:0 1 auto;align-items:center">
+    <div style="display:flex;flex-direction:column;gap:.6em;min-width:0">
+      <h1 style="font-size:clamp(30px,5cqw,72px)">Running the River LINE with the cars you have</h1>
+      <p class="lead">Background, how the line is run today, what we built and found, and the fixes worth pursuing next.</p>
+      <p class="small" style="font-size:.85em">Virginia Tech · Grado Department of Industrial and Systems Engineering<br>Faculty advisor: Dr. Robert Hildebrand</p>
+    </div>
+    <figure style="margin:0;display:flex;flex-direction:column;gap:.3em;min-width:0">
+      <img src="__IMG_PHOTO__" alt="A white, blue and yellow two-car River LINE diesel light rail train at a Camden platform, with the Ben Franklin Bridge behind" style="width:100%;border-radius:4px;display:block">
+      <figcaption class="src" style="margin:0">River LINE train at Camden, opening week 2004. Photo © 2004 Jon Bell, as reproduced in NJDOT SSO Appendix F.</figcaption>
+    </figure>
+  </div>
+  <svg id="heroTrack" viewBox="0 0 1000 120" role="img" aria-label="The River LINE from Camden to Trenton, 34 miles, with single-track sections"></svg>
+  <div class="foot"><span>Camden ⇄ Trenton · 34 mi · 21 stations</span><span>Working findings · September 28, 2026</span></div>
+</div></section>
+
+<!-- 1b: agenda -->
+<section class="slide" id="agenda" aria-label="Agenda"><div class="in">
+  <div class="kicker"><span class="tag">Agenda</span></div>
+  <h2>Agenda</h2>
+  <div class="grid g2" style="align-content:start">
+    <ol class="pts" style="font-size:1.1em">
+      <li><b>Background:</b> the line, the client, what went wrong</li>
+      <li><b>Problem statement</b>, objectives, requirements and scope</li>
+      <li><b>Current process:</b> today's timetable, train by train</li>
+      <li><b>Approach:</b> models, alternatives and how we compared them</li>
+    </ol>
+    <ol class="pts" start="5" style="font-size:1.1em">
+      <li><b>Proposed solutions:</b> B8, a replay of a day, where the line bottlenecks</li>
+      <li><b>Results</b> and how well the model matches 2024–26</li>
+      <li><b>Fixes to pursue</b>, plan and risks</li>
+      <li>Questions · key terms · sources</li>
+    </ol>
+  </div>
+  <p class="callout cool">Slides marked <b>Interactive</b> are working parts of our dashboard: pick a timetable, a time of day or conditions, and the charts update.</p>
+</div></section>
+
+<!-- 2 -->
+<section class="slide" id="s2" aria-label="The line"><div class="in">
+  <div class="kicker"><span class="tag">Background</span><span>The line</span></div>
+  <h2>A 34-mile diesel light rail line, mostly on one track</h2>
+  <svg id="lineTrack" viewBox="0 0 1000 150" role="img" aria-label="Track diagram with single and double track and stations"></svg>
+  <div class="grid g2">
+    <ul class="pts">
+      <li>Opened March 2004 on a former freight line. Freight trains still use it at night, so passenger service runs about 6&nbsp;am–10&nbsp;pm.</li>
+      <li>Seven single-track sections. Opposing trains can only pass on double track, so the timetable is built around those meets.</li>
+      <li>72 grade crossings, 23 bridges. Trains are at most 2 cars long.</li>
+    </ul>
+    <div class="stats">
+      <div class="stat"><span class="v num">20</span><span class="k">Stadler diesel cars, built 2002–03</span></div>
+      <div class="stat"><span class="v num">8</span><span class="k">trains needed at the peaks today</span></div>
+      <div class="stat"><span class="v num">67<span style="font-size:.5em"> min</span></span><span class="k">scheduled end to end</span></div>
+      <div class="stat"><span class="v num">2 / 8</span><span class="k">cars that fit overnight at Burlington / Trenton</span></div>
+    </div>
+  </div>
+  <p class="src">NJ TRANSIT GTFS (Sept 2026); NJDOT State Safety Oversight Appendix F (2021); track positions calibrated to NJ TRANSIT's scheduled meets.</p>
+</div></section>
+
+<!-- 2b: map -->
+<section class="slide" id="map" aria-label="What we are dealing with"><div class="in">
+  <div class="kicker"><span class="tag">Background</span><span>What we are dealing with</span></div>
+  <div class="grid" style="grid-template-columns:auto 1fr;align-items:start">
+    <figure style="margin:0;height:100%;display:flex;flex-direction:column;gap:.3em;min-width:0">
+      <img src="__IMG_MAP__" alt="NJ TRANSIT River LINE route map along the Delaware River from Camden to Trenton, with all 21 stations" style="height:min(100%,36cqw);width:auto;max-width:100%;border:1px solid var(--rule);border-radius:4px;display:block;object-fit:contain">
+      <figcaption class="src" style="margin:0;max-width:22em">River LINE map: NJ TRANSIT, as reproduced in NJDOT SSO Appendix F.</figcaption>
+    </figure>
+    <div style="display:flex;flex-direction:column;gap:.8em;min-width:0">
+      <h2>Camden to Trenton along the Delaware, through ten river towns</h2>
+      <ul class="pts">
+        <li><b>Connects:</b> NJ TRANSIT Northeast Corridor, Amtrak and SEPTA at Trenton; the Atlantic City Line at Pennsauken; PATCO at Walter Rand in Camden.</li>
+        <li><b>Shares the track with freight.</b> Freight trains run overnight, so passenger service must fit between about 6&nbsp;am and 10&nbsp;pm.</li>
+        <li><b>Runs through town centers:</b> street running in Camden and Trenton, 72 grade crossings, and platforms that take one train at a time on single-track sections.</li>
+        <li><b>Small, aging fleet:</b> 20 diesel cars built in 2002–03. Today's timetable needs 8 in service at the peaks, before spares and rescues.</li>
+      </ul>
+      <svg id="mapTrack" viewBox="0 0 1000 120" role="img" aria-label="Straight-line diagram of the line with the seven single-track sections"></svg>
+    </div>
+  </div>
+</div></section>
+
+<!-- 3 -->
+<section class="slide" id="s3" aria-label="The question"><div class="in">
+  <div class="kicker"><span class="tag">Background</span><span>The client's question</span></div>
+  <h2>“We have N working cars at 6&nbsp;am. What should we run today?”</h2>
+  <div class="grid g3">
+    <div class="stat cool"><span class="v">One track</span><span class="k">Every train must meet opposing trains on double track. Adding or removing a train changes every meet.</span></div>
+    <div class="stat hot"><span class="v">Two cars per failure</span><span class="k">A breakdown ties up a second car to rescue it, and on single track it blocks both directions.</span></div>
+    <div class="stat cool"><span class="v">No plan B</span><span class="k">There is one published weekday timetable. When cars are short, trips are cancelled one by one.</span></div>
+  </div>
+  <p class="callout">The decision happens every morning. It depends on how many cars pass inspection, which depends on how reliable the fleet is and how fast repairs come back.</p>
+</div></section>
+
+<!-- 3b: problem statement -->
+<section class="slide" id="problem" aria-label="Problem statement"><div class="in">
+  <div class="kicker"><span class="tag">Background</span><span>Problem statement</span></div>
+  <h2>Problem statement</h2>
+  <p class="callout cool" style="font-size:1.12em;max-width:none">River LINE riders do not get the service the timetable promises. In 2024–25 only 80–87% of trips arrived on time, against 97–99% on NJ TRANSIT's other light rail lines. On days when too few cars pass inspection, trips are cancelled one at a time, without notice. Our model puts the combined loss at about <b>31% of scheduled trip-miles</b> in 2024–25 and <b>16%</b> in 2026.</p>
+  <div class="grid g3">
+    <div class="stat hot"><span class="v" style="font-size:1.5em">1 · Late trains spread</span><span class="k">On single track, one late train holds every opposing train due to meet it. Today's timetable schedules 36 meets a day with less than a minute to spare.</span></div>
+    <div class="stat hot"><span class="v" style="font-size:1.5em">2 · One plan for every day</span><span class="k">The single published timetable needs 8 trains. With fewer cars, the shortfall shows up as unplanned cancellations and longer gaps that riders learn about at the platform.</span></div>
+    <div class="stat hot"><span class="v" style="font-size:1.5em">3 · An unreliable fleet</span><span class="k">Miles between failures fell from about 22,000 (2022) to 2,377 (Sept 2025). Each failure takes a second car to rescue it and blocks the single track.</span></div>
+  </div>
+  <p class="small"><b>Measured by</b> reliable trip-miles delivered: trip-miles that run and arrive less than 6 minutes late, as a % of today's timetable. Proposed target: 90%.</p>
+</div></section>
+
+<!-- 3c: objectives, requirements, scope -->
+<section class="slide" id="objectives" aria-label="Objectives, requirements and scope"><div class="in">
+  <div class="kicker"><span class="tag">Background</span><span>Objectives · requirements · scope</span></div>
+  <h2>What success looks like</h2>
+  <div class="grid g3" style="align-content:start">
+    <div><h3>Objectives (measurable; targets to agree with NJ TRANSIT)</h3>
+      <ol class="pts" style="margin-top:.4em;font-size:.92em">
+        <li>Reliable trip-miles delivered ≥ 90% (model: 84% in 2026 conditions)</li>
+        <li>On time ≥ 95% of trips run (NJ TRANSIT's goal is 97%)</li>
+        <li>Unplanned cancellations ≤ 1% of scheduled trips</li>
+        <li>No longer gaps than today (30 min at the peaks) and no more than today's 109 train-hours a day</li>
+      </ol></div>
+    <div><h3>Client requirements</h3>
+      <ul class="pts" style="margin-top:.4em;font-size:.92em">
+        <li>Choose the day's schedule from the 6&nbsp;am hold sheet (cars available)</li>
+        <li>Weigh on-time performance, frequency and rider impact</li>
+        <li>Every meet on double track; freight window kept</li>
+        <li>A tool a dispatcher can use; open-source solvers only</li>
+        <li>Built on public data now, re-run on NJ TRANSIT data later</li>
+      </ul></div>
+    <div><h3>Scope</h3>
+      <p style="margin-top:.4em;font-size:.92em"><b>In:</b> weekday timetables, the daily plan by car count, delay and fleet simulation, fleet reliability requirements.</p>
+      <p style="margin-top:.5em;font-size:.92em"><b>Out:</b> weekends and events, crew rostering, bus bridges, fares, and design of new track.</p></div>
+  </div>
+  <p class="small"><b>Reliable trip-miles delivered</b> = trip-miles that run and arrive less than 6 minutes late, as a % of today's timetable. It counts a cancelled trip and a late trip as lost service in one number.</p>
+</div></section>
+
+<!-- 4 -->
+<section class="slide" id="s4" aria-label="What went wrong"><div class="in">
+  <div class="kicker"><span class="tag">Background</span><span>2022–2026</span></div>
+  <h2>Reliability collapsed, then began to recover</h2>
+  <div class="grid g21">
+    <div style="display:flex;flex-direction:column;gap:.4em;min-width:0">
+      <div class="small">Mean miles between failures, River LINE, monthly (NJ TRANSIT)</div>
+      <svg id="chMdbf" viewBox="0 0 640 300" role="img" aria-label="Line chart of miles between failures 2017 to 2026"></svg>
+    </div>
+    <ul class="pts">
+      <li><b>2023:</b> peak service cut to every 30 minutes; 80% on time in August.</li>
+      <li><b>Aug 2024:</b> interim 30-minute schedule and buses at six stations.</li>
+      <li><b>Oct 2024:</b> a train hit a fallen tree near Florence; the operator was killed.</li>
+      <li><b>Sept 2025:</b> 2,377 miles between failures, the low point.</li>
+      <li><b>Feb 14, 2026:</b> NJ TRANSIT took over operations from Alstom. On time has stayed above 93% since.</li>
+    </ul>
+  </div>
+  <p class="src">NJ TRANSIT light rail MDBF data; Philadelphia Inquirer (2023); NJ TRANSIT (Aug 2024); NTSB RIR-25-19; NJ TRANSIT board item 2511-51; NJ OLS FY2027 budget analysis.</p>
+</div></section>
+
+<!-- 5 -->
+<section class="slide" id="s5" aria-label="Riders"><div class="in">
+  <div class="kicker"><span class="tag">Background</span><span>Riders</span></div>
+  <h2>Riders rated it lowest of the three light rail lines, until the takeover</h2>
+  <div class="grid g21">
+    <div style="display:flex;flex-direction:column;gap:.4em;min-width:0">
+      <div class="legend"><span><i style="background:var(--s1)"></i>River LINE</span><span><i style="background:var(--s2)"></i>Hudson–Bergen</span><span><i style="background:var(--s3)"></i>Newark Light Rail</span></div>
+      <svg id="chCss" viewBox="0 0 640 280" role="img" aria-label="Overall satisfaction by survey wave and light rail line"></svg>
+      <div class="small">Overall satisfaction, 0–10, NJ TRANSIT Customer Satisfaction Survey. No surveys in 2020–21.</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:.8em">
+      <div class="stats" style="grid-template-columns:1fr 1fr">
+        <div class="stat"><span class="v num">63%</span><span class="k">ride to work</span></div>
+        <div class="stat"><span class="v num">21%</span><span class="k">have no car</span></div>
+      </div>
+      <p><b>Weakest ratings:</b> cleanliness on board, security, and how disruptions are handled. On-time scores improved most in Fall 2025.</p>
+      <p class="small">Rider profile: DVRPC on-board survey (2010), the only River LINE-specific one.</p>
+    </div>
+  </div>
+</div></section>
+
+<!-- 6 -->
+<section class="slide" id="s6" aria-label="Money and ridership"><div class="in">
+  <div class="kicker"><span class="tag">Background</span><span>Money and ridership</span></div>
+  <h2>Ridership is at about 60% of 2019, and fares cover about 3% of cost</h2>
+  <div class="grid g12">
+    <div class="stats" style="grid-template-columns:1fr 1fr;align-content:start">
+      <div class="stat"><span class="v num">$36.4M</span><span class="k">operating cost, FY2024</span></div>
+      <div class="stat hot"><span class="v num">$952</span><span class="k">per vehicle revenue hour (was $705 in 2019)</span></div>
+      <div class="stat"><span class="v num">$19.57</span><span class="k">cost per trip; fares bring in $0.46</span></div>
+      <div class="stat cool"><span class="v num">+22%</span><span class="k">ridership, June 2026 vs June 2025</span></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:.4em;min-width:0">
+      <div class="small">Trips per year (millions), NTD. 2026 is January–July only.</div>
+      <svg id="chAnnual" viewBox="0 0 640 280" role="img" aria-label="Bar chart of annual trips 2012 to 2026"></svg>
+    </div>
+  </div>
+  <p class="src">National Transit Database (the River LINE is reported as “Hybrid Rail”); NJ OLS FY2026 budget analysis.</p>
+</div></section>
+
+<!-- 7 -->
+<section class="slide" id="s7" aria-label="How it works today"><div class="in">
+  <div class="kicker"><span class="tag">Current process</span><span>A weekday today</span></div>
+  <h2>One timetable, whatever the car count</h2>
+  <div class="flow">
+    <div class="step"><b>6 am hold sheet</b><span class="small">Cars that passed inspection</span></div><span class="arr">→</span>
+    <div class="step"><b>Run the published timetable</b><span class="small">Needs 8 trains at the peaks, 6 midday</span></div><span class="arr">→</span>
+    <div class="step bad"><b>Short of cars</b><span class="small">Whole vehicle runs cancelled, unannounced</span></div><span class="arr">→</span>
+    <div class="step bad"><b>Breakdown</b><span class="small">A second car is pulled to rescue it; single track blocked</span></div>
+  </div>
+  <div class="grid g2">
+    <div class="callout cool"><h3>What today's timetable gets right</h3><p style="margin-top:.4em">Its 15/15/30-minute peak spacing fits 8 trains into a 150-minute round trip. Even 20-minute spacing would need a 9th train. The 30-minute gap also hides recovery time.</p></div>
+    <div class="callout"><h3>What it lacks</h3><p style="margin-top:.4em">No smaller timetables ready for short days, no rule for when to hold a spare car, and no way to tell riders the day's plan before they leave home.</p></div>
+  </div>
+</div></section>
+
+<!-- 7b: interactive timetable explorer -->
+<section class="slide" id="explore" aria-label="Timetable explorer"><div class="in">
+  <div class="kicker"><span class="tag">Current process</span><span>Interactive · from the dashboard</span></div>
+  <h2>The timetable, train by train</h2>
+  <div class="ctl">
+    <span class="lbl">Timetable</span><span class="seg" id="exTT"></span>
+    <span class="lbl">Compare with</span><select id="exCmp" aria-label="Compare with"></select>
+    <span class="lbl">When</span><span class="seg" id="exWin"></span>
+  </div>
+  <div class="grid g21">
+    <div class="chartcol">
+      <div class="legend"><span><i style="background:var(--s1)"></i>To Trenton</span><span><i style="background:var(--s2)"></i>To Camden</span><span id="exCmpLeg" hidden><i style="background:transparent;border:1.5px dashed var(--ink-2)"></i><span id="exCmpName"></span></span><span><i style="background:var(--single)"></i>Single track</span><span><span class="dot" style="background:var(--bad)"></span>meet, &lt;1 min spare</span><span><span class="dot" style="background:var(--signal)"></span>1–2.5 min</span></div>
+      <svg id="exSvg" viewBox="0 0 760 380" role="img" aria-label="Time-distance chart of every trip in the selected period"></svg>
+      <div class="small">Each line is one trip: time runs left to right, Camden at the bottom, Trenton at the top. Lines can only cross outside the tan single-track bands.</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:.7em;min-width:0">
+      <table class="mtab" id="exTab"></table>
+      <div class="note callout cool" id="exNote"></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- 8 -->
+<section class="slide" id="s8" aria-label="Our approach"><div class="in">
+  <div class="kicker"><span class="tag">What we built</span><span>Approach</span></div>
+  <h2>Four models, one measure</h2>
+  <div class="flow">
+    <div class="step"><b>Public data</b><span class="small">Timetable, NTD, NJ TRANSIT failure data, surveys, weather</span></div><span class="arr">→</span>
+    <div class="step"><b>Timetable optimizer</b><span class="small">Single-track integer program: every meet on double track</span></div><span class="arr">→</span>
+    <div class="step"><b>Delay simulation</b><span class="small">Late trains hold opposing trains at sidings</span></div><span class="arr">→</span>
+    <div class="step"><b>Fleet simulation</b><span class="small">Breakdowns, repairs, rescues, 6 am car count</span></div><span class="arr">→</span>
+    <div class="step"><b>Dashboard</b><span class="small">Playbook, replays, policy lab</span></div>
+  </div>
+  <div class="grid g2">
+    <div class="callout cool"><h3>Headline measure</h3><p style="margin-top:.4em"><b>Reliable trip-miles delivered:</b> trip-miles that run and arrive less than 6 minutes late, as a % of today's timetable. A cancelled trip counts as not delivered.</p></div>
+    <div><h3>Proposed targets (to agree with NJ TRANSIT)</h3>
+      <ul class="pts" style="margin-top:.4em"><li>Reliable trip-miles ≥ 90%</li><li>On time ≥ 95% (NJ TRANSIT's goal is 97%)</li><li>Unplanned cancellations ≤ 1%</li><li>No longer gaps and no more train-hours than today</li></ul></div>
+  </div>
+</div></section>
+
+<!-- 8b: alternatives -->
+<section class="slide" id="alternatives" aria-label="Alternatives compared"><div class="in">
+  <div class="kicker"><span class="tag">What we built</span><span>Alternatives compared</span></div>
+  <h2>Five timetable designs, scored on the same criteria</h2>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Design</th><th>Idea</th><th class="r">Trains at peak</th><th class="r">Longest peak gap (min)</th><th class="r">Meets &lt;1 min spare /day</th><th class="r">On time, 2024–25</th><th class="r">Held at sidings (min/day)</th><th class="r">Train-hours</th><th>Verdict</th></tr></thead>
+    <tbody>
+      <tr><td><b>Today</b></td><td>NJ TRANSIT's published 15/15/30 pattern</td><td class="r num">8</td><td class="r num">30</td><td class="r num">36</td><td class="r num">82%</td><td class="r num">257</td><td class="r num">109</td><td><span class="pill cool">baseline</span></td></tr>
+      <tr><td><b>U8 uniform</b></td><td>Clock-face, every 21 min</td><td class="r num">8</td><td class="r num">21</td><td colspan="4" class="muted">7 meets fall on single track: not feasible without re-timing</td><td><span class="pill bad">infeasible</span></td></tr>
+      <tr><td><b>T8 even</b></td><td>Optimizer evens out gaps</td><td class="r num">8</td><td class="r num">24</td><td class="r num">109</td><td class="r num">69%</td><td class="r num">421</td><td class="r num">109</td><td><span class="pill bad">rejected</span></td></tr>
+      <tr class="hl"><td><b>B8</b></td><td>Optimizer with ≥2.5 min at meets, ≥9 min layovers</td><td class="r num">8</td><td class="r num">31</td><td class="r num">0</td><td class="r num">88%</td><td class="r num">170</td><td class="r num">109</td><td><span class="pill good">recommended</span></td></tr>
+      <tr><td><b>B7</b></td><td>Same rules, one train fewer</td><td class="r num">7</td><td class="r num">32</td><td class="r num">0</td><td class="r num">88%</td><td class="r num">140</td><td class="r num">100</td><td><span class="pill good">short days</span></td></tr>
+    </tbody></table></div>
+  <div class="grid g2" style="flex:0 1 auto">
+    <p class="small"><b>Also tested and dropped:</b> moving slack to holds before single track (S8), longer layovers only (R8), bigger meet buffers only (G8). Each recovers only part of the loss.</p>
+    <p class="small"><b>Daily policy alternatives:</b> run today's timetable every day; B8 every day; or choose a smaller timetable from the 6&nbsp;am car count, with or without a spare. Compared on reliable trip-miles and cancellations over 10 simulated years.</p>
+  </div>
+</div></section>
+
+<!-- 9 -->
+<section class="slide" id="s9" aria-label="Even spacing runs late"><div class="in">
+  <div class="kicker"><span class="tag">Finding</span><span>Timetable</span></div>
+  <h2>Evening out the gaps alone makes trains later</h2>
+  <div class="grid g2">
+    <div class="stats" style="grid-template-columns:1fr 1fr;align-content:start">
+      <div class="stat"><span class="v num">30 → 21</span><span class="k">longest morning gap (min), today → evenly spaced T8</span></div>
+      <div class="stat hot"><span class="v num">82% → 69%</span><span class="k">trips on time, today → T8 (2024–25 conditions)</span></div>
+      <div class="stat hot"><span class="v num">7% → 22%</span><span class="k">meets with less than 1 minute of slack</span></div>
+      <div class="stat hot"><span class="v num">9 → 6</span><span class="k">median layover at the ends (min)</span></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:.8em">
+      <p>Packing the trains evenly uses up the slack. A train one minute late then holds the opposing train at the siding, and the delay spreads down the line.</p>
+      <p class="callout">The fix is slack in the right places: at least 2.5 minutes at every meet and 9-minute layovers. Moving slack into holds before single track, longer layovers alone, or bigger meet buffers alone each recover only part of the loss.</p>
+    </div>
+  </div>
+</div></section>
+
+<!-- 10 -->
+<section class="slide" id="s10" aria-label="Proposal B8"><div class="in">
+  <div class="kicker"><span class="tag">Proposal</span><span>B8 timetable</span></div>
+  <h2>B8: same trains, same cost, fewer late trains</h2>
+  <div class="grid g21">
+    <div style="display:flex;flex-direction:column;gap:.3em;min-width:0">
+      <div class="legend"><span><i style="background:var(--s1)"></i>To Trenton</span><span><i style="background:var(--s2)"></i>To Camden</span><span><i style="background:var(--single)"></i>Single track</span><span><i style="background:var(--bad);border-radius:50%"></i>Held for a late train</span><span class="muted">faint = schedule</span></div>
+      <svg id="chReplay" viewBox="0 0 640 330" role="img" aria-label="The same simulated morning under today's timetable and B8"></svg>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:.8em">
+      <p>B8 uses 8 trains on a 160-minute cycle, with at least 2.5 minutes of slack at every meet and layovers of at least 9 minutes. It uses the same train-hours as today.</p>
+      <div class="stats" style="grid-template-columns:1fr 1fr">
+        <div class="stat cool"><span class="v num">88%</span><span class="k">on time (today 82%), 2024–25 conditions</span></div>
+        <div class="stat cool"><span class="v num">79%</span><span class="k">on hot days (today 60%)</span></div>
+      </div>
+      <p class="small">The trade-off: its longest morning gap is 31 minutes, the same as today. With 8 trains, even spacing and punctuality pull against each other; B8 chooses punctuality.</p>
+    </div>
+  </div>
+</div></section>
+
+<!-- 10b: animated replay -->
+<section class="slide" id="replay" aria-label="Replay a simulated day"><div class="in">
+  <div class="kicker"><span class="tag">Proposal</span><span>Interactive · replay a simulated day</span></div>
+  <h2>Watch one late train hold up the line</h2>
+  <div class="ctl">
+    <button class="play" id="rpPlay" type="button">▶ Play</button>
+    <input type="range" id="rpT" min="0" max="1" step="0.5" aria-label="Time of day">
+    <span class="lbl">Day</span><span class="seg" id="rpDay"></span>
+    <span class="lbl">When</span><span class="seg" id="rpWin"></span>
+    <span class="lbl">Compare</span><select id="rpA" aria-label="Top timetable"></select>
+    <span>vs</span><select id="rpB" aria-label="Bottom timetable"></select>
+  </div>
+  <div class="grid g21">
+    <div class="chartcol"><svg id="rpSvg" viewBox="0 0 700 400" role="img" aria-label="Simulated trips drawn up to the clock time for two timetables, with live train positions"></svg></div>
+    <div style="display:flex;flex-direction:column;gap:.6em;min-width:0">
+      <div class="clock" id="rpClock">6:00</div>
+      <table class="mtab" id="rpTab"></table>
+      <div class="legend"><span><i style="background:var(--s1)"></i>To Trenton</span><span><i style="background:var(--s2)"></i>To Camden</span><span><span class="dot" style="background:var(--bad)"></span>held at a siding</span><span class="muted">faint = schedule</span></div>
+      <p class="note muted" id="rpNote">Both timetables get the same random draws: the same slow runs, door faults and ramp deployments. Only the schedule differs.</p>
+    </div>
+  </div>
+</div></section>
+
+<!-- 10c: bottlenecks -->
+<section class="slide" id="bottlenecks" aria-label="Where the line bottlenecks"><div class="in">
+  <div class="kicker"><span class="tag">Finding</span><span>Interactive · where and when delay builds up</span></div>
+  <h2>Where the line bottlenecks, and what fixes it</h2>
+  <div class="ctl">
+    <span class="lbl">Timetable</span><span class="seg" id="bnTT"></span>
+    <span class="lbl">Conditions</span><span class="seg" id="bnReg"></span>
+  </div>
+  <div class="grid g21">
+    <div class="chartcol">
+      <div class="small">Minutes per day that trains wait at the entrance of each single-track section for a late opposing train (300 simulated days)</div>
+      <svg id="bnSec" viewBox="0 0 700 235" role="img" aria-label="Knock-on delay by single-track section"></svg>
+      <div class="small">Same, by hour of the day</div>
+      <svg id="bnHour" viewBox="0 0 700 120" role="img" aria-label="Knock-on delay by hour"></svg>
+    </div>
+    <div class="note" id="bnNote" style="display:flex;flex-direction:column;gap:.6em;min-width:0"></div>
+  </div>
+</div></section>
+
+<!-- 11 -->
+<section class="slide" id="s11" aria-label="Morning playbook"><div class="in">
+  <div class="kicker"><span class="tag">Proposal</span><span>6 am playbook</span></div>
+  <h2>A timetable for every car count</h2>
+  <div class="grid g12">
+    <div style="display:flex;flex-direction:column;gap:.8em">
+      <p>At the 6&nbsp;am hold sheet, publish the timetable the cars can run, and hold one spare car for rescues.</p>
+      <p class="callout cool">On short days the gain is predictability. A smaller published timetable cancels about 4% of its trips. Running today's timetable with the same cars cancels 15–52%.</p>
+      <p class="small">Ranked by reliable trip-miles delivered, excluding plans that cancel more than 5% of their own trips. 2026 conditions, summer, 300 simulated days each.</p>
+    </div>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Cars at 6 am</th><th>Run</th><th class="r">Reliable trip-miles</th><th class="r">Cancelled</th><th class="r">Today's timetable cancels</th></tr></thead>
+      <tbody>
+        <tr class="hl"><td class="num">9+</td><td>B8</td><td class="r num">86–87%</td><td class="r num">3–4.5%</td><td class="r num">2–4%</td></tr>
+        <tr><td class="num">8</td><td>B7 + 1 spare</td><td class="r num">79%</td><td class="r num">4.4%</td><td class="r num">7.9%</td></tr>
+        <tr><td class="num">7</td><td>T6 + 1 spare</td><td class="r num">70%</td><td class="r num">4.3%</td><td class="r num">15.0%</td></tr>
+        <tr><td class="num">6</td><td>T5 + 1 spare</td><td class="r num">63%</td><td class="r num">4.8%</td><td class="r num">26.0%</td></tr>
+        <tr><td class="num">5</td><td>T4 + 1 spare</td><td class="r num">49%</td><td class="r num">3.6%</td><td class="r num">40.2%</td></tr>
+        <tr><td class="num">4</td><td>T3 + 1 spare</td><td class="r num">39%</td><td class="r num">4.1%</td><td class="r num">52.1%</td></tr>
+        <tr><td class="num">3</td><td>T3, plus buses</td><td class="r num">37%</td><td class="r num">10.2%</td><td class="r num">64.7%</td></tr>
+      </tbody></table></div>
+  </div>
+</div></section>
+
+<!-- 12 -->
+<section class="slide" id="s12" aria-label="Results"><div class="in">
+  <div class="kicker"><span class="tag">Results</span><span>Calibrated scenarios</span></div>
+  <h2>B8 wins in every scenario, but fleet reliability matters more</h2>
+  <div class="grid g21">
+    <div style="display:flex;flex-direction:column;gap:.3em;min-width:0">
+      <div class="legend"><span><i style="background:var(--s1)"></i>Today's timetable</span><span><i style="background:var(--s3)"></i>B8 / robust tiers</span><span><i style="background:var(--s2)"></i>Earlier T8–T3 tiers</span></div>
+      <svg id="chRtd" viewBox="0 0 640 300" role="img" aria-label="Reliable trip-miles delivered by scenario and plan"></svg>
+      <div class="small">Reliable trip-miles delivered, % of today's timetable. Error bars: range over 10 simulated years. Axis starts at 50%.</div>
+    </div>
+    <ul class="pts">
+      <li><b>2024–25 → 2026 reliability:</b> worth 13–18 points for every plan.</li>
+      <li><b>B8:</b> +3 to +4 points over today at the same cost ($547 per train-hour).</li>
+      <li><b>Choosing at 6 am:</b> adds about 1 point in 2024–25 conditions and nothing in 2026. It is insurance for the next fleet crisis.</li>
+      <li><b>The earlier T8–T3 tiers</b> cancel least but score below today, because T8 and T7 run late.</li>
+    </ul>
+  </div>
+  <p class="src">S1: 2024–25, 3,661 miles between failures, 10-day repairs. S2: 2026, 3,568 miles, 5-day repairs. S3: renewed fleet, 10,000 miles.</p>
+</div></section>
+
+<!-- 13 -->
+<section class="slide" id="s13" aria-label="Validation"><div class="in">
+  <div class="kicker"><span class="tag">Results</span><span>Checked against 2024–26</span></div>
+  <h2>What the model gets right, and where it doesn't</h2>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Evidence</th><th>Observed</th><th>Model</th><th>Verdict</th></tr></thead>
+    <tbody>
+      <tr><td>Failures per year</td><td class="num">267 major (FY2024)</td><td class="num">about 290</td><td><span class="pill good">close</span></td></tr>
+      <tr><td>Summer 2024 car shortage</td><td>Cut to 30-minute schedule and buses</td><td>Fewer than 8 cars on 59% of summer days</td><td><span class="pill good">consistent</span></td></tr>
+      <tr><td>Cars in service, 2026</td><td class="num">12 (Mar–Jun), 8 (Jul)</td><td>12.7 on an average day</td><td><span class="pill good">consistent</span></td></tr>
+      <tr><td>On time, 2024–25</td><td class="num">84–87%</td><td class="num">82%</td><td><span class="pill warn">2–5 points low</span></td></tr>
+      <tr><td>Worst summer days</td><td class="num">45–56% on time</td><td class="num">about 20%</td><td><span class="pill bad">too harsh</span></td></tr>
+      <tr><td>Cancellations</td><td>15 cancelled trips in July 2025</td><td>Hundreds a month</td><td><span class="pill bad">unresolved</span></td></tr>
+    </tbody></table></div>
+  <p class="callout">The model tracks the crisis and recovery. It overstates bad days, because heat is modeled as a 6% slowdown all day. It can't yet be checked on cancellations. Train-by-train records would settle both.</p>
+</div></section>
+
+<!-- 14 -->
+<section class="slide" id="s14" aria-label="The ceiling"><div class="in">
+  <div class="kicker"><span class="tag">So what</span><span>Where the big gains are</span></div>
+  <h2>The timetable is near its best. The big gains are elsewhere.</h2>
+  <div class="grid g21">
+    <div style="display:flex;flex-direction:column;gap:.3em;min-width:0">
+      <svg id="chCeiling" viewBox="0 0 640 260" role="img" aria-label="Reliable trip-miles delivered in steps toward the 90 percent target"></svg>
+      <div class="small">Reliable trip-miles delivered, %. Dashed line: proposed 90% target.</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:.8em">
+      <p>Better fleet reliability and faster repairs moved the line 15 points. A better timetable adds 3–4 more.</p>
+      <p>Even B8 on a renewed fleet stops just short of 90%. Reaching the target means cutting delays at their source.</p>
+    </div>
+  </div>
+</div></section>
+
+<!-- 15 -->
+<section class="slide" id="s15" aria-label="Fixes to pursue"><div class="in">
+  <div class="kicker"><span class="tag">Fixes to pursue</span><span>As consultants</span></div>
+  <h2>Where a student team can move the needle</h2>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Lever</th><th>Decision now?</th><th>Deliverable</th><th>Data needed</th><th>Odds</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td><b>Replacement fleet specification</b></td><td>Yes. The replacement RFP is being written</td><td>Cars needed and the reliability to require, to hit the targets</td><td>Mostly in hand</td><td><span class="pill good">high</span></td></tr>
+      <tr><td><b>Repair turnaround</b></td><td>Ongoing (Kinkisharyo)</td><td>Repair-priority and spare-parts policy; the value of a repair day</td><td>Work orders, failure logs</td><td><span class="pill good">medium–high</span></td></tr>
+      <tr><td><b>Dispatching rules</b></td><td>Daily practice</td><td>Rules for when to swap which train waits, tested in simulation</td><td>Train-location data</td><td><span class="pill warn">medium</span></td></tr>
+      <tr><td><b>Running-time study</b></td><td>Anytime</td><td>Where the 67 minutes go; dwell and slow spots</td><td>Train-location data</td><td><span class="pill warn">medium</span></td></tr>
+      <tr><td><b>New siding</b></td><td>Capital planning</td><td>Ranked locations for one more passing track</td><td>Track chart, costs</td><td><span class="pill bad">low, short run</span></td></tr>
+    </tbody></table></div>
+  <p class="small">Modeled value of each lever: repairs from 8 to 3 days is worth about 5 points; the 2024–25 vs 2026 delay levels differ by about 10 points of on-time performance.</p>
+</div></section>
+
+<!-- 16 -->
+<section class="slide" id="s16" aria-label="Recommended plan"><div class="in">
+  <div class="kicker"><span class="tag">Recommendation</span><span>Next semester</span></div>
+  <h2>Deliver the timetable work, lead with the fleet spec, add one operations lever</h2>
+  <div class="grid g3">
+    <div class="stat cool"><span class="v">1. Hand over</span><span class="k">B8 and B7, the 6 am playbook, and the dashboard. Ready to review now.</span></div>
+    <div class="stat cool"><span class="v">2. Fleet spec</span><span class="k">Fleet size and reliability requirements for the replacement RFP. Uses our models directly.</span></div>
+    <div class="stat cool"><span class="v">3. One lever</span><span class="k">Repair turnaround or dispatching, whichever NJ TRANSIT can share data for.</span></div>
+  </div>
+  <div class="grid g2">
+    <div><h3>Asks for NJ TRANSIT</h3><ul class="pts" style="margin-top:.4em"><li>Who owns the fleet RFP, and who owns maintenance performance?</li><li>Agree the targets and a cost for unplanned cancellations.</li><li>Can a reduced timetable be published by 6&nbsp;am?</li></ul></div>
+    <div><h3>Data to request</h3><ul class="pts" style="margin-top:.4em"><li>Hold sheets and train-level cancellations and arrivals, 2024–26</li><li>Work orders and repair times</li><li>Official track chart and the temporal separation plan</li></ul></div>
+  </div>
+</div></section>
+
+<!-- 16b: plan and risks -->
+<section class="slide" id="plan" aria-label="Plan, schedule and risks"><div class="in">
+  <div class="kicker"><span class="tag">Plan</span><span>2026–27 schedule and risks</span></div>
+  <h2>Plan to April, and what could go wrong</h2>
+  <div class="flow">
+    <div class="step"><b>Oct 26</b><span class="small">Project charter signed by NJ TRANSIT</span></div><span class="arr">→</span>
+    <div class="step"><b>Nov–Dec</b><span class="small">Prototype design review with client; prototype presentation; written proposal</span></div><span class="arr">→</span>
+    <div class="step"><b>Jan–Mar</b><span class="small">Re-run on NJ TRANSIT data; test dispatching rule; fleet spec analysis</span></div><span class="arr">→</span>
+    <div class="step"><b>April</b><span class="small">Poster, final presentation, final report</span></div><span class="arr">→</span>
+    <div class="step"><b>Apr 29, 2027</b><span class="small">Senior Symposium</span></div>
+  </div>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Risk</th><th>Effect</th><th>Contingency</th></tr></thead>
+    <tbody>
+      <tr><td>NJ TRANSIT can't share hold sheets or failure logs</td><td>Results stay calibrated to public data only</td><td>Keep public calibration; report sensitivity ranges; ask for summaries instead of raw logs</td></tr>
+      <tr><td>Siding positions differ from our calibration</td><td>Some meets may move</td><td>Re-solve timetables when the official track chart arrives (hours, not weeks)</td></tr>
+      <tr><td>A reduced timetable can't be published by 6&nbsp;am</td><td>No daily tiers</td><td>B8 alone still delivers most of the gain</td></tr>
+      <tr><td>Model too harsh on hot days</td><td>Overstates summer losses</td><td>Replace the all-day 6% heat slowdown with afternoon speed limits once confirmed</td></tr>
+    </tbody></table></div>
+</div></section>
+
+<!-- 16c: key terms -->
+<section class="slide" id="terms" aria-label="Key terms"><div class="in">
+  <div class="kicker"><span class="tag">Reference</span><span>Key terms</span></div>
+  <h2>Key terms</h2>
+  <div class="grid g2" style="font-size:.9em;align-content:start">
+    <dl class="lever" style="margin:0">
+      <dt><b>Single track</b></dt><dd style="margin:0">A stretch with one track; only one direction can use it at a time.</dd>
+      <dt><b>Meet</b></dt><dd style="margin:0">Where two opposing trains pass. Must happen on double track.</dd>
+      <dt><b>Spare time at a meet</b></dt><dd style="margin:0">Minutes between one train leaving the single track and the opposing train being due to enter it.</dd>
+      <dt><b>Layover</b></dt><dd style="margin:0">Time a train waits at the end of the line before its next trip.</dd>
+      <dt><b>Hold sheet</b></dt><dd style="margin:0">The 6&nbsp;am list of cars fit for service that day.</dd>
+    </dl>
+    <dl class="lever" style="margin:0">
+      <dt><b>On time</b></dt><dd style="margin:0">Arrives less than 6 minutes late (NJ TRANSIT counts 0:00–5:59).</dd>
+      <dt><b>MDBF</b></dt><dd style="margin:0">Mean distance between failures, in car-miles.</dd>
+      <dt><b>Knock-on delay</b></dt><dd style="margin:0">Minutes a train waits at a siding for a late opposing train.</dd>
+      <dt><b>Reliable trip-miles</b></dt><dd style="margin:0">Trip-miles that run and arrive on time, as a % of today's timetable. Our headline measure.</dd>
+      <dt><b>B8, B7, T8</b></dt><dd style="margin:0">Timetables we designed: B = buffered meets, T = evenly spaced; the digit is trains at the peak.</dd>
+    </dl>
+  </div>
+</div></section>
+
+<!-- 17 -->
+<section class="slide" id="s17" aria-label="Sources"><div class="in">
+  <div class="kicker"><span class="tag">Sources</span><span>Full citations in the report</span></div>
+  <h2>Where the numbers come from</h2>
+  <div class="grid g2" style="font-size:.86em">
+    <ul class="pts">
+      <li>NJ TRANSIT: GTFS timetable (Sept 2026), light rail on-time and failure data, Customer Satisfaction Survey reports 2022–25, board agendas (Nov 12, 2025; Apr 15, 2026), press releases.</li>
+      <li>FTA National Transit Database: monthly ridership and annual cost, service and breakdown data (NJ TRANSIT, Hybrid Rail).</li>
+      <li>NJ Office of Legislative Services: NJ TRANSIT budget discussion points, FY2026 and FY2027.</li>
+      <li>NTSB Railroad Investigation Report RIR-25-19; NJDOT State Safety Oversight Appendix F.</li>
+    </ul>
+    <ul class="pts">
+      <li>DVRPC, <i>NJ Transit River LINE Survey</i> (2013).</li>
+      <li>Rutgers VTC, <i>Economic Development Benefits of New Transit Service: The RiverLINE</i> (2010).</li>
+      <li>Press: Philadelphia Inquirer, NJ.com, News 12 NJ, ROI-NJ, CBS Philadelphia.</li>
+      <li>Team 22 reports: main report (rev. 4), background report, timetable book, dashboard.</li>
+    </ul>
+  </div>
+  <p class="small">All model results use public data and inferred repair times; they should be re-run with NJ TRANSIT's hold sheets and failure logs.</p>
+</div></section>
+
+</main>
+<nav class="nav" aria-label="Slide navigation">
+  <button id="prev" type="button" aria-label="Previous slide">←</button>
+  <div class="track" id="navTrack" role="slider" tabindex="0" aria-label="Slide position along the line" aria-valuemin="1" aria-valuemax="27" aria-valuenow="1"><svg id="navSvg" viewBox="0 0 1000 34" preserveAspectRatio="none"></svg></div>
+  <span class="count" id="count">1 / 27</span>
+  <button id="next" type="button" aria-label="Next slide">→</button>
+</nav>
+</div>
+<div id="tip" hidden></div>
+
+<script>
+const D = __DATA__;
+const NS="http://www.w3.org/2000/svg";
+const el=(tag,attrs,parent,text)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(text!=null)e.textContent=text;if(parent)parent.appendChild(e);return e;};
+const tip=document.getElementById("tip");
+function hoverable(node,html){ node.style.cursor="default"; node.addEventListener("mousemove",ev=>{tip.innerHTML=html;tip.hidden=false;const x=Math.min(ev.clientX+12,innerWidth-270);tip.style.left=x+"px";tip.style.top=(ev.clientY+12)+"px";}); node.addEventListener("mouseleave",()=>tip.hidden=true); }
+const L=33.59, singles=D.single, stations=D.stations;
+
+// ---------- track strips ----------
+function trackStrip(svg,{W=1000,y=60,labels=true,big=false}={}){
+  const x=m=>20+(W-40)*m/L;
+  // double-track parts as two rails, single as one rail on a soft band
+  singles.forEach(([a,b])=>el("rect",{x:x(a),y:y-12,width:x(b)-x(a),height:24,fill:"var(--single)",rx:3},svg));
+  let prev=0; const segs=[]; singles.forEach(([a,b])=>{segs.push(["D",prev,a]);segs.push(["S",a,b]);prev=b;}); segs.push(["D",prev,L]);
+  segs.forEach(([t,a,b])=>{ if(t==="D"){ el("line",{x1:x(a),x2:x(b),y1:y-4,y2:y-4,stroke:"var(--river)","stroke-width":big?3:2.2},svg); el("line",{x1:x(a),x2:x(b),y1:y+4,y2:y+4,stroke:"var(--river)","stroke-width":big?3:2.2},svg);} else el("line",{x1:x(a),x2:x(b),y1:y,y2:y,stroke:"var(--ink-2)","stroke-width":big?3:2.2},svg); });
+  const key=new Set(["Entertainment Center","Pennsauken TC","Riverside","Burlington Towne Ctr","Bordentown","Trenton TC"]);
+  stations.forEach(([n,p],i)=>{ el("circle",{cx:x(p),cy:y,r:big?5:4,fill:"var(--panel)",stroke:"var(--ink)","stroke-width":1.6},svg);
+    if(labels&&key.has(n)){ const up=i%2===0; const t=el("text",{x:x(p),y:up?y-22:y+34,"text-anchor":i===0?"start":(i===stations.length-1?"end":"middle"),"font-size":big?15:14,class:"lab"},svg,n.replace("Burlington Towne Ctr","Burlington").replace("Entertainment Center","Camden (Ent. Center)")); }
+  });
+  return x;
+}
+(function(){ const s=document.getElementById("heroTrack"); trackStrip(s,{y:58,big:true}); el("text",{x:20,y:112,"font-size":13},s,"Camden"); el("text",{x:980,y:112,"font-size":13,"text-anchor":"end"},s,"Trenton"); })();
+(function(){ const s=document.getElementById("mapTrack"); trackStrip(s,{y:52}); el("text",{x:20,y:112,"font-size":13},s,"Camden · mile 0"); el("text",{x:980,y:112,"font-size":13,"text-anchor":"end"},s,"Trenton · mile 33.6"); el("text",{x:500,y:112,"font-size":13,"text-anchor":"middle",class:"lab"},s,"tan = the 7 single-track sections"); })();
+(function(){ const s=document.getElementById("lineTrack"); const x=trackStrip(s,{y:70});
+  el("rect",{x:20,y:122,width:26,height:12,fill:"var(--single)",rx:2},s); el("text",{x:52,y:132,"font-size":13,class:"lab"},s,"single track (one train at a time)");
+  el("line",{x1:330,x2:356,y1:124,y2:124,stroke:"var(--river)","stroke-width":2.2},s); el("line",{x1:330,x2:356,y1:132,y2:132,stroke:"var(--river)","stroke-width":2.2},s); el("text",{x:362,y:132,"font-size":13,class:"lab"},s,"double track (trains can pass)");
+  el("text",{x:980,y:132,"font-size":13,"text-anchor":"end"},s,"miles 0 → 33.6");
+})();
+
+// ---------- generic axes ----------
+function axes(svg,{W,H,m,x0,x1,y0,y1,yt,yfmt=v=>v,xt=[],xfmt=v=>v}){
+  const X=v=>m.l+(W-m.l-m.r)*(v-x0)/(x1-x0), Y=v=>H-m.b-(H-m.t-m.b)*(v-y0)/(y1-y0);
+  yt.forEach(v=>{ el("line",{x1:m.l,x2:W-m.r,y1:Y(v),y2:Y(v),stroke:"var(--rule)","stroke-width":1},svg); el("text",{x:m.l-6,y:Y(v)+4,"text-anchor":"end","font-size":12},svg,yfmt(v)); });
+  xt.forEach(v=>el("text",{x:X(v),y:H-m.b+16,"text-anchor":"middle","font-size":12},svg,xfmt(v)));
+  el("line",{x1:m.l,x2:W-m.r,y1:H-m.b,y2:H-m.b,stroke:"var(--muted)","stroke-width":1},svg);
+  return {X,Y};
+}
+
+// MDBF
+(function(){ const s=document.getElementById("chMdbf"); const W=640,H=300,m={l:48,r:14,t:14,b:26};
+  const pts=D.mdbf.map(([d,v])=>{const [y,mo]=d.split("-").map(Number);return [y+(mo-0.5)/12,v];});
+  const {X,Y}=axes(s,{W,H,m,x0:2017,x1:2026.75,y0:0,y1:33000,yt:[0,10000,20000,30000],yfmt:v=>v?(v/1000)+"k":"0",xt:[2017,2018,2019,2020,2021,2022,2023,2024,2025,2026]});
+  const p=pts.map(([a,b],i)=>(i?"L":"M")+X(a).toFixed(1)+","+Y(b).toFixed(1)).join("");
+  el("path",{d:p+`L${X(pts[pts.length-1][0])},${Y(0)}L${X(pts[0][0])},${Y(0)}Z`,fill:"var(--s1)",opacity:.1},s);
+  el("path",{d:p,fill:"none",stroke:"var(--s1)","stroke-width":2,"stroke-linejoin":"round"},s);
+  const t26=2026+1.5/12; el("line",{x1:X(t26),x2:X(t26),y1:m.t,y2:H-m.b,stroke:"var(--good)","stroke-dasharray":"4 3"},s);
+  el("text",{x:X(t26)-4,y:m.t+12,"text-anchor":"end","font-size":12,class:"lab"},s,"NJ TRANSIT operates");
+  const low=pts.reduce((a,b)=>b[1]<a[1]?b:a); el("circle",{cx:X(low[0]),cy:Y(low[1]),r:4,fill:"var(--s1)",stroke:"var(--panel)","stroke-width":2},s);
+  el("text",{x:X(low[0]),y:Y(low[1])-9,"text-anchor":"middle","font-size":12,class:"strong"},s,"2,377");
+  const pk=pts.filter(q=>q[0]>2022&&q[0]<2023).reduce((a,b)=>b[1]>a[1]?b:a);
+  el("text",{x:X(2022.5),y:Y(22300)-10,"text-anchor":"middle","font-size":12,class:"lab"},s,"≈22,000 in 2021–22");
+  // hover: invisible hit strip
+  pts.forEach(([a,b],i)=>{ const r=el("rect",{x:X(a)-3,y:m.t,width:6,height:H-m.t-m.b,fill:"transparent"},s); hoverable(r,`<b>${D.mdbf[i][0]}</b><br>${b.toLocaleString()} miles between failures`); });
+})();
+
+// satisfaction
+(function(){ const s=document.getElementById("chCss"); const W=640,H=280,m={l:40,r:16,t:14,b:40}; const n=D.css.length;
+  const {X,Y}=axes(s,{W,H,m,x0:-.5,x1:n-.5,y0:5.5,y1:7.5,yt:[5.5,6,6.5,7,7.5],yfmt:v=>v.toFixed(1)});
+  D.css.forEach((r,i)=>{ el("text",{x:X(i),y:H-m.b+15,"text-anchor":"middle","font-size":11},s,r[0].split(" ")[0]); el("text",{x:X(i),y:H-m.b+29,"text-anchor":"middle","font-size":11},s,r[0].split(" ")[1]); });
+  el("line",{x1:X(1.5),x2:X(1.5),y1:m.t,y2:H-m.b,stroke:"var(--rule)","stroke-dasharray":"3 3"},s);
+  [[1,"var(--s1)",2.6],[2,"var(--s2)",1.6],[3,"var(--s3)",1.6]].forEach(([c,col,w])=>{
+    const pts=D.css.map((r,i)=>[i,r[c]]).filter(q=>q[1]!=null);
+    el("path",{d:pts.map(([i,v],k)=>(k?"L":"M")+X(i)+","+Y(v)).join(""),fill:"none",stroke:col,"stroke-width":w},s);
+    pts.forEach(([i,v])=>{ const cc=el("circle",{cx:X(i),cy:Y(v),r:c===1?5:4,fill:col,stroke:"var(--panel)","stroke-width":2},s); hoverable(cc,`<b>${D.css[i][0]}</b><br>${["","River LINE","Hudson–Bergen","Newark Light Rail"][c]}: ${v.toFixed(1)}`); });
+  });
+  [[8,5.9],[9,6.8]].forEach(([i,v])=>el("text",{x:X(i),y:Y(v)+(v<6?18:-10),"text-anchor":"middle","font-size":12,class:"strong"},s,v.toFixed(1)));
+})();
+
+// annual trips
+(function(){ const s=document.getElementById("chAnnual"); const W=640,H=280,m={l:40,r:10,t:14,b:26}; const A=D.annual;
+  const {X,Y}=axes(s,{W,H,m,x0:A[0][0]-.6,x1:A[A.length-1][0]+.6,y0:0,y1:3.2,yt:[0,1,2,3],yfmt:v=>v+"M"});
+  const bw=(X(1)-X(0))*.7;
+  A.forEach(([y,v])=>{ const partial=y===2026; const b=el("rect",{x:X(y)-bw/2,y:Y(v/1e6),width:bw,height:Y(0)-Y(v/1e6),fill:partial?"var(--river-soft)":"var(--s1)",stroke:partial?"var(--s1)":"none","stroke-dasharray":partial?"3 2":"",rx:2},s);
+    hoverable(b,`<b>${y}${partial?" (Jan–Jul)":""}</b><br>${(v/1e6).toFixed(2)} million trips`);
+    if(y%2===0||y===2025) el("text",{x:X(y),y:H-m.b+16,"text-anchor":"middle","font-size":11.5},s,String(y)); });
+  [[2019,"2.65"],[2025,"1.63"]].forEach(([y,t])=>{const v=A.find(q=>q[0]===y)[1]; el("text",{x:X(y),y:Y(v/1e6)-6,"text-anchor":"middle","font-size":12,class:"strong"},s,t);});
+})();
+
+// replay (same simulated morning)
+(function(){ const s=document.getElementById("chReplay"); const W=640,H=330; const panels=[["njt","Today's timetable",8],["b8","B8",172]]; const m={l:70,r:10}; const t0=330,t1=570;
+  const pos=stations.map(q=>q[1]);
+  panels.forEach(([k,name,top])=>{ const h=128; const X=t=>m.l+(W-m.l-m.r)*(t-t0)/(t1-t0), Y=mi=>top+h-(h*mi/L);
+    singles.forEach(([a,b])=>el("rect",{x:m.l,y:Y(b),width:W-m.l-m.r,height:Y(a)-Y(b),fill:"var(--single)",opacity:.7},s));
+    const R=D.replay[k];
+    el("text",{x:m.l,y:top-0,"font-size":13,class:"strong"},s,`${name}: ${R.otp}% on time · ${R.knock} min held`);
+    el("text",{x:m.l-6,y:Y(0)+4,"text-anchor":"end","font-size":11},s,"Camden"); el("text",{x:m.l-6,y:Y(L)+8,"text-anchor":"end","font-size":11},s,"Trenton");
+    const g=el("g",{},s); el("clipPath",{id:"cp"+k},s).appendChild(el("rect",{x:m.l,y:top-2,width:W-m.l-m.r,height:h+4}));
+    g.setAttribute("clip-path",`url(#cp${k})`);
+    R.trips.forEach(([d,p,a,w])=>{ const col=d==="NB"?"var(--s1)":"var(--s2)";
+      el("path",{d:p.map(([i,t],j)=>(j?"L":"M")+X(t).toFixed(1)+","+Y(pos[i]).toFixed(1)).join(""),fill:"none",stroke:col,"stroke-width":1,opacity:.28},g);
+      el("path",{d:a.map(([i,t],j)=>(j?"L":"M")+X(t).toFixed(1)+","+Y(pos[i]).toFixed(1)).join(""),fill:"none",stroke:col,"stroke-width":1.6},g);
+      w.forEach(([mi,t,dd])=>{ const c=el("circle",{cx:X(t),cy:Y(mi),r:2.5+Math.sqrt(dd)*1.4,fill:"var(--bad)",opacity:.8},g); hoverable(c,`Held ${dd.toFixed(1)} min for a late opposing train`); });
+    });
+    if(top>100) [360,420,480,540].forEach(t=>el("text",{x:X(t),y:top+h+16,"text-anchor":"middle","font-size":11.5},s,`${Math.floor(t/60)}:${String(t%60).padStart(2,"0")}`));
+  });
+})();
+
+// RTD by scenario
+(function(){ const s=document.getElementById("chRtd"); const W=640,H=300,m={l:40,r:10,t:16,b:30};
+  const sc=[["S1 Alstom 2024-25","2024–25"],["S2 NJ TRANSIT 2026","2026"],["S3 Renewed fleet","Renewed fleet"]];
+  const ser=[[0,"var(--s1)","Today's timetable"],[3,"var(--s3)","Robust tiers (B8)"],[2,"var(--s2)","Earlier T8–T3 tiers"]];
+  const {X,Y}=axes(s,{W,H,m,x0:-.5,x1:2.5,y0:50,y1:100,yt:[50,60,70,80,90,100],yfmt:v=>v+"%"});
+  el("line",{x1:m.l,x2:W-m.r,y1:Y(90),y2:Y(90),stroke:"var(--ink-2)","stroke-dasharray":"5 4"},s); el("text",{x:W-m.r,y:Y(90)-5,"text-anchor":"end","font-size":11.5,class:"lab"},s,"target 90%");
+  const bw=44;
+  sc.forEach(([key,lab],i)=>{ el("text",{x:X(i),y:H-m.b+18,"text-anchor":"middle","font-size":12.5,class:"lab"},s,lab);
+    ser.forEach(([pi,col,name],j)=>{ const r=D.rtd[key][pi]; const cx=X(i)+(j-1)*(bw+3);
+      const b=el("rect",{x:cx-bw/2,y:Y(r[1]),width:bw,height:Y(50)-Y(r[1]),fill:col,rx:3},s);
+      hoverable(b,`<b>${lab}</b><br>${name}: ${r[1].toFixed(1)}%<br>range ${r[2].toFixed(1)}–${r[3].toFixed(1)}%<br>cancelled ${r[4].toFixed(1)}%`);
+      el("line",{x1:cx,x2:cx,y1:Y(r[2]),y2:Y(r[3]),stroke:"var(--ink-2)","stroke-width":1.2},s);
+      el("text",{x:cx,y:Y(r[3])-5,"text-anchor":"middle","font-size":11,class:"strong"},s,r[1].toFixed(1)); }); });
+})();
+
+// ceiling steps
+(function(){ const s=document.getElementById("chCeiling"); const W=640,H=260,m={l:190,r:40,t:8,b:22};
+  const R=D.rtd; const rows=[["2024–25, today's timetable",R["S1 Alstom 2024-25"][0][1],"var(--muted)"],["2026 fleet, today's timetable",R["S2 NJ TRANSIT 2026"][0][1],"var(--s1)"],["2026 fleet + B8",R["S2 NJ TRANSIT 2026"][1][1],"var(--s3)"],["Renewed fleet + B8",R["S3 Renewed fleet"][1][1],"var(--s3)"]];
+  const X=v=>m.l+(W-m.l-m.r)*v/100, rh=(H-m.t-m.b)/rows.length;
+  [0,25,50,75,100].forEach(v=>{ el("line",{x1:X(v),x2:X(v),y1:m.t,y2:H-m.b,stroke:"var(--rule)"},s); el("text",{x:X(v),y:H-4,"text-anchor":"middle","font-size":11.5},s,v+"%"); });
+  rows.forEach(([lab,v,col],i)=>{ const y=m.t+i*rh+rh*.18, h=rh*.64; el("text",{x:m.l-8,y:y+h/2+4,"text-anchor":"end","font-size":12.5,class:"lab"},s,lab);
+    const b=el("rect",{x:X(0),y,width:X(v)-X(0),height:h,fill:col,rx:3},s); hoverable(b,`${lab}: ${v.toFixed(1)}%`);
+    el("text",{x:X(v)+5,y:y+h/2+4,"font-size":12.5,class:"strong"},s,v.toFixed(1)); });
+  el("line",{x1:X(90),x2:X(90),y1:m.t,y2:H-m.b,stroke:"var(--ink-2)","stroke-dasharray":"5 4"},s);
+})();
+
+/*__INTERACTIVE__*/
+// ---------- navigation ----------
+const slides=[...document.querySelectorAll(".slide")]; const N=slides.length; let cur=0;
+const navSvg=document.getElementById("navSvg");
+(function(){ const W=1000,y=17, x=m=>12+(W-24)*m/L;
+  singles.forEach(([a,b])=>el("rect",{x:x(a),y:y-7,width:x(b)-x(a),height:14,fill:"var(--single)"},navSvg));
+  el("line",{x1:x(0),x2:x(L),y1:y,y2:y,stroke:"var(--muted)","stroke-width":2},navSvg);
+  for(let i=0;i<N;i++){ el("circle",{cx:x(L*i/(N-1)),cy:y,r:3.2,fill:"var(--panel)",stroke:"var(--muted)","stroke-width":1.5,class:"tick"},navSvg); }
+  el("rect",{id:"train",x:0,y:y-6,width:26,height:12,rx:5,fill:"var(--river)"},navSvg);
+})();
+function show(i){ cur=Math.max(0,Math.min(N-1,i)); slides.forEach((s,k)=>s.classList.toggle("on",k===cur));
+  document.getElementById("count").textContent=`${cur+1} / ${N}`; document.getElementById("prev").disabled=cur===0; document.getElementById("next").disabled=cur===N-1;
+  const tr=document.getElementById("navTrack"); tr.setAttribute("aria-valuenow",cur+1);
+  const W=1000, x=m=>12+(W-24)*m/L; document.getElementById("train").setAttribute("x",x(L*cur/(N-1))-13);
+  if(slides[cur].id!=="replay"&&window.__rpStop) window.__rpStop();
+  try{ history.replaceState(null,"","#"+slides[cur].id); }catch(e){} }
+document.getElementById("prev").onclick=()=>show(cur-1); document.getElementById("next").onclick=()=>show(cur+1);
+document.getElementById("navTrack").addEventListener("click",ev=>{ const r=ev.currentTarget.getBoundingClientRect(); show(Math.round((ev.clientX-r.left)/r.width*(N-1))); });
+document.addEventListener("keydown",e=>{ if(!document.body.classList.contains("deckmode")) return; if(e.target.closest&&e.target.closest("select,input,.seg,.play")) return; if(["ArrowRight","PageDown"," "].includes(e.key)){e.preventDefault();show(cur+1);} if(["ArrowLeft","PageUp"].includes(e.key)){e.preventDefault();show(cur-1);} if(e.key==="Home")show(0); if(e.key==="End")show(N-1); });
+function mode(){ const deck=innerWidth>=820&&innerHeight>=500; document.body.classList.toggle("deckmode",deck); document.body.classList.toggle("stacked",!deck); }
+addEventListener("resize",mode); mode();
+addEventListener("hashchange",()=>{ const i=slides.findIndex(s=>s.id===location.hash.slice(1)); if(i>=0&&i!==cur) show(i); });
+const h=location.hash.slice(1); const start=slides.findIndex(s=>s.id===h); show(start>=0?start:0);
+</script>

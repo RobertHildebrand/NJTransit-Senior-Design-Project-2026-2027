@@ -1,0 +1,30 @@
+\documentclass[10pt,landscape]{article}
+\usepackage[margin=0.6in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{booktabs}
+\usepackage[hidelinks]{hyperref}
+\title{River LINE Timetable Book\\\large Current (NJ TRANSIT, Sept 2026) and proposed weekday timetables}
+\author{ISE Senior Design Team 22}
+\date{September 28, 2026}
+\begin{document}
+\maketitle
+\noindent Times are departures, rounded to the minute. ``--'' means the trip does not serve that station.
+\begin{itemize}
+\item \textbf{NJT current} is transcribed from NJ TRANSIT's GTFS feed (release of Sept.~15, 2026; Mobility Database mirror mdb-509).
+\item \textbf{Proposed T8--T3} come from the pattern optimizer described in the project report. Each keeps NJ TRANSIT's 150-minute round trip and spaces trains as evenly as the single track allows. Every scheduled meet falls on double track in the calibrated track model, all day.
+\item \textbf{Proposals B8, B7, E5, E6, G8, S8, R8, W7} (revision 3) change one design choice each: meet buffers and layover length (B8, B7, G8, R8), the midday service (E5, E6), holds before single track (S8), and summer running times (W7). All are conflict-free. B8 is the recommended weekday timetable; see Section~7 of the project report for their simulated punctuality.
+\item \textbf{Uniform U8--U4} use a single headway in each period. Each period is conflict-free, but the changeovers between peak and off-peak produce the conflicts listed below and need retiming before use.
+\item All proposed timetables are planning drafts: running times are NJ TRANSIT's scheduled times, and siding locations are calibrated from NJ TRANSIT's own meets rather than taken from an official track chart.
+\end{itemize}
+\begin{center}\small
+\begin{tabular}{@{}lrrrrrrrr@{}}\toprule
+Timetable & Trains peak/mid & Trips & Train-h & AM gap $\to$Trenton & AM gap $\to$Camden & Midday gap & Avg wait & Meet conflicts\\
+ & & & & mean/max (min) & mean/max (min) & mean (min) & (min) & \\\midrule
+%%ROWS%%
+\bottomrule\end{tabular}\end{center}
+\noindent Avg wait: random passenger arrivals at Walter Rand, weighted by an assumed hourly demand profile. Meet conflicts: pairs of opposing trains scheduled on the same single-track section (calibrated track model, 0.5-min buffer).
+\clearpage
+\tableofcontents
+\clearpage
+\input{timetable_book_body.tex}
+\end{document}

@@ -1,0 +1,100 @@
+{
+ "gtfs_weekday_trips": 87,
+ "gtfs_full_trips": 76,
+ "gtfs_run_time_median": 67.0,
+ "gtfs_max_trains": 8,
+ "gtfs_midday_trains": 6,
+ "nb_walter_rand_am": {
+  "n": 7,
+  "mean": 17.5,
+  "cv": 0.31943828249996997,
+  "wait_random": 9.642857142857144,
+  "wait_even": 8.75,
+  "gaps": [
+   15,
+   15,
+   30,
+   15,
+   15,
+   15
+  ]
+ },
+ "nb_walter_rand_pm": {
+  "n": 10,
+  "mean": 18.333333333333332,
+  "cv": 0.34015067152490375,
+  "wait_random": 10.227272727272727,
+  "wait_even": 9.166666666666666,
+  "gaps": [
+   15,
+   15,
+   15,
+   30,
+   15,
+   30,
+   15,
+   15,
+   15
+  ]
+ },
+ "nb_walter_rand_mid": {
+  "n": 11,
+  "mean": 30.0,
+  "cv": 0.0,
+  "wait_random": 15.0,
+  "wait_even": 15.0,
+  "gaps": [
+   30,
+   30,
+   30,
+   30,
+   30,
+   30,
+   30,
+   30,
+   30,
+   30
+  ]
+ },
+ "osm_single_intervals": [
+  [
+   3.94,
+   5.69
+  ],
+  [
+   7.5,
+   9.24
+  ],
+  [
+   10.9,
+   12.12
+  ],
+  [
+   14.56,
+   15.43
+  ],
+  [
+   18.05,
+   20.04
+  ],
+  [
+   21.67,
+   29.29
+  ]
+ ],
+ "osm_single_miles": 15.2,
+ "osm_min_runtime_at_limit_min": 46.3,
+ "hot_days_jul_mean": 10.2,
+ "freeze_days_jan_mean": 23.9,
+ "hot_days_2024_JJA": 27,
+ "hot_days_mean_JJA": 21.0,
+ "ntd_cost_per_vrh_LR_PT_2024": 809.07,
+ "ntd_cost_per_vrh_LR_DO_2024": 560.24,
+ "ntd_cost_per_vrh_MB_PT_2024": 125.98,
+ "ntd_cost_per_vrh_MB_DO_2024": 213.96,
+ "ntd_LR_PT_miles_per_major_failure": {
+  "2022": 8636,
+  "2023": 16873,
+  "2024": 17452
+ }
+}

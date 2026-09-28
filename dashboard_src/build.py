@@ -1,0 +1,2 @@
+head=open('page_head.html').read(); body=open('page_body.html').read(); js=open('page_js.js').read(); data=open('data.json').read(); data2=open('data2.json').read(); data3=open('data3.json').read()
+open('river_line_sim.html','w').write(head+'\n'+body+'\n<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>\n<script>window.RL_DATA='+data+';window.RL_DATA2='+data2+';window.RL_DATA3='+data3+';</script>\n<script>\n'+js+'\n</script>\n')

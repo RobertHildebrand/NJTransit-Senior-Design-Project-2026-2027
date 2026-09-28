@@ -1,0 +1,349 @@
+date,line,mdbf
+2017-01-01,Hudson-Bergen Light Rail,29599.0
+2017-01-01,River Line,9362.0
+2017-01-01,Newark Light Rail,8219.0
+2017-02-01,Newark Light Rail,7164.0
+2017-02-01,Hudson-Bergen Light Rail,28081.0
+2017-02-01,River Line,9829.0
+2017-03-01,Hudson-Bergen Light Rail,27048.0
+2017-03-01,Newark Light Rail,8026.0
+2017-03-01,River Line,9630.0
+2017-04-01,Hudson-Bergen Light Rail,25543.0
+2017-04-01,Newark Light Rail,7849.0
+2017-04-01,River Line,9377.0
+2017-05-01,Hudson-Bergen Light Rail,25302.0
+2017-05-01,Newark Light Rail,7641.0
+2017-05-01,River Line,9195.0
+2017-06-01,Newark Light Rail,7389.0
+2017-06-01,Hudson-Bergen Light Rail,21724.0
+2017-06-01,River Line,8911.0
+2017-07-01,Hudson-Bergen Light Rail,25827.0
+2017-07-01,River Line,8806.0
+2017-07-01,Newark Light Rail,7322.0
+2017-08-01,Newark Light Rail,7106.0
+2017-08-01,Hudson-Bergen Light Rail,24835.0
+2017-08-01,River Line,8664.0
+2017-09-01,Hudson-Bergen Light Rail,24961.0
+2017-09-01,Newark Light Rail,7842.0
+2017-09-01,River Line,8878.0
+2017-10-01,Hudson-Bergen Light Rail,23172.0
+2017-10-01,River Line,8371.0
+2017-10-01,Newark Light Rail,8618.0
+2017-11-01,Hudson-Bergen Light Rail,22141.0
+2017-11-01,River Line,8058.0
+2017-11-01,Newark Light Rail,8976.0
+2017-12-01,Newark Light Rail,9349.0
+2017-12-01,River Line,8064.0
+2017-12-01,Hudson-Bergen Light Rail,21869.0
+2018-01-01,Hudson-Bergen Light Rail,21203.0
+2018-01-01,River Line,7653.0
+2018-01-01,Newark Light Rail,9285.0
+2018-02-01,Newark Light Rail,9542.0
+2018-02-01,Hudson-Bergen Light Rail,21082.0
+2018-02-01,River Line,8093.0
+2018-03-01,Hudson-Bergen Light Rail,20081.0
+2018-03-01,Newark Light Rail,10069.0
+2018-03-01,River Line,7929.0
+2018-04-01,Hudson-Bergen Light Rail,19573.0
+2018-04-01,Newark Light Rail,9461.0
+2018-04-01,River Line,7888.0
+2018-05-01,Hudson-Bergen Light Rail,19153.0
+2018-05-01,Newark Light Rail,9150.0
+2018-05-01,River Line,7693.0
+2018-06-01,Newark Light Rail,9188.0
+2018-06-01,Hudson-Bergen Light Rail,19470.0
+2018-06-01,River Line,7618.0
+2018-07-01,Hudson-Bergen Light Rail,18555.0
+2018-07-01,River Line,7504.0
+2018-07-01,Newark Light Rail,9111.0
+2018-08-01,Newark Light Rail,9104.0
+2018-08-01,Hudson-Bergen Light Rail,17807.0
+2018-08-01,River Line,7317.0
+2018-09-01,Hudson-Bergen Light Rail,17786.0
+2018-09-01,Newark Light Rail,8771.0
+2018-09-01,River Line,7093.0
+2018-10-01,Hudson-Bergen Light Rail,17940.0
+2018-10-01,River Line,6926.0
+2018-10-01,Newark Light Rail,8712.0
+2018-11-01,Hudson-Bergen Light Rail,18305.0
+2018-11-01,River Line,6922.0
+2018-11-01,Newark Light Rail,8498.0
+2018-12-01,Newark Light Rail,8342.0
+2018-12-01,River Line,6739.0
+2018-12-01,Hudson-Bergen Light Rail,18225.0
+2019-01-01,Newark Light Rail,8124.0
+2019-01-01,River Line,6643.0
+2019-01-01,Hudson-Bergen Light Rail,17717.0
+2019-02-01,Newark Light Rail,7940.0
+2019-02-01,River Line,6509.0
+2019-02-01,Hudson-Bergen Light Rail,17872.0
+2019-03-01,Newark Light Rail,7767.0
+2019-03-01,Hudson-Bergen Light Rail,18062.0
+2019-03-01,River Line,6616.0
+2019-04-01,Newark Light Rail,7518.0
+2019-04-01,Hudson-Bergen Light Rail,18032.0
+2019-04-01,River Line,6685.0
+2019-05-01,River Line,6423.0
+2019-05-01,Newark Light Rail,7525.0
+2019-05-01,Hudson-Bergen Light Rail,18047.0
+2019-06-01,Newark Light Rail,7390.0
+2019-06-01,River Line,6286.0
+2019-06-01,Hudson-Bergen Light Rail,18260.0
+2019-07-01,River Line,5984.0
+2019-07-01,Hudson-Bergen Light Rail,18841.0
+2019-07-01,Newark Light Rail,6493.0
+2019-08-01,Hudson-Bergen Light Rail,19329.0
+2019-08-01,Newark Light Rail,5959.0
+2019-08-01,River Line,5834.0
+2019-09-01,Newark Light Rail,6323.0
+2019-09-01,Hudson-Bergen Light Rail,19397.0
+2019-09-01,River Line,5613.0
+2019-10-01,Hudson-Bergen Light Rail,23575.0
+2019-10-01,River Line,5606.0
+2019-10-01,Newark Light Rail,6150.0
+2019-11-01,Newark Light Rail,5872.0
+2019-11-01,Hudson-Bergen Light Rail,25670.0
+2019-11-01,River Line,5909.0
+2019-12-01,Newark Light Rail,5408.0
+2019-12-01,Hudson-Bergen Light Rail,26461.0
+2019-12-01,River Line,6284.0
+2020-01-01,Hudson-Bergen Light Rail,28322.0
+2020-01-01,Newark Light Rail,5368.0
+2020-01-01,River Line,8254.0
+2020-02-01,River Line,8925.0
+2020-02-01,Hudson-Bergen Light Rail,29475.0
+2020-02-01,Newark Light Rail,4980.0
+2020-03-01,Newark Light Rail,4809.0
+2020-03-01,Hudson-Bergen Light Rail,32341.0
+2020-03-01,River Line,11050.0
+2020-04-01,River Line,11819.0
+2020-04-01,Hudson-Bergen Light Rail,34322.0
+2020-04-01,Newark Light Rail,4886.0
+2020-05-01,River Line,12135.0
+2020-05-01,Hudson-Bergen Light Rail,37524.0
+2020-05-01,Newark Light Rail,4973.0
+2020-06-01,Hudson-Bergen Light Rail,26951.0
+2020-06-01,Newark Light Rail,5088.0
+2020-06-01,River Line,12873.0
+2020-07-01,Hudson-Bergen Light Rail,22763.0
+2020-07-01,River Line,13441.0
+2020-07-01,Newark Light Rail,5048.0
+2020-08-01,Newark Light Rail,5064.0
+2020-08-01,Hudson-Bergen Light Rail,16247.0
+2020-08-01,River Line,13903.0
+2020-09-01,Hudson-Bergen Light Rail,11829.0
+2020-09-01,Newark Light Rail,5211.0
+2020-09-01,River Line,14531.0
+2020-10-01,River Line,15110.0
+2020-10-01,Hudson-Bergen Light Rail,15642.0
+2020-10-01,Newark Light Rail,5163.0
+2020-11-01,Newark Light Rail,5174.0
+2020-11-01,River Line,15492.0
+2020-11-01,Hudson-Bergen Light Rail,9284.0
+2020-12-01,Hudson-Bergen Light Rail,13926.0
+2020-12-01,Newark Light Rail,5256.0
+2020-12-01,River Line,15865.0
+2021-01-01,Hudson-Bergen Light Rail,10071.0
+2021-01-01,River Line,16258.0
+2021-01-01,Newark Light Rail,5347.0
+2021-02-01,Newark Light Rail,5433.0
+2021-02-01,River Line,16669.0
+2021-02-01,Hudson-Bergen Light Rail,13433.0
+2021-03-01,River Line,18161.0
+2021-03-01,Hudson-Bergen Light Rail,8888.0
+2021-03-01,Newark Light Rail,5445.0
+2021-04-01,Newark Light Rail,5252.0
+2021-04-01,Hudson-Bergen Light Rail,10392.0
+2021-04-01,River Line,18941.0
+2021-05-01,Newark Light Rail,5006.0
+2021-05-01,Hudson-Bergen Light Rail,12705.0
+2021-05-01,River Line,20325.0
+2021-06-01,Hudson-Bergen Light Rail,4764.0
+2021-06-01,Newark Light Rail,4918.0
+2021-06-01,River Line,20830.0
+2021-07-01,Hudson-Bergen Light Rail,5993.0
+2021-07-01,Newark Light Rail,4850.0
+2021-07-01,River Line,20986.0
+2021-08-01,Newark Light Rail,4912.0
+2021-08-01,Hudson-Bergen Light Rail,6944.0
+2021-08-01,River Line,21617.0
+2021-09-01,Hudson-Bergen Light Rail,5082.0
+2021-09-01,Newark Light Rail,4816.0
+2021-09-01,River Line,22452.0
+2021-10-01,Newark Light Rail,4828.0
+2021-10-01,Hudson-Bergen Light Rail,5684.0
+2021-10-01,River Line,21165.0
+2021-11-01,Newark Light Rail,4812.0
+2021-11-01,Hudson-Bergen Light Rail,5511.0
+2021-11-01,River Line,21129.0
+2021-12-01,Newark Light Rail,4789.0
+2021-12-01,Hudson-Bergen Light Rail,7010.0
+2021-12-01,River Line,19896.0
+2022-01-01,Hudson-Bergen Light Rail,7583.0
+2022-01-01,Newark Light Rail,4612.0
+2022-01-01,River Line,19407.0
+2022-02-01,Hudson-Bergen Light Rail,8042.0
+2022-02-01,Newark Light Rail,4453.0
+2022-02-01,River Line,20921.0
+2022-03-01,Newark Light Rail,4390.0
+2022-03-01,Hudson-Bergen Light Rail,10465.0
+2022-03-01,River Line,21588.0
+2022-04-01,Newark Light Rail,4619.0
+2022-04-01,Hudson-Bergen Light Rail,8241.0
+2022-04-01,River Line,32260.0
+2022-05-01,Newark Light Rail,4566.0
+2022-05-01,Hudson-Bergen Light Rail,8012.0
+2022-05-01,River Line,22402.0
+2022-06-01,Hudson-Bergen Light Rail,8568.0
+2022-06-01,Newark Light Rail,4381.0
+2022-06-01,River Line,22253.0
+2022-07-01,Hudson-Bergen Light Rail,5499.0
+2022-07-01,Newark Light Rail,4460.0
+2022-07-01,River Line,21846.0
+2022-08-01,Newark Light Rail,4442.0
+2022-08-01,Hudson-Bergen Light Rail,23754.0
+2022-08-01,River Line,22187.0
+2022-09-01,Newark Light Rail,4279.0
+2022-09-01,Hudson-Bergen Light Rail,20318.0
+2022-09-01,River Line,22021.0
+2022-10-01,Newark Light Rail,4413.0
+2022-10-01,Hudson-Bergen Light Rail,15336.0
+2022-10-01,River Line,21863.0
+2022-11-01,Newark Light Rail,4218.0
+2022-11-01,Hudson-Bergen Light Rail,10460.0
+2022-11-01,River Line,21328.0
+2022-12-01,Newark Light Rail,4260.0
+2022-12-01,Hudson-Bergen Light Rail,8968.0
+2022-12-01,River Line,19971.0
+2023-01-01,Hudson-Bergen Light Rail,9904.0
+2023-01-01,Newark Light Rail,5972.0
+2023-01-01,River Line,17388.0
+2023-02-01,Newark Light Rail,6156.0
+2023-02-01,Hudson-Bergen Light Rail,10467.0
+2023-02-01,River Line,15094.0
+2023-03-01,Newark Light Rail,5974.0
+2023-03-01,Hudson-Bergen Light Rail,10989.0
+2023-03-01,River Line,12877.0
+2023-04-01,Newark Light Rail,5772.0
+2023-04-01,Hudson-Bergen Light Rail,11814.0
+2023-04-01,River Line,11154.0
+2023-05-01,Newark Light Rail,5635.0
+2023-05-01,Hudson-Bergen Light Rail,13065.0
+2023-05-01,River Line,10327.0
+2023-06-01,Hudson-Bergen Light Rail,14051.0
+2023-06-01,Newark Light Rail,5630.0
+2023-06-01,River Line,9692.0
+2023-07-01,Hudson-Bergen Light Rail,16321.0
+2023-07-01,Newark Light Rail,5583.0
+2023-07-01,River Line,9214.0
+2023-08-01,Newark Light Rail,5428.0
+2023-08-01,Hudson-Bergen Light Rail,15567.0
+2023-08-01,River Line,7856.0
+2023-09-01,Hudson-Bergen Light Rail,12892.0
+2023-09-01,Newark Light Rail,5441.0
+2023-09-01,River Line,7101.0
+2023-10-01,Newark Light Rail,5170.0
+2023-10-01,Hudson-Bergen Light Rail,14778.0
+2023-10-01,River Line,6817.0
+2023-11-01,Newark Light Rail,5147.0
+2023-11-01,Hudson-Bergen Light Rail,14854.0
+2023-11-01,River Line,6485.0
+2023-12-01,Newark Light Rail,5102.0
+2023-12-01,Hudson-Bergen Light Rail,15508.0
+2023-12-01,River Line,6381.0
+2024-01-01,Hudson-Bergen Light Rail,15990.0
+2024-01-01,Newark Light Rail,3417.0
+2024-01-01,River Line,5822.0
+2024-02-01,Newark Light Rail,3230.0
+2024-02-01,Hudson-Bergen Light Rail,13004.0
+2024-02-01,River Line,4670.0
+2024-03-01,River Line,4679.0
+2024-03-01,Newark Light Rail,3274.0
+2024-03-01,Hudson-Bergen Light Rail,13188.0
+2024-04-01,Hudson-Bergen Light Rail,13405.0
+2024-04-01,Newark Light Rail,3608.0
+2024-04-01,River Line,4164.0
+2024-05-01,River Line,3934.0
+2024-05-01,Newark Light Rail,3591.0
+2024-05-01,Hudson-Bergen Light Rail,13590.0
+2024-06-01,Newark Light Rail,3633.0
+2024-06-01,Hudson-Bergen Light Rail,13737.0
+2024-06-01,River Line,3720.0
+2024-07-01,River Line,3921.0
+2024-07-01,Newark Light Rail,3792.0
+2024-07-01,Hudson-Bergen Light Rail,14005.0
+2024-08-01,Hudson-Bergen Light Rail,13494.0
+2024-08-01,Newark Light Rail,3773.0
+2024-08-01,River Line,4063.0
+2024-09-01,River Line,4244.0
+2024-09-01,Hudson-Bergen Light Rail,13141.0
+2024-09-01,Newark Light Rail,4049.0
+2024-10-01,River Line,2616.0
+2024-10-01,Newark Light Rail,4174.0
+2024-10-01,Hudson-Bergen Light Rail,11838.0
+2024-11-01,River Line,4281.0
+2024-11-01,Newark Light Rail,4602.0
+2024-11-01,Hudson-Bergen Light Rail,13297.0
+2024-12-01,Newark Light Rail,4833.0
+2024-12-01,Hudson-Bergen Light Rail,13043.0
+2024-12-01,River Line,4196.0
+2025-01-01,Newark Light Rail,4901.0
+2025-01-01,Hudson-Bergen Light Rail,12717.0
+2025-01-01,River Line,4036.0
+2025-02-01,Hudson-Bergen Light Rail,12041.0
+2025-02-01,Newark Light Rail,5232.0
+2025-02-01,River Line,4138.0
+2025-03-01,Hudson-Bergen Light Rail,12784.0
+2025-03-01,Newark Light Rail,5153.0
+2025-03-01,River Line,3801.0
+2025-04-01,Newark Light Rail,4694.0
+2025-04-01,Hudson-Bergen Light Rail,13504.0
+2025-04-01,River Line,3442.0
+2025-05-01,River Line,3244.0
+2025-05-01,Hudson-Bergen Light Rail,14023.0
+2025-05-01,Newark Light Rail,4933.0
+2025-06-01,River Line,3244.0
+2025-06-01,Hudson-Bergen Light Rail,13284.0
+2025-06-01,Newark Light Rail,4933.0
+2025-07-01,Newark Light Rail,4876.0
+2025-07-01,Hudson-Bergen Light Rail,12890.0
+2025-07-01,River Line,2678.0
+2025-08-01,Hudson-Bergen Light Rail,13682.0
+2025-08-01,River Line,2586.0
+2025-08-01,Newark Light Rail,4955.0
+2025-09-01,Newark Light Rail,5245.0
+2025-09-01,River Line,2377.0
+2025-09-01,Hudson-Bergen Light Rail,13401.0
+2025-10-01,River Line,2496.0
+2025-10-01,Hudson-Bergen Light Rail,13190.0
+2025-10-01,Newark Light Rail,4660.0
+2025-11-01,Newark Light Rail,4586.0
+2025-11-01,Hudson-Bergen Light Rail,12818.0
+2025-11-01,River Line,2818.0
+2025-12-01,Hudson-Bergen Light Rail,12118.0
+2025-12-01,Newark Light Rail,4511.0
+2025-12-01,River Line,2686.0
+2026-01-01,Hudson-Bergen Light Rail,11426.0
+2026-01-01,River Line,2724.0
+2026-01-01,Newark Light Rail,4446.0
+2026-02-01,Newark Light Rail,4728.0
+2026-02-01,Hudson-Bergen Light Rail,11222.0
+2026-02-01,River Line,2819.0
+2026-03-01,Hudson-Bergen Light Rail,12650.0
+2026-03-01,River Line,3201.0
+2026-03-01,Newark Light Rail,4904.0
+2026-04-01,Newark Light Rail,4874.0
+2026-04-01,River Line,3421.0
+2026-04-01,Hudson-Bergen Light Rail,11442.0
+2026-05-01,Newark Light Rail,4721.0
+2026-05-01,Hudson-Bergen Light Rail,10127.0
+2026-05-01,River Line,3593.0
+2026-06-01,Hudson-Bergen Light Rail,10053.0
+2026-06-01,Newark Light Rail,5021.0
+2026-06-01,River Line,3690.0
+2026-07-01,Newark Light Rail,4654.0
+2026-07-01,Hudson-Bergen Light Rail,9623.0
+2026-07-01,River Line,3822.0
+2026-08-01,Newark Light Rail,4566.0
+2026-08-01,Hudson-Bergen Light Rail,8041.0
+2026-08-01,River Line,3680.0

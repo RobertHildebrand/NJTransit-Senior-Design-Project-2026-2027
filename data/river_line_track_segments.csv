@@ -1,0 +1,16 @@
+segment_no,track,from_mp,from_municipality,to_mp,to_municipality,length_mi,siding_name,stations_within_approx_by_gtfs_shape_dist,source
+1,Double,0.0,Camden,3.5,Pennsauken,3.5,,ENTERTAINMENT CENTER|AQUARIUM|COOPER ST/RUTGERS UNIV|WALTER RAND TRANS CTR,NJDOT Freight Guideway F_RiverLINE.pdf v10/1/2021 https://nj.gov/transportation/capital/guideway/pdf/F_RiverLINE.pdf
+2,Single,3.5,Pennsauken,5.0,Pennsauken,1.5,,36TH STREET STATION,NJDOT Freight Guideway F_RiverLINE.pdf v10/1/2021 https://nj.gov/transportation/capital/guideway/pdf/F_RiverLINE.pdf
+3,Double,5.0,Pennsauken,7.0,Palmyra,2.0,Pennsauken siding,PENNSAUKEN TRANSIT CENTER|ROUTE 73/PENNSAUKEN,NJDOT Freight Guideway F_RiverLINE.pdf v10/1/2021 https://nj.gov/transportation/capital/guideway/pdf/F_RiverLINE.pdf
+4,Single,7.0,Palmyra,8.7,Riverton,1.7,,PALMYRA,NJDOT Freight Guideway F_RiverLINE.pdf v10/1/2021 https://nj.gov/transportation/capital/guideway/pdf/F_RiverLINE.pdf
+5,Double,8.7,Riverton,10.5,Cinnaminson,1.8,,RIVERTON|CINNAMINSON,NJDOT Freight Guideway F_RiverLINE.pdf v10/1/2021 https://nj.gov/transportation/capital/guideway/pdf/F_RiverLINE.pdf
+6,Single,10.5,Cinnaminson,11.8,Riverside,1.3,,,NJDOT Freight Guideway F_RiverLINE.pdf v10/1/2021 https://nj.gov/transportation/capital/guideway/pdf/F_RiverLINE.pdf
+7,Double,11.8,Riverside,14.0,Delanco,2.2,,RIVERSIDE|DELANCO,NJDOT Freight Guideway F_RiverLINE.pdf v10/1/2021 https://nj.gov/transportation/capital/guideway/pdf/F_RiverLINE.pdf
+8,Single,14.0,Delanco,15.0,Edgewater Park,1.0,,,NJDOT Freight Guideway F_RiverLINE.pdf v10/1/2021 https://nj.gov/transportation/capital/guideway/pdf/F_RiverLINE.pdf
+9,Double,15.0,Edgewater Park,17.5,Burlington City,2.5,South Burlington siding,BEVERLY/EDGEWATER PARK,NJDOT Freight Guideway F_RiverLINE.pdf v10/1/2021 https://nj.gov/transportation/capital/guideway/pdf/F_RiverLINE.pdf
+10,Single,17.5,Burlington City,19.6,Burlington Township,2.1,,BURLINGTON SOUTH|BURLINGTON TOWNE CTR,NJDOT Freight Guideway F_RiverLINE.pdf v10/1/2021 https://nj.gov/transportation/capital/guideway/pdf/F_RiverLINE.pdf
+11,Double,19.6,Burlington Township,21.1,Florence Township,1.5,Florence siding,,NJDOT Freight Guideway F_RiverLINE.pdf v10/1/2021 https://nj.gov/transportation/capital/guideway/pdf/F_RiverLINE.pdf
+12,Single,21.1,Florence Township,24.2,Mansfield Township,3.1,,FLORENCE|ROEBLING,NJDOT Freight Guideway F_RiverLINE.pdf v10/1/2021 https://nj.gov/transportation/capital/guideway/pdf/F_RiverLINE.pdf
+13,Double,24.2,Mansfield Township,26.9,Bordentown Township,2.7,Roebling siding (spelled 'Roehling' in source),,NJDOT Freight Guideway F_RiverLINE.pdf v10/1/2021 https://nj.gov/transportation/capital/guideway/pdf/F_RiverLINE.pdf
+14,Single,26.9,Bordentown Township,28.9,Bordentown Township,2.0,,BORDENTOWN,NJDOT Freight Guideway F_RiverLINE.pdf v10/1/2021 https://nj.gov/transportation/capital/guideway/pdf/F_RiverLINE.pdf
+15,Double,28.9,Bordentown Township,33.9,Trenton,5.0,,CASS STREET|HAMILTON AVENUE|TRENTON TRANSIT CENTER,NJDOT Freight Guideway F_RiverLINE.pdf v10/1/2021 https://nj.gov/transportation/capital/guideway/pdf/F_RiverLINE.pdf

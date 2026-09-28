@@ -1,0 +1,21 @@
+policy,season,cancel %,on-time % pub,avg wait,cars avail
+Fixed 8-car (20/30),fall,7.2,83.5,15.4,9.1
+Fixed 8-car (20/30),spring,5.4,90.9,14.6,9.8
+Fixed 8-car (20/30),summer,16.0,78.5,20.6,7.5
+Fixed 8-car (20/30),winter,10.1,83.4,17.0,8.4
+"Tiered clockface, 1 spare",fall,0.7,89.3,14.4,9.2
+"Tiered clockface, 1 spare",spring,0.5,95.4,13.0,10.2
+"Tiered clockface, 1 spare",summer,1.5,92.1,17.3,7.9
+"Tiered clockface, 1 spare",winter,0.9,91.9,15.0,8.8
+"Tiered clockface, no spare",fall,1.6,88.4,14.0,8.9
+"Tiered clockface, no spare",spring,1.1,94.8,12.5,10.0
+"Tiered clockface, no spare",summer,3.4,90.3,17.9,7.1
+"Tiered clockface, no spare",winter,2.0,90.9,14.8,8.3
+"Tiered flexible, 1 spare",fall,0.9,89.0,13.7,8.9
+"Tiered flexible, 1 spare",spring,0.6,95.4,12.5,9.9
+"Tiered flexible, 1 spare",summer,1.8,91.7,15.9,7.8
+"Tiered flexible, 1 spare",winter,1.1,91.6,14.2,8.5
+"Tiered flexible, 2 spares",fall,0.6,89.3,14.4,9.1
+"Tiered flexible, 2 spares",spring,0.5,95.5,13.4,10.0
+"Tiered flexible, 2 spares",summer,1.1,92.5,17.0,7.9
+"Tiered flexible, 2 spares",winter,0.8,92.0,15.7,8.5
